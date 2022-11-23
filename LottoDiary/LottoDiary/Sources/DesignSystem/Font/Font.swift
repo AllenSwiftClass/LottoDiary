@@ -8,5 +8,8 @@
 import Foundation
 
 enum Font {
-    
+    enum Name: String {
+        case system
+        case gmarketsans = "GmarketSans"
+    }
 }
