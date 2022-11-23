@@ -58,16 +58,104 @@
 		C050B30B292E30E700E664DB /* LottoDiary */ = {
 			isa = PBXGroup;
 			children = (
-				C050B30C292E30E700E664DB /* AppDelegate.swift */,
-				C050B30E292E30E700E664DB /* SceneDelegate.swift */,
-				C050B310292E30E700E664DB /* ViewController.swift */,
+				C050B324292E319B00E664DB /* Sources */,
+				C050B323292E319300E664DB /* Resources */,
+				C050B315292E30E700E664DB /* LottoDiary.xcdatamodeld */,
+			);
+			path = LottoDiary;
+			sourceTree = "<group>";
+		};
+		C050B323292E319300E664DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				C050B312292E30E700E664DB /* Main.storyboard */,
 				C050B318292E30E700E664DB /* Assets.xcassets */,
 				C050B31A292E30E700E664DB /* LaunchScreen.storyboard */,
 				C050B31D292E30E700E664DB /* Info.plist */,
-				C050B315292E30E700E664DB /* LottoDiary.xcdatamodeld */,
+				C050B326292E31BE00E664DB /* Fonts */,
 			);
-			path = LottoDiary;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C050B324292E319B00E664DB /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C050B32B292E322E00E664DB /* Utility */,
+				C050B328292E31E000E664DB /* DesignSystem */,
+				C050B327292E31D700E664DB /* Present */,
+				C050B325292E31A900E664DB /* App */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C050B325292E31A900E664DB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C050B30C292E30E700E664DB /* AppDelegate.swift */,
+				C050B30E292E30E700E664DB /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C050B326292E31BE00E664DB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C050B327292E31D700E664DB /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				C050B310292E30E700E664DB /* ViewController.swift */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		C050B328292E31E000E664DB /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				C050B32A292E320D00E664DB /* Font */,
+				C050B329292E320300E664DB /* Color */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		C050B329292E320300E664DB /* Color */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		C050B32A292E320D00E664DB /* Font */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		C050B32B292E322E00E664DB /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C050B32D292E324400E664DB /* Extensions */,
+				C050B32C292E323D00E664DB /* DeviceInfo */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		C050B32C292E323D00E664DB /* DeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DeviceInfo;
+			sourceTree = "<group>";
+		};
+		C050B32D292E324400E664DB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
