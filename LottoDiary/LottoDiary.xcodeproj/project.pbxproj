@@ -17,6 +17,8 @@
 		C050B331292E327E00E664DB /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B32E292E327E00E664DB /* GmarketSansTTFLight.ttf */; };
 		C050B332292E327E00E664DB /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B32F292E327E00E664DB /* GmarketSansTTFBold.ttf */; };
 		C050B333292E327E00E664DB /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */; };
+		C050B335292E358600E664DB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B334292E358600E664DB /* Font.swift */; };
+		C050B337292E358F00E664DB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B336292E358F00E664DB /* Palette.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		C050B32E292E327E00E664DB /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
 		C050B32F292E327E00E664DB /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
+		C050B334292E358600E664DB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		C050B336292E358F00E664DB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 		C050B329292E320300E664DB /* Color */ = {
 			isa = PBXGroup;
 			children = (
+				C050B336292E358F00E664DB /* Palette.swift */,
 			);
 			path = Color;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 		C050B32A292E320D00E664DB /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				C050B334292E358600E664DB /* Font.swift */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -243,6 +249,8 @@
 			files = (
 				C050B311292E30E700E664DB /* ViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
+				C050B335292E358600E664DB /* Font.swift in Sources */,
+				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
 			);
