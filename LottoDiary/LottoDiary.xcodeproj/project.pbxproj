@@ -14,6 +14,9 @@
 		C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C050B315292E30E700E664DB /* LottoDiary.xcdatamodeld */; };
 		C050B319292E30E700E664DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C050B318292E30E700E664DB /* Assets.xcassets */; };
 		C050B31C292E30E700E664DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C050B31A292E30E700E664DB /* LaunchScreen.storyboard */; };
+		C050B331292E327E00E664DB /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B32E292E327E00E664DB /* GmarketSansTTFLight.ttf */; };
+		C050B332292E327E00E664DB /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B32F292E327E00E664DB /* GmarketSansTTFBold.ttf */; };
+		C050B333292E327E00E664DB /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		C050B318292E30E700E664DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C050B31B292E30E700E664DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C050B31D292E30E700E664DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C050B32E292E327E00E664DB /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
+		C050B32F292E327E00E664DB /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
+		C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,9 @@
 		C050B326292E31BE00E664DB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				C050B32F292E327E00E664DB /* GmarketSansTTFBold.ttf */,
+				C050B32E292E327E00E664DB /* GmarketSansTTFLight.ttf */,
+				C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -217,8 +226,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C050B31C292E30E700E664DB /* LaunchScreen.storyboard in Resources */,
+				C050B331292E327E00E664DB /* GmarketSansTTFLight.ttf in Resources */,
 				C050B319292E30E700E664DB /* Assets.xcassets in Resources */,
 				C050B314292E30E700E664DB /* Main.storyboard in Resources */,
+				C050B332292E327E00E664DB /* GmarketSansTTFBold.ttf in Resources */,
+				C050B333292E327E00E664DB /* GmarketSansTTFMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
