@@ -21,6 +21,7 @@
 		C050B337292E358F00E664DB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B336292E358F00E664DB /* Palette.swift */; };
 		C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C050B339292E3A4E00E664DB /* SnapKit */; };
 		C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33B292E3AB300E664DB /* UIFont+.swift */; };
+		C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33D292E3B6E00E664DB /* DeviceInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		C050B334292E358600E664DB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		C050B336292E358F00E664DB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		C050B33B292E3AB300E664DB /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		C050B33D292E3B6E00E664DB /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		C050B32C292E323D00E664DB /* DeviceInfo */ = {
 			isa = PBXGroup;
 			children = (
+				C050B33D292E3B6E00E664DB /* DeviceInfo.swift */,
 			);
 			path = DeviceInfo;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
+				C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
