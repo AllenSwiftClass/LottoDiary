@@ -19,6 +19,8 @@
 		C050B333292E327E00E664DB /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */; };
 		C050B335292E358600E664DB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B334292E358600E664DB /* Font.swift */; };
 		C050B337292E358F00E664DB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B336292E358F00E664DB /* Palette.swift */; };
+		C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C050B339292E3A4E00E664DB /* SnapKit */; };
+		C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33B292E3AB300E664DB /* UIFont+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,7 @@
 		C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
 		C050B334292E358600E664DB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		C050B336292E358F00E664DB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		C050B33B292E3AB300E664DB /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +173,7 @@
 		C050B32D292E324400E664DB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C050B33B292E3AB300E664DB /* UIFont+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -189,6 +194,9 @@
 			dependencies = (
 			);
 			name = LottoDiary;
+			packageProductDependencies = (
+				C050B339292E3A4E00E664DB /* SnapKit */,
+			);
 			productName = LottoDiary;
 			productReference = C050B309292E30E700E664DB /* LottoDiary.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +225,9 @@
 				Base,
 			);
 			mainGroup = C050B300292E30E700E664DB;
+			packageReferences = (
+				C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C050B30A292E30E700E664DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -250,6 +261,7 @@
 				C050B311292E30E700E664DB /* ViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
+				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
@@ -470,6 +482,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C050B339292E3A4E00E664DB /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C050B315292E30E700E664DB /* LottoDiary.xcdatamodeld */ = {
