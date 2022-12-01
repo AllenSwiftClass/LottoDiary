@@ -27,6 +27,7 @@ class ViewController: UIViewController {
             make.center.equalToSuperview()
             make.size.equalTo(200)
         }
+        print("new commit")
         // Do any additional setup after loading the view.
     }
 
