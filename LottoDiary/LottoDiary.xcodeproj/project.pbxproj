@@ -36,7 +36,7 @@
 		C050B316292E30E700E664DB /* LottoDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LottoDiary.xcdatamodel; sourceTree = "<group>"; };
 		C050B318292E30E700E664DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C050B31B292E30E700E664DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C050B31D292E30E700E664DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C050B31D292E30E700E664DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		C050B32E292E327E00E664DB /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
 		C050B32F292E327E00E664DB /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
@@ -80,6 +80,7 @@
 		C050B30B292E30E700E664DB /* LottoDiary */ = {
 			isa = PBXGroup;
 			children = (
+				C050B31D292E30E700E664DB /* Info.plist */,
 				C050B324292E319B00E664DB /* Sources */,
 				C050B323292E319300E664DB /* Resources */,
 				C050B315292E30E700E664DB /* LottoDiary.xcdatamodeld */,
@@ -94,7 +95,6 @@
 				C050B318292E30E700E664DB /* Assets.xcassets */,
 				C050B343292E40CD00E664DB /* Colors.xcassets */,
 				C050B31A292E30E700E664DB /* LaunchScreen.storyboard */,
-				C050B31D292E30E700E664DB /* Info.plist */,
 				C050B326292E31BE00E664DB /* Fonts */,
 			);
 			path = Resources;
