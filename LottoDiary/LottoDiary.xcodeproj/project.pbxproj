@@ -25,6 +25,9 @@
 		C050B340292E3D7100E664DB /* CGColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33F292E3D7100E664DB /* CGColor+.swift */; };
 		C050B342292E3D9200E664DB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B341292E3D9200E664DB /* UIColor+.swift */; };
 		C050B344292E40CD00E664DB /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C050B343292E40CD00E664DB /* Colors.xcassets */; };
+		C0A2EC572939E61700667F9E /* Test1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A2EC562939E61700667F9E /* Test1ViewController.swift */; };
+		C0A2EC592939E62000667F9E /* Test2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A2EC582939E62000667F9E /* Test2ViewController.swift */; };
+		C0A2EC5B2939E62600667F9E /* Test3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A2EC5A2939E62600667F9E /* Test3ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		C050B33F292E3D7100E664DB /* CGColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+.swift"; sourceTree = "<group>"; };
 		C050B341292E3D9200E664DB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		C050B343292E40CD00E664DB /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		C0A2EC562939E61700667F9E /* Test1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1ViewController.swift; sourceTree = "<group>"; };
+		C0A2EC582939E62000667F9E /* Test2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2ViewController.swift; sourceTree = "<group>"; };
+		C0A2EC5A2939E62600667F9E /* Test3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				C050B310292E30E700E664DB /* ViewController.swift */,
+				C0A2EC562939E61700667F9E /* Test1ViewController.swift */,
+				C0A2EC582939E62000667F9E /* Test2ViewController.swift */,
+				C0A2EC5A2939E62600667F9E /* Test3ViewController.swift */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -272,10 +281,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
+				C0A2EC592939E62000667F9E /* Test2ViewController.swift in Sources */,
 				C050B311292E30E700E664DB /* ViewController.swift in Sources */,
+				C0A2EC572939E61700667F9E /* Test1ViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
+				C0A2EC5B2939E62600667F9E /* Test3ViewController.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
