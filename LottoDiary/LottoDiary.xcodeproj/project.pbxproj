@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6240F8422939E77D00A2C781 /* Test4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F8412939E77D00A2C781 /* Test4ViewController.swift */; };
+		6240F8442939E78900A2C781 /* Test5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F8432939E78900A2C781 /* Test5ViewController.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* ViewController.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6240F8412939E77D00A2C781 /* Test4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test4ViewController.swift; sourceTree = "<group>"; };
+		6240F8432939E78900A2C781 /* Test5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test5ViewController.swift; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 				C0A2EC562939E61700667F9E /* Test1ViewController.swift */,
 				C0A2EC582939E62000667F9E /* Test2ViewController.swift */,
 				C0A2EC5A2939E62600667F9E /* Test3ViewController.swift */,
+				6240F8412939E77D00A2C781 /* Test4ViewController.swift */,
+				6240F8432939E78900A2C781 /* Test5ViewController.swift */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -283,7 +289,9 @@
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
 				C0A2EC592939E62000667F9E /* Test2ViewController.swift in Sources */,
 				C050B311292E30E700E664DB /* ViewController.swift in Sources */,
+				6240F8422939E77D00A2C781 /* Test4ViewController.swift in Sources */,
 				C0A2EC572939E61700667F9E /* Test1ViewController.swift in Sources */,
+				6240F8442939E78900A2C781 /* Test5ViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
