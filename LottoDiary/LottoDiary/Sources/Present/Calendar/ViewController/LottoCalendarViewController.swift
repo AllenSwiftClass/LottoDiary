@@ -25,7 +25,7 @@ final class LottoCalendarViewController: UIViewController {
     
     let calendarHeight: CGFloat = 300
     
-    let lottos: [Lotto] = [
+    var lottos: [Lotto] = [
         Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-13"),
         Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-13"),
         Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-17"),
@@ -34,13 +34,36 @@ final class LottoCalendarViewController: UIViewController {
         Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18")
     ]
     
+    // 날자 변환 객체
+    lazy var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
+    lazy var selectedDate: String = formatter.string(from: Date())
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
+    
+    
+    // MARK: - DiffableDataSource 관련 property
+    
+    var headerView: DateHeaderView? = nil
+    
+    enum Section: Equatable {
+        case date
+    }
+    
+    var dataSource: DataSource!
+    var lottosCollectionView: UICollectionView! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.gray17181D)
         
+        print(DeviceInfo.screenWidth)
         // 스크롤 뷰 레이아웃 설정
         configureScrollView()
         
@@ -49,6 +72,9 @@ final class LottoCalendarViewController: UIViewController {
         // 캘린더 이벤트 등록
         setupEvents()
         
+        // CollectionView, DataSource 설정
+        configureCollectionView()
+        configureDataSource()
         
     }
     
@@ -57,6 +83,134 @@ final class LottoCalendarViewController: UIViewController {
     }
     
 
+}
+
+
+// MARK: - DiffableDataSource, CompositionalLayout 관련 함수
+extension LottoCalendarViewController {
+    func configureCollectionView() {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
+        
+        contentView.addSubview(collectionView)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.delegate = self
+        collectionView.register(LottoCell.self, forCellWithReuseIdentifier: LottoCell.reuseIdentifier)
+        collectionView.backgroundColor = .designSystem(.gray17181D)
+
+        collectionView.isScrollEnabled = false
+        lottosCollectionView = collectionView
+        
+        let lottoCount = lottos.filter{ $0.date == self.selectedDate}
+            .count
+        
+        lottosCollectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(self.calendarHeight + 20) // 캘린더와의 거리
+            make.width.equalToSuperview()
+            make.height.equalTo(lottoCount * 90 + 20 + 50) // 셀 크기, 헤더(MM월 dd일, 푸터)
+            // bottom으로 contentView를 마무리지음
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    func configureDataSource() {
+        dataSource = DataSource(collectionView: lottosCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, lottoId: Lotto.ID) ->
+            UICollectionViewCell? in
+            
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LottoCell.reuseIdentifier,
+                for: indexPath) as? LottoCell
+            else { fatalError("Could not create new cell") }
+            let lotto = self.lotto(for: lottoId)
+            
+            if lotto != nil {
+                cell.purchaseAmount.text = "\(lotto!.purchaseAmount.formattedWithSeparator) 원"
+                cell.winningAmount.text = "\(lotto!.winningAmount.formattedWithSeparator) 원"
+                cell.type = lotto!.type
+            }
+            return cell
+        }
+        
+        let headerRegistration = UICollectionView.SupplementaryRegistration(elementKind: DateHeaderView.elementKind, handler: headerRegistrationHandler)
+        let footerRegistration = UICollectionView.SupplementaryRegistration(elementKind: AddLottoFooterView.elementKind, handler: footerRegistrationHandler)
+        
+        dataSource.supplementaryViewProvider = { [unowned self]
+            (collectionView, elementKind, indexPath) -> UICollectionReusableView? in
+            
+            if elementKind == DateHeaderView.elementKind {
+                
+                // Dequeue header view
+                return self.lottosCollectionView.dequeueConfiguredReusableSupplementary(
+                    using: headerRegistration, for: indexPath)
+                
+            } else {
+                // Dequeue footer view
+                return self.lottosCollectionView.dequeueConfiguredReusableSupplementary(
+                    using: footerRegistration, for: indexPath)
+            }
+        }
+        
+        updateSnapShot()
+    }
+    
+    func generateLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { _ , _ in
+            return self.generateLottosLayout()
+        }
+        return layout
+    }
+    
+    func generateLottosLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(90))
+        
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize,
+            repeatingSubitem: item,
+            count: 1)
+        
+        group.contentInsets = NSDirectionalEdgeInsets(
+            top: 15,
+            leading: 15,
+            bottom: 0,
+            trailing: 15)
+        
+        // 헤더크기 설정
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(120),
+            heightDimension: .absolute(14))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: DateHeaderView.elementKind,
+            alignment: .topLeading)
+            
+        // footer 크기설정
+        let footerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(50))
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: footerSize,
+            elementKind: AddLottoFooterView.elementKind,
+            alignment: .bottom)
+        sectionFooter.contentInsets = NSDirectionalEdgeInsets(
+            top: 15,
+            leading: 15,
+            bottom: 0,
+            trailing: 15)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
+        
+        return section
+    }
 }
 
 
@@ -81,9 +235,10 @@ extension LottoCalendarViewController {
 }
 
 
-// MARK: - calendar Func, DataSource, Delegate
+// MARK: - calendar Method, DataSource, Delegate
 extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
-    // MARK: - 메서드
+    
+    // MARK: - Method
     
     func configureCalendarLayout() {
         contentView.addSubview(calendar)
@@ -178,6 +333,10 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
             make.height.equalTo(boundHeight)
         }
         
+        lottosCollectionView.snp.updateConstraints { make in
+            make.top.equalTo(boundHeight + 20) // 변경된 캘린더의 높이 + 아래 collectionView와의 gap
+        }
+        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         } completion: { _ in
@@ -187,6 +346,14 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
 
 
         self.view.layoutIfNeeded()
+    }
+    
+    // 날짜 선택 시 호출
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        selectedDate = formatter.string(from: date)
+        
+        changeCollectionViewHeight()
+        updateSnapShot()
     }
     
 }
@@ -214,7 +381,39 @@ extension LottoCalendarViewController: FSCalendarDelegateAppearance {
 }
 
 
-// 확장버튼 델리게이트 메서드
+// MARK: - CollectionView Method, Delegate
+extension LottoCalendarViewController: UICollectionViewDelegate {
+    
+    // MARK: - Method
+    
+    func changeCollectionViewHeight() {
+        // headerViewText 변경
+        headerView?.label.text = selectedDate.dateStringToHeaderView
+        
+        let lottoCount = lottos.filter{ $0.date == self.selectedDate}
+            .count
+        
+        lottosCollectionView.snp.updateConstraints { make in
+            make.height.equalTo(lottoCount * 90 + 20 + 50) // 셀 크기, 헤더(MM월 dd일, 푸터)
+            // bottom으로 contentView를 마무리지음
+            make.bottom.equalToSuperview()
+        }
+        
+    
+        // 컬렉션 뷰의 height이 커지는 부분을 애니메이션
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.changeHeaderTitle()
+        }
+    }
+    
+}
+
+
+
+// MARK: - Expand Button Delegate
 extension LottoCalendarViewController: ExpandButtonDelegate {
     func isMonthChange(_ isMonth: Bool) {
         switchCalendarScope(isMonth)

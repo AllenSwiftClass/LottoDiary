@@ -19,6 +19,7 @@ enum Font {
         case _11 = 11
         case _13 = 13
         case _15 = 15
+        case _16 = 16
         case _17 = 17
         case _19 = 19
         case _20 = 20

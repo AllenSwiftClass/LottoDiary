@@ -18,6 +18,12 @@
 		6240F856293C63E400A2C781 /* LottoCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F855293C63E400A2C781 /* LottoCalendar.swift */; };
 		6240F858293C64A700A2C781 /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F857293C64A700A2C781 /* ExpandButton.swift */; };
 		6240F85A293C70CA00A2C781 /* Lotto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F859293C70CA00A2C781 /* Lotto.swift */; };
+		6240F85C293C7DD500A2C781 /* LottoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F85B293C7DD500A2C781 /* LottoCell.swift */; };
+		6240F85E293C7EC100A2C781 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F85D293C7EC100A2C781 /* DateHeaderView.swift */; };
+		6240F860293C7FE100A2C781 /* AddLottoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F85F293C7FE100A2C781 /* AddLottoFooterView.swift */; };
+		6240F864293C831600A2C781 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F863293C831600A2C781 /* Int+.swift */; };
+		6240F866293C843B00A2C781 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F865293C843B00A2C781 /* String+.swift */; };
+		6240F868293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F867293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -48,6 +54,12 @@
 		6240F855293C63E400A2C781 /* LottoCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCalendar.swift; sourceTree = "<group>"; };
 		6240F857293C64A700A2C781 /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
 		6240F859293C70CA00A2C781 /* Lotto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lotto.swift; sourceTree = "<group>"; };
+		6240F85B293C7DD500A2C781 /* LottoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCell.swift; sourceTree = "<group>"; };
+		6240F85D293C7EC100A2C781 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
+		6240F85F293C7FE100A2C781 /* AddLottoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLottoFooterView.swift; sourceTree = "<group>"; };
+		6240F863293C831600A2C781 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		6240F865293C843B00A2C781 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		6240F867293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottoCalenderViewController+DataSource.swift"; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */,
+				6240F867293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -116,6 +129,9 @@
 			children = (
 				6240F855293C63E400A2C781 /* LottoCalendar.swift */,
 				6240F857293C64A700A2C781 /* ExpandButton.swift */,
+				6240F85B293C7DD500A2C781 /* LottoCell.swift */,
+				6240F85D293C7EC100A2C781 /* DateHeaderView.swift */,
+				6240F85F293C7FE100A2C781 /* AddLottoFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +281,8 @@
 				C050B33B292E3AB300E664DB /* UIFont+.swift */,
 				C050B33F292E3D7100E664DB /* CGColor+.swift */,
 				C050B341292E3D9200E664DB /* UIColor+.swift */,
+				6240F863293C831600A2C781 /* Int+.swift */,
+				6240F865293C843B00A2C781 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -358,21 +376,27 @@
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
 				4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */,
 				4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */,
+				6240F85C293C7DD500A2C781 /* LottoCell.swift in Sources */,
 				4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */,
 				C050B311292E30E700E664DB /* HomeViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
 				4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */,
+				6240F866293C843B00A2C781 /* String+.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
+				6240F864293C831600A2C781 /* Int+.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
 				4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
 				4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */,
+				6240F868293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift in Sources */,
 				6240F85A293C70CA00A2C781 /* Lotto.swift in Sources */,
 				6240F858293C64A700A2C781 /* ExpandButton.swift in Sources */,
 				C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */,
 				C050B342292E3D9200E664DB /* UIColor+.swift in Sources */,
+				6240F860293C7FE100A2C781 /* AddLottoFooterView.swift in Sources */,
+				6240F85E293C7EC100A2C781 /* DateHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -502,7 +526,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -527,7 +551,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -556,7 +580,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

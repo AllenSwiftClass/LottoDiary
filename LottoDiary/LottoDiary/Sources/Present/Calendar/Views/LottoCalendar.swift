@@ -11,7 +11,6 @@ import SnapKit
 
 final class LottoCalendar: FSCalendar {
     
-    
     lazy var expandButton: ExpandButton = {
         let button = ExpandButton(frame: .zero)
         return button
