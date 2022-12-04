@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AudioToolbox
 
 
 final class AddLottoViewController: UIViewController {
@@ -51,11 +52,27 @@ final class AddLottoViewController: UIViewController {
         return segmentedControl
     }()
     
+    private lazy var warningPurchaseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "100,000,000 이하의 숫자만 입력 가능합니다."
+        label.font = .gmarksans(weight: .regular, size: ._11)
+        label.textColor = .clear
+        return label
+    }()
+    
+    
+    private lazy var warningWinningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "100,000,000 이하의 숫자만 입력 가능합니다."
+        label.font = .gmarksans(weight: .regular, size: ._11)
+        label.textColor = .clear
+        return label
+    }()
+    
+    
     private lazy var purchaseTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = .designSystem(.gray2B2C35)
-        view.layer.cornerRadius = 8
-        view.layer.masksToBounds = true
+        view.backgroundColor = .clear
         view.addSubview(purchaseTextField)
         view.addSubview(purchaseLabel)
         return view
@@ -74,6 +91,7 @@ final class AddLottoViewController: UIViewController {
         tf.backgroundColor = .clear
         tf.textColor = .white
         tf.tintColor = .white
+        tf.font = .gmarksans(weight: .regular, size: ._25)
         tf.keyboardType = .numberPad
         tf.autocapitalizationType = .none
         tf.autocorrectionType = .no
@@ -84,9 +102,7 @@ final class AddLottoViewController: UIViewController {
     
     private lazy var winningTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = .designSystem(.gray2D2B35)
-        view.layer.cornerRadius = 8
-        view.layer.masksToBounds = true
+        view.backgroundColor = .clear
         view.addSubview(winningLabel)
         view.addSubview(winningTextField)
         return view
@@ -105,6 +121,7 @@ final class AddLottoViewController: UIViewController {
         tf.backgroundColor = .clear
         tf.textColor = .white
         tf.tintColor = .white
+        tf.font = .gmarksans(weight: .regular, size: ._25)
         tf.keyboardType = .numberPad
         tf.autocapitalizationType = .none
         tf.autocorrectionType = .no
@@ -158,7 +175,7 @@ final class AddLottoViewController: UIViewController {
     
     
     func setUI() {
-        [typeLabel, lottoSegmentedControl, purchaseTextFieldView, winningTextFieldView, okButton, cancelButton]
+        [typeLabel, lottoSegmentedControl, purchaseTextFieldView, winningTextFieldView, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton]
             .forEach{ self.view.addSubview($0) }
         
         typeLabel.snp.makeConstraints { make in
@@ -176,7 +193,7 @@ final class AddLottoViewController: UIViewController {
         purchaseTextFieldView.snp.makeConstraints { make in
             make.top.equalTo(lottoSegmentedControl.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(60)
+            make.height.equalTo(80)
         }
         
         purchaseLabel.snp.makeConstraints { make in
@@ -184,16 +201,25 @@ final class AddLottoViewController: UIViewController {
             make.top.equalToSuperview().offset(10)
         }
         
+        purchaseTextField.attributedPlaceholder = NSAttributedString(string: "구매금액을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.designSystem(.gray63626B)!])
+        
+        
         purchaseTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.top.equalTo(purchaseLabel.snp.bottom).offset(5)
+            make.height.equalTo(30)
             make.width.equalToSuperview()
+        }
+        
+        warningPurchaseLabel.snp.makeConstraints { make in
+            make.top.equalTo(purchaseTextField.snp.bottom).offset(5)
+            make.leading.equalToSuperview().offset(40)
         }
         
         winningTextFieldView.snp.makeConstraints { make in
             make.top.equalTo(purchaseTextFieldView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(60)
+            make.height.equalTo(80)
         }
         
         winningLabel.snp.makeConstraints { make in
@@ -201,24 +227,33 @@ final class AddLottoViewController: UIViewController {
             make.top.equalToSuperview().offset(10)
         }
         
+        
+        winningTextField.attributedPlaceholder = NSAttributedString(string: "당첨금액을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.designSystem(.gray63626B)!])
+        
         winningTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.top.equalTo(winningLabel.snp.bottom).offset(5)
+            make.height.equalTo(30)
             make.width.equalToSuperview()
+        }
+        
+        warningWinningLabel.snp.makeConstraints { make in
+            make.top.equalTo(winningTextField.snp.bottom).offset(5)
+            make.leading.equalToSuperview().offset(40)
         }
         
         okButton.layer.cornerRadius = 5.0
         cancelButton.layer.cornerRadius = 5.0
         
         okButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-300)
+            make.top.equalTo(winningTextFieldView.snp.bottom).offset(20)
             make.centerX.equalToSuperview().offset(-60)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
         
         cancelButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-300)
+            make.top.equalTo(winningTextFieldView.snp.bottom).offset(20)
             make.leading.equalTo(okButton.snp.trailing).offset(20)
             make.width.equalTo(100)
             make.height.equalTo(50)
@@ -264,6 +299,7 @@ final class AddLottoViewController: UIViewController {
     
     // 확인버튼 Validate
     func validateOkButton() {
+        
         // 구매금액과 당첨금액이 비어있지 않을때
         if let purchase = purchaseTextField.text?.replacingOccurrences(of: ",", with: ""), !purchase.isEmpty,
            let price = winningTextField.text?.replacingOccurrences(of: ",", with: ""), !price.isEmpty {
@@ -285,6 +321,39 @@ final class AddLottoViewController: UIViewController {
         }
     }
     
+    // TextField 흔들기 애니메이션
+        func shakeTextField(_ textField: UITextField) -> Void {
+            if textField == purchaseTextField {
+                warningPurchaseLabel.textColor = .systemRed
+            } else {
+                warningWinningLabel.textColor = .systemRed
+            }
+            
+            UIView.animate(withDuration: 0.05, animations: {
+                textField.frame.origin.x -= 2.5
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.05, animations: {
+                    textField.frame.origin.x += 5
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.05, animations: {
+                        textField.frame.origin.x -= 2.5
+                    }, completion: {_ in
+                        UIView.animate(withDuration: 0.05, animations: {
+                            textField.frame.origin.x -= 2.5
+                        }, completion: {_ in
+                            UIView.animate(withDuration: 0.05, animations: {
+                                textField.frame.origin.x += 5
+                            }, completion: {_ in
+                                UIView.animate(withDuration: 0.05, animations: {
+                                    textField.frame.origin.x -= 2.5
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        }
+    
 }
 
 
@@ -298,6 +367,17 @@ extension AddLottoViewController: UITextFieldDelegate {
             formatter.maximumFractionDigits = 0
             if let removeAllSeparator = textField.text?.replacingOccurrences(of: formatter.groupingSeparator, with: "") {
                 var beforeFormattedString = removeAllSeparator + string
+                // 입력된 수가 100억 보다 크다면
+                if beforeFormattedString.count > 10 {
+                    shakeTextField(textField)
+                    return false
+                } else {
+                    if textField == purchaseTextField {
+                        warningPurchaseLabel.textColor = .clear
+                    } else {
+                        warningWinningLabel.textColor = .clear
+                    }
+                }
                 if formatter.number(from: string) != nil { // 백스페이스가 들어오면 숫자로 변환이 안되기 때문에 nil
                     // 숫자로 만든 후에 formatter.string으로 문자열을 만드는 과정에서 ,을 붙이게 된다.
                     if let formattedNumber = formatter.number(from: beforeFormattedString), let formattedString = formatter.string(from: formattedNumber) {
@@ -328,5 +408,7 @@ extension AddLottoViewController: UITextFieldDelegate {
         // textFeild의 내용이 전부 지워질때 델리게이트 단에서 내용을 지워준다.
         return true
     }
+    
+    
     
 }

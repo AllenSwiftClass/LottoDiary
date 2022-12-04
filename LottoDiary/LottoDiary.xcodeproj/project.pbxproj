@@ -26,6 +26,7 @@
 		6240F868293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F867293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift */; };
 		6240F86A293C97B500A2C781 /* LottoCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F869293C97B500A2C781 /* LottoCalendarViewModel.swift */; };
 		6240F86C293C993600A2C781 /* AddLottoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F86B293C993600A2C781 /* AddLottoViewController.swift */; };
+		6240F86F293CB22A00A2C781 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6240F86E293CB22A00A2C781 /* AudioToolbox.framework */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -64,6 +65,7 @@
 		6240F867293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottoCalenderViewController+DataSource.swift"; sourceTree = "<group>"; };
 		6240F869293C97B500A2C781 /* LottoCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCalendarViewModel.swift; sourceTree = "<group>"; };
 		6240F86B293C993600A2C781 /* AddLottoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLottoViewController.swift; sourceTree = "<group>"; };
+		6240F86E293CB22A00A2C781 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				6240F84E293C620000A2C781 /* RxSwift in Frameworks */,
 				C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */,
 				6240F84B293C5E7400A2C781 /* FSCalendar in Frameworks */,
+				6240F86F293CB22A00A2C781 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,11 +160,20 @@
 			path = Type;
 			sourceTree = "<group>";
 		};
+		6240F86D293CB22900A2C781 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6240F86E293CB22A00A2C781 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C050B300292E30E700E664DB = {
 			isa = PBXGroup;
 			children = (
 				C050B30B292E30E700E664DB /* LottoDiary */,
 				C050B30A292E30E700E664DB /* Products */,
+				6240F86D293CB22900A2C781 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
