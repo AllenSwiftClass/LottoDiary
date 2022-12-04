@@ -25,24 +25,7 @@ final class LottoCalendarViewController: UIViewController {
     
     let calendarHeight: CGFloat = 300
     
-    var lottos: [Lotto] = [
-        Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-13"),
-        Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-13"),
-        Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-17"),
-        Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-        Lotto(type: .spitto, purchaseAmount: 20001, winningAmount: 15000, date: "2022-11-18"),
-        Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18")
-    ]
-    
-    // 날자 변환 객체
-    lazy var formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
-    
-    lazy var selectedDate: String = formatter.string(from: Date())
+    let viewModel = LottoCalendarViewModel()
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -100,17 +83,21 @@ extension LottoCalendarViewController {
         collectionView.isScrollEnabled = false
         lottosCollectionView = collectionView
         
-        let lottoCount = lottos.filter{ $0.date == self.selectedDate}
-            .count
-        
-        lottosCollectionView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalTo(self.calendarHeight + 20) // 캘린더와의 거리
-            make.width.equalToSuperview()
-            make.height.equalTo(lottoCount * 90 + 20 + 50) // 셀 크기, 헤더(MM월 dd일, 푸터)
-            // bottom으로 contentView를 마무리지음
-            make.bottom.equalToSuperview()
-        }
+        viewModel.filteredLottos
+            .map { $0.count }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { count in
+                self.lottosCollectionView.snp.makeConstraints { make in
+                    make.leading.equalToSuperview()
+                    make.top.equalTo(self.calendarHeight + 20) // 캘린더와의 거리
+                    make.width.equalToSuperview()
+                    // 동적으로 데이터가 들어가야함
+                    make.height.equalTo(count * 90 + 20 + 50) // 셀 크기, 헤더(MM월 dd일), 푸터
+                    // bottom으로 contentView를 마무리지음
+                    make.bottom.equalToSuperview()
+                }
+            })
+            .dispose()
     }
     
     func configureDataSource() {
@@ -255,15 +242,14 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     }
     
     func setupEvents() {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "yyyy-MM-dd"
+        // 로또배열을 탐색하며 date 포멧이 가능한 date를 이벤트에 넣어준다.
         
-        lottos.forEach { (lotto) in
-            let date = formatter.date(from: lotto.date)!
-            self.events.append(date)
-            
-        }
+        viewModel.lottoObservable
+            .map{$0.map{ self.viewModel.formatter.date(from: $0.date)!} }
+            .subscribe(onNext: { (dates) in
+                dates.forEach{ self.events.append($0) }
+            })
+            .dispose()
     }
     
     // 헤더의 제목을 attributed 시키는 함수
@@ -350,7 +336,7 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
     
     // 날짜 선택 시 호출
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        selectedDate = formatter.string(from: date)
+        viewModel.selectedDate = viewModel.formatter.string(from: date)
         
         changeCollectionViewHeight()
         updateSnapShot()
@@ -388,20 +374,24 @@ extension LottoCalendarViewController: UICollectionViewDelegate {
     
     func changeCollectionViewHeight() {
         // headerViewText 변경
-        headerView?.label.text = selectedDate.dateStringToHeaderView
+        headerView?.label.text = viewModel.selectedDate.dateStringToHeaderView
         
-        let lottoCount = lottos.filter{ $0.date == self.selectedDate}
-            .count
+        viewModel.filteredLottos
+            .map { $0.count }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { count in
+                self.lottosCollectionView.snp.updateConstraints { make in
+                    // 동적으로 데이터가 들어가야함
+                    make.height.equalTo(count * 90 + 20 + 50)  // 셀 크기, 헤더(MM월 dd일), 푸터
+                    
+                    // bottom으로 contentView를 마무리지음
+                    make.bottom.equalToSuperview()
+                }
+            })
+            .dispose()
         
-        lottosCollectionView.snp.updateConstraints { make in
-            make.height.equalTo(lottoCount * 90 + 20 + 50) // 셀 크기, 헤더(MM월 dd일, 푸터)
-            // bottom으로 contentView를 마무리지음
-            make.bottom.equalToSuperview()
-        }
         
-    
         // 컬렉션 뷰의 height이 커지는 부분을 애니메이션
-        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         } completion: { _ in
