@@ -41,6 +41,16 @@ extension LottoCalendarViewController {
             
         return lotto
     }
+    
+    // 로또 Observable을 불러와서 새로운 로또를 추가
+    func add(_ lotto: Lotto) {
+        do {
+            let lottos = try viewModel.lottoObservable.value()
+            viewModel.lottoObservable.onNext(lottos + [lotto])
+        } catch {
+            print(error)
+        }
+    }
 }
 
 
@@ -56,6 +66,24 @@ extension LottoCalendarViewController {
     // footer등록 시 사용되는 completionHandler
     func footerRegistrationHandler(addLottoFooterView: AddLottoFooterView, elementKind: String, indexPath: IndexPath) {
         addLottoFooterView.label.text = "새로운 로또 추가"
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.didPressAddButton))
+        addLottoFooterView.addGestureRecognizer(gesture)
     }
+    
+    // 로또 추가버튼을 클릭할 때 실행되는 메서드
+    @objc func didPressAddButton(sender: UITapGestureRecognizer) {
+        let lotto = Lotto(type: .lotto, purchaseAmount: 0, winningAmount: 0, date: viewModel.selectedDate)
+        let vc = AddLottoViewController(lotto: lotto) { [weak self] newLotto in
+            self?.add(newLotto)
+            self?.changeCollectionViewHeight()
+            self?.updateSnapShot()
+            self?.setupEvents()
+            self?.changeHeaderTitle()
+            self?.dismiss(animated: true)
+        }
+        vc.selectedDate = viewModel.selectedDate
+        self.present(vc, animated: true)
+    }
+
     
 }
