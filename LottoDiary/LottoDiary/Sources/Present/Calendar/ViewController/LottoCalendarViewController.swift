@@ -34,9 +34,15 @@ final class LottoCalendarViewController: UIViewController {
         Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18")
     ]
     
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.gray17181D)
+        
+        // 스크롤 뷰 레이아웃 설정
+        configureScrollView()
         
         // 캘린더 레이아웃 설정
         configureCalendarLayout()
@@ -54,18 +60,37 @@ final class LottoCalendarViewController: UIViewController {
 }
 
 
+// MARK: - ScrollView 관련 함수
+
+extension LottoCalendarViewController {
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        scrollView.addSubview(contentView)
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
+            make.width.equalTo(scrollView.snp.width)
+        }
+    }
+}
+
+
 // MARK: - calendar Func, DataSource, Delegate
 extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
-    
-    
     // MARK: - 메서드
     
     func configureCalendarLayout() {
-        view.addSubview(calendar)
+        contentView.addSubview(calendar)
         calendar.dataSource = self
         calendar.delegate = self
         calendar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(200)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(15)
             make.height.equalTo(calendarHeight)
         }
