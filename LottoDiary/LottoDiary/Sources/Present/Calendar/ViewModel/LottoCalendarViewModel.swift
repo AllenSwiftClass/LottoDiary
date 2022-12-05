@@ -6,13 +6,12 @@
 //
 
 
-
-import Foundation
 import RxSwift
+import Foundation
 
 final class LottoCalendarViewModel {
     
-    // 날자 변환 객체
+    // 날짜 변환 객체
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")

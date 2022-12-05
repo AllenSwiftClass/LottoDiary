@@ -46,7 +46,6 @@ final class LottoCalendarViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.gray17181D)
         
-        print(DeviceInfo.screenWidth)
         // 스크롤 뷰 레이아웃 설정
         configureScrollView()
         

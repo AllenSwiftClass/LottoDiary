@@ -5,7 +5,6 @@
 //  Created by 천승현 on 2022/12/04.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 

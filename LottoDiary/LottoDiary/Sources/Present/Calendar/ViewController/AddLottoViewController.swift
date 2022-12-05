@@ -288,7 +288,6 @@ final class AddLottoViewController: UIViewController {
         default:
             break
         }
-        print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
     }
     
     // 다른 곳 클릭 시 텍스트뷰 닫기
