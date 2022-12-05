@@ -1,5 +1,5 @@
 //  HeaderView.swift
-//  FscalendarLearning
+//  LottoDiary
 //
 //  Created by 천승현 on 2022/12/04.
 //

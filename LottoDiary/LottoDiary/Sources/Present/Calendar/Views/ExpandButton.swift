@@ -1,8 +1,8 @@
 //
 //  ExpandButton.swift
-//  FscalendarLearning
+//  LottoDiary
 //
-//  Created by 천승현 on 2022/11/17.
+//  Created by 천승현 on 2022/12/04.
 //
 
 import UIKit
