@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */; };
+		4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */; };
+		4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */; };
+		4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */; };
+		4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8292939EB9B000F8AB3 /* CustomTabBar.swift */; };
+		4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC82B2939EBAA000F8AB3 /* TabBarController.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
-		C050B311292E30E700E664DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* ViewController.swift */; };
+		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
 		C050B314292E30E700E664DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C050B312292E30E700E664DB /* Main.storyboard */; };
 		C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C050B315292E30E700E664DB /* LottoDiary.xcdatamodeld */; };
 		C050B319292E30E700E664DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C050B318292E30E700E664DB /* Assets.xcassets */; };
@@ -28,10 +34,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLottoListViewController.swift; sourceTree = "<group>"; };
+		4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCalendarViewController.swift; sourceTree = "<group>"; };
+		4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoQRViewController.swift; sourceTree = "<group>"; };
+		4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLottoNumberViewController.swift; sourceTree = "<group>"; };
+		4F5CC8292939EB9B000F8AB3 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		4F5CC82B2939EBAA000F8AB3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C050B310292E30E700E664DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C050B310292E30E700E664DB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C050B313292E30E700E664DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C050B316292E30E700E664DB /* LottoDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LottoDiary.xcdatamodel; sourceTree = "<group>"; };
 		C050B318292E30E700E664DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F5CC8282939EB89000F8AB3 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4F5CC8292939EB9B000F8AB3 /* CustomTabBar.swift */,
+				4F5CC82B2939EBAA000F8AB3 /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		C050B300292E30E700E664DB = {
 			isa = PBXGroup;
 			children = (
@@ -133,7 +154,12 @@
 		C050B327292E31D700E664DB /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				C050B310292E30E700E664DB /* ViewController.swift */,
+				4F5CC8282939EB89000F8AB3 /* TabBar */,
+				C050B310292E30E700E664DB /* HomeViewController.swift */,
+				4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */,
+				4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */,
+				4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */,
+				4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -272,13 +298,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
-				C050B311292E30E700E664DB /* ViewController.swift in Sources */,
+				4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */,
+				4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */,
+				4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */,
+				C050B311292E30E700E664DB /* HomeViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
+				4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
+				4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
+				4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */,
 				C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */,
 				C050B342292E3D9200E664DB /* UIColor+.swift in Sources */,
 			);
@@ -427,7 +459,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z225784MRD;
+				DEVELOPMENT_TEAM = F2W258F5P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LottoDiary/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -435,6 +467,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +488,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z225784MRD;
+				DEVELOPMENT_TEAM = F2W258F5P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LottoDiary/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -463,6 +496,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
