@@ -21,6 +21,7 @@
 		4FE0818C293E2BA8006F9A1C /* LottoListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE0818B293E2BA8006F9A1C /* LottoListHeader.swift */; };
 		4FE08195293E31BE006F9A1C /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4FE08194293E31BE006F9A1C /* Charts */; };
 		4FE08197293E4537006F9A1C /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE08196293E4537006F9A1C /* Int+.swift */; };
+		4FE081AE293F0A72006F9A1C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4FE081AD293F0A72006F9A1C /* SnapKit */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -33,7 +34,6 @@
 		C050B333292E327E00E664DB /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C050B330292E327E00E664DB /* GmarketSansTTFMedium.ttf */; };
 		C050B335292E358600E664DB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B334292E358600E664DB /* Font.swift */; };
 		C050B337292E358F00E664DB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B336292E358F00E664DB /* Palette.swift */; };
-		C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C050B339292E3A4E00E664DB /* SnapKit */; };
 		C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33B292E3AB300E664DB /* UIFont+.swift */; };
 		C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33D292E3B6E00E664DB /* DeviceInfo.swift */; };
 		C050B340292E3D7100E664DB /* CGColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33F292E3D7100E664DB /* CGColor+.swift */; };
@@ -81,8 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */,
 				4FE08195293E31BE006F9A1C /* Charts in Frameworks */,
+				4FE081AE293F0A72006F9A1C /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,11 +136,19 @@
 			path = LottoList;
 			sourceTree = "<group>";
 		};
+		4FE081AC293F0A72006F9A1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C050B300292E30E700E664DB = {
 			isa = PBXGroup;
 			children = (
 				C050B30B292E30E700E664DB /* LottoDiary */,
 				C050B30A292E30E700E664DB /* Products */,
+				4FE081AC293F0A72006F9A1C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -288,8 +296,8 @@
 			);
 			name = LottoDiary;
 			packageProductDependencies = (
-				C050B339292E3A4E00E664DB /* SnapKit */,
 				4FE08194293E31BE006F9A1C /* Charts */,
+				4FE081AD293F0A72006F9A1C /* SnapKit */,
 			);
 			productName = LottoDiary;
 			productReference = C050B309292E30E700E664DB /* LottoDiary.app */;
@@ -622,7 +630,7 @@
 			package = 4FE08193293E31BE006F9A1C /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
-		C050B339292E3A4E00E664DB /* SnapKit */ = {
+		4FE081AD293F0A72006F9A1C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;

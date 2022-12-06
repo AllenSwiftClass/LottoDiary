@@ -73,7 +73,7 @@ class LottoListHeader: UIView {
         
         let monthText = NSMutableAttributedString(string: "\(Int(self.selectedYear))년  \(Int(self.selectedMonth))월 >")
         
-        // 2022년 : 흰색에 글씨 크게, 더 굵게
+        // 2022년 : 흰색에 글씨 속성 변경
         monthText.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: String(self.selectedYear).count + 1))
         monthText.addAttribute(.font, value: UIFont.gmarksans(weight: .bold, size: ._19), range: NSRange(location: 0, length: String(self.selectedYear).count + 1))
         
@@ -91,7 +91,7 @@ class LottoListHeader: UIView {
         
         let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 35))
         
-        let cancelBtn = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancleAction))
+        let cancelBtn = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelAction))
         let doneBtn = UIBarButtonItem(title: "선택", style: .done, target: self, action: #selector(doneAction))
         
         // cancle과 done 버튼 사이 space 주기
@@ -111,7 +111,7 @@ class LottoListHeader: UIView {
         self.datePickerView.selectRow(monthRow, inComponent: 1, animated: false)
     }
     
-    @objc func cancleAction() {
+    @objc func cancelAction() {
         self.setupSelectRow()
         // 취소를 누르면, dateTextField의 월 부분이 모두 흰색으로 변해버리는 현상 발생
         self.setupDateTextFieldText()

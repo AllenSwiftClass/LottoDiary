@@ -14,7 +14,7 @@ final class ChartLottoListViewController: UIViewController {
     // MARK: - Propertises
     
     let chartViewModel = ChartViewModel()
-    lazy var lottoListViewModel = LottoListViewModel()
+    let lottoListViewModel = LottoListViewModel()
     
     // 앱 실행시, 초기 설정은 오늘 년도와 날짜
     lazy var selectedYear: Double = self.lottoListViewModel.getTodayDate()[0] {
@@ -54,7 +54,6 @@ final class ChartLottoListViewController: UIViewController {
         return cv
     }()
     
-    // TODO: typealias 공부하기
     typealias Section = LottoListDataSourceController.Section
     typealias Amount = LottoListDataSourceController.Amount
     
@@ -128,11 +127,10 @@ final class ChartLottoListViewController: UIViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as! LottoListCell
             
-            // TODO: ,000 설정하기
             cell.amountLabel.text = String("\(Int(item.amount!).formattedWithSeparator) 원")
             cell.resultLabel.text = item.result?.title
             cell.resultLabel.textColor = item.result?.textColor
-            cell.setupCell(section: indexPath.section, percent: item.percent)
+            cell.setupCellDetail(section: indexPath.section, percent: item.percent)
             return cell
         }
         

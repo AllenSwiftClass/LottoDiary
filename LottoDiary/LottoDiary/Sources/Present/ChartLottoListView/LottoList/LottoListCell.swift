@@ -103,7 +103,7 @@ class LottoListCell: UITableViewCell {
     }
     
     // 하나의 cell을 재사용하기 때문에, section에 따라 titleLabel, mainImage 변경
-    func setupCell(section: Int, percent: Int?) {
+    func setupCellDetail(section: Int, percent: Int?) {
         if section == 0 {
             titleLabel.text = Section.goal.title
             mainImage.image = Section.goal.image

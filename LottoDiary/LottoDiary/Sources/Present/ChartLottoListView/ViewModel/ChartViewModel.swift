@@ -10,8 +10,6 @@ import Charts
 
 class ChartViewModel {
     
-    let lottoListViewModel = LottoListViewModel()
-    
     // 1. BarChartDataEntry 변환하기.
     // BarChartDataEntry의 x, y는 모두 Double 타입
     // chart는 년단위로 로드되기 때문에, year 파라미터로 받아 데이터 조회
@@ -24,7 +22,6 @@ class ChartViewModel {
         // 만약 특정 년도 데이터가 2월, 4월 등 1~12월 모두 있는 경우가 아닐때, 데이터가 없는 월 차트 채워주기
         rowData.forEach { eachData in
             for month in 1...12 {
-                // buyYear은 있는데 buyMonth는 없는 데이터는 없으므로 강제 !
                 if month == Int(eachData.buyMonth) {
                     yearLottoItem.append(eachData)
                 } else {
