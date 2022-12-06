@@ -16,6 +16,8 @@
 		C011D982293F4A6600F66889 /* NumberDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D981293F4A6600F66889 /* NumberDrawViewController.swift */; };
 		C011D985293F4AA400F66889 /* LottoBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D984293F4AA400F66889 /* LottoBall.swift */; };
 		C011D987293F4AB200F66889 /* LottoNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D986293F4AB200F66889 /* LottoNumbersView.swift */; };
+		C011D989293F4D8300F66889 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D988293F4D8300F66889 /* Int+.swift */; };
+		C011D98B293F529200F66889 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D98A293F529200F66889 /* UIView+.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -46,6 +48,8 @@
 		C011D981293F4A6600F66889 /* NumberDrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDrawViewController.swift; sourceTree = "<group>"; };
 		C011D984293F4AA400F66889 /* LottoBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoBall.swift; sourceTree = "<group>"; };
 		C011D986293F4AB200F66889 /* LottoNumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoNumbersView.swift; sourceTree = "<group>"; };
+		C011D988293F4D8300F66889 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		C011D98A293F529200F66889 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				C050B33B292E3AB300E664DB /* UIFont+.swift */,
 				C050B33F292E3D7100E664DB /* CGColor+.swift */,
 				C050B341292E3D9200E664DB /* UIColor+.swift */,
+				C011D988293F4D8300F66889 /* Int+.swift */,
+				C011D98A293F529200F66889 /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -329,7 +335,9 @@
 				C050B311292E30E700E664DB /* HomeViewController.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
+				C011D989293F4D8300F66889 /* Int+.swift in Sources */,
 				C011D987293F4AB200F66889 /* LottoNumbersView.swift in Sources */,
+				C011D98B293F529200F66889 /* UIView+.swift in Sources */,
 				4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
