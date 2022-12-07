@@ -18,6 +18,8 @@
 		C011D987293F4AB200F66889 /* LottoNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D986293F4AB200F66889 /* LottoNumbersView.swift */; };
 		C011D989293F4D8300F66889 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D988293F4D8300F66889 /* Int+.swift */; };
 		C011D98B293F529200F66889 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D98A293F529200F66889 /* UIView+.swift */; };
+		C011D98D2940C6D200F66889 /* LastLottoNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D98C2940C6D200F66889 /* LastLottoNumberTableViewCell.swift */; };
+		C011D9902940CCB300F66889 /* LottoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011D98F2940CCB300F66889 /* LottoData.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -50,6 +52,8 @@
 		C011D986293F4AB200F66889 /* LottoNumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoNumbersView.swift; sourceTree = "<group>"; };
 		C011D988293F4D8300F66889 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		C011D98A293F529200F66889 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		C011D98C2940C6D200F66889 /* LastLottoNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastLottoNumberTableViewCell.swift; sourceTree = "<group>"; };
+		C011D98F2940CCB300F66889 /* LottoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoData.swift; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 		C011D980293F4A1E00F66889 /* NumberDrawTap */ = {
 			isa = PBXGroup;
 			children = (
+				C011D98E2940CC6200F66889 /* Models */,
 				C011D983293F4A9000F66889 /* Views */,
 				C011D981293F4A6600F66889 /* NumberDrawViewController.swift */,
 			);
@@ -106,8 +111,17 @@
 			children = (
 				C011D984293F4AA400F66889 /* LottoBall.swift */,
 				C011D986293F4AB200F66889 /* LottoNumbersView.swift */,
+				C011D98C2940C6D200F66889 /* LastLottoNumberTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C011D98E2940CC6200F66889 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C011D98F2940CCB300F66889 /* LottoData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C050B300292E30E700E664DB = {
@@ -328,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C011D9902940CCB300F66889 /* LottoData.swift in Sources */,
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
 				4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */,
 				4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */,
@@ -341,6 +356,7 @@
 				4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
+				C011D98D2940C6D200F66889 /* LastLottoNumberTableViewCell.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
 				C011D985293F4AA400F66889 /* LottoBall.swift in Sources */,
 				4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */,

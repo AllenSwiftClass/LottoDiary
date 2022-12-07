@@ -76,6 +76,28 @@ final class NumberDrawViewController: UIViewController {
         return view
     }()
     
+    lazy var lastLottoNumberTabelView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.register(LastLottoNumberTableViewCell.self, forCellReuseIdentifier: LastLottoNumberTableViewCell.cellId)
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
+        tableView.rowHeight = DeviceInfo.screenHeight / 10
+        return tableView
+    }()
+    
+    var lastDrawNumberButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("회차 번호 더보기", for: .normal)
+        button.titleLabel?.font = .gmarksans(weight: .bold, size: ._13)
+        button.tintColor = .white
+        button.backgroundColor = .designSystem(.mainBlue)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.backgroundBlack)
@@ -118,7 +140,7 @@ final class NumberDrawViewController: UIViewController {
         view.addSubview(lastNumberTitle)
         lastNumberTitle.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(14)
-            make.top.equalTo(randomNumberDrawView.snp.bottom).offset(40)
+            make.top.equalTo(randomNumberDrawView.snp.bottom).offset(30)
             make.height.equalTo(23)
         }
         
@@ -126,12 +148,38 @@ final class NumberDrawViewController: UIViewController {
         lastNumbersView.snp.makeConstraints { make in
             make.top.equalTo(lastNumberTitle.snp.bottom).offset(13)
             make.leading.trailing.equalToSuperview().inset(14)
-            make.bottom.equalToSuperview().inset(140)
+            make.bottom.equalToSuperview().inset(130)
+        }
+        
+        lastNumbersView.addSubview(lastLottoNumberTabelView)
+        lastLottoNumberTabelView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        lastNumbersView.addSubview(lastDrawNumberButton)
+        lastDrawNumberButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(14)
+            make.bottom.equalToSuperview().inset(14)
+            make.height.equalTo(32)
+            make.width.equalTo(142)
         }
         
     }
     
     @objc func changeButtonTapped() {
         randomNumberDraw.lottoNumbers = Int.makeRandomIntArray(count: 7)
+    }
+}
+
+extension NumberDrawViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return LottoData.lastDrawDatas.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LastLottoNumberTableViewCell.cellId, for: indexPath) as? LastLottoNumberTableViewCell else { return UITableViewCell() }
+        cell.lottoData = LottoData.lastDrawDatas[indexPath.row]
+        cell.selectionStyle = .none
+        return cell
     }
 }
