@@ -23,6 +23,7 @@ final class ChartLottoListViewController: UIViewController {
             self.setupChartData()
         }
     }
+    
     lazy var selectedMonth: Double = lottoListViewModel.getTodayDate()[1] {
         didSet {
             // selectedMonth 변경시, 월에 맞는 lottoList 변경
@@ -57,7 +58,7 @@ final class ChartLottoListViewController: UIViewController {
     typealias Section = LottoListDataSourceController.Section
     typealias Amount = LottoListDataSourceController.Amount
     
-    var dataSource: UITableViewDiffableDataSource<Section, Amount>!
+    var dataSource: UITableViewDiffableDataSource<Section, Amount.ID>!
     
     // MARK: - Lifecycle
 
@@ -106,7 +107,7 @@ final class ChartLottoListViewController: UIViewController {
         
         // 구분선 제거
         lottoListView.separatorStyle = .none
-        
+        // cell 등록
         self.lottoListView.register(LottoListCell.self, forCellReuseIdentifier: "\(LottoListCell.self)")
         
         lottoListView.snp.makeConstraints { make in
@@ -123,34 +124,30 @@ final class ChartLottoListViewController: UIViewController {
     }
     
     private func setupLottoListDataSource() {
-        self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoListView) { (tableView, indexPath, item) -> UITableViewCell? in
+        self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoListView) { (tableView, indexPath, identifier) -> UITableViewCell? in
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as! LottoListCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as? LottoListCell else {
+                print("cell dequeueReusable 실패")
+                return
+            }
             
-            cell.amountLabel.text = String("\(Int(item.amount!).formattedWithSeparator) 원")
-            cell.resultLabel.text = item.result?.title
-            cell.resultLabel.textColor = item.result?.textColor
-            cell.setupCellDetail(section: indexPath.section, percent: item.percent)
+            cell.amountLabel.text = String("\(Int(identifier.amount!).formattedWithSeparator) 원")
+            cell.resultLabel.text = identifier.result?.title
+            cell.resultLabel.textColor = identifier.result?.textColor
+            cell.setupCellDetail(section: indexPath.section, percent: identifier.percent)
             return cell
         }
         
     }
     
     private func setupLottoListSnapshot() {
-        
-        let data = lottoListViewModel.getMonthList(year: selectedYear, month: selectedMonth)
-        let percentData = lottoListViewModel.getMonthPercent(year: selectedYear, month: selectedMonth).first
-        
-        let item1 = [Amount(amount: data.goalAmount, result: percentData?.key, percent: percentData?.value)]
-        let item2 = [Amount(amount: data.buyAmount, result: percentData?.key, percent: percentData?.value)]
-        let item3 = [Amount(amount: data.winAmount, result: percentData?.key, percent: percentData?.value)]
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Amount>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Amount.ID>()
         
         snapshot.appendSections([.goal, .buy, .win])
-        snapshot.appendItems(item1, toSection: .goal)
-        snapshot.appendItems(item2, toSection: .buy)
-        snapshot.appendItems(item3, toSection: .win)
+        let items = lottoListViewModel.makeAmountData(year: selectedYear, month: selectedMonth)
+        snapshot.appendItems([items[0]], toSection: .goal)
+        snapshot.appendItems([items[1]], toSection: .buy)
+        snapshot.appendItems([items[2]], toSection: .win)
         
         self.dataSource.apply(snapshot, animatingDifferences: false)
     }

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class LottoListDataSourceController {
+final class LottoListDataSourceController {
+    
     enum Section {
         case goal, buy, win
         
@@ -61,9 +62,11 @@ class LottoListDataSourceController {
             }
         }
     }
-    
-    struct Amount: Hashable {
-        let id = UUID()
+
+    // datasource의 성능 향상을 위해 Amount.id를 identifier로 사용
+    struct Amount: Identifiable {
+        let id = UUID().uuidString
+        
         var amount: Double?
         var result: GoalResult?
         var percent: Int?

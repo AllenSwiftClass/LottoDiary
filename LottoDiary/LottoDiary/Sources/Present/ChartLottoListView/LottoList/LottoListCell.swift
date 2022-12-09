@@ -122,7 +122,7 @@ class LottoListCell: UITableViewCell {
     // label에서 image와 title 같이 사용하기
     // func으로 따로 뺀 이유는 Percent 받아서 숫자와 이미지 설정해주기 위해.
     func setupPercent(percent: Int) {
-        let percentString = String("\(abs(percent).formattedWithSeparator)% ")
+        let percentString = "\(abs(percent).formattedWithSeparator)% "
         let attributedString = NSMutableAttributedString(string: percentString)
         let imageAttachment = NSTextAttachment()
         
@@ -130,10 +130,14 @@ class LottoListCell: UITableViewCell {
         if percent == 0 {
             imageAttachment.image = UIImage(systemName: "minus")?.withTintColor(UIColor.designSystem(.mainGreen)!)
             attributedString.addAttribute(.foregroundColor, value: UIColor.designSystem(.mainGreen)!, range: NSRange(location: 0, length: percentString.count))
-        } else if percent < 0 {
+        }
+        // + % 라면,
+        else if percent < 0 {
             imageAttachment.image = UIImage(systemName: "arrowtriangle.down.fill")?.withTintColor(UIColor.designSystem(.mainBlue)!)
             attributedString.addAttribute(.foregroundColor, value: UIColor.designSystem(.mainBlue)!, range: NSRange(location: 0, length: percentString.count))
-        } else {
+        }
+        // - % 라면, (%가 없다면)
+        else {
             imageAttachment.image = UIImage(systemName: "arrowtriangle.up.fill")?.withTintColor(UIColor.designSystem(.mainOrange)!)
             attributedString.addAttribute(.foregroundColor, value: UIColor.designSystem(.mainOrange)!, range: NSRange(location: 0, length: percentString.count))
         }

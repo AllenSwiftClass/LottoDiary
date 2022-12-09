@@ -10,6 +10,9 @@ import UIKit
 class LottoListViewModel {
     
     typealias GoalResult = LottoListDataSourceController.GoalResult
+    typealias Amount = LottoListDataSourceController.Amount
+    
+    let lottoListViewModel = LottoListViewModel()
     
     // rowData에서 특정 년도, 월 데이터 뽑아내기
     func getMonthList(year: Double, month: Double) -> LottoItem {
@@ -68,6 +71,21 @@ class LottoListViewModel {
             year.append(num)
         }
         return [year, month]
+    }
+    
+    func makeAmountData(year: Double, month: Double) -> [Amount.ID] {
+        
+        // 1. 특정 년, 월 데이터를 가져온다.
+        let data = lottoListViewModel.getMonthList(year: year, month: month)
+        let percentData = lottoListViewModel.getMonthPercent(year: year, month: month).first
+        
+        // 2. 데이터를 Amount에 넣어 새로운 Amount 객체를 생성한다.
+        let item1 = Amount(amount: data.goalAmount, result: percentData?.key, percent: percentData?.value).id
+        let item2 = Amount(amount: data.buyAmount, result: percentData?.key, percent: percentData?.value).id
+        let item3 = Amount(amount: data.winAmount, result: percentData?.key, percent: percentData?.value).id
+        
+        // 단, 하나의 데이터에 Amount가 goal, buy, win 3개가 생성되어야 한다.
+        return [item1, item2, item3]
     }
 }
 
