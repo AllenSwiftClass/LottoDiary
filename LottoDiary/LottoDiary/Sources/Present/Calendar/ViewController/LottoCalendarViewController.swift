@@ -374,7 +374,7 @@ extension LottoCalendarViewController: UICollectionViewDelegate {
     
     func changeCollectionViewHeight() {
         // headerViewText 변경
-        headerView?.label.text = viewModel.selectedDate.dateStringToHeaderView
+        headerView?.headerLabel.text = viewModel.selectedDate.dateStringToHeaderView
         
         viewModel.filteredLottos
             .map { $0.count }

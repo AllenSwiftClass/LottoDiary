@@ -20,11 +20,6 @@ final class AddLottoViewController: UIViewController {
     
     lazy var selectedDate: String? = nil
     
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
     private lazy var typeLabel = GmarkLabel(text: "로또 종류", font: .gmarksans(weight: .bold, size: ._22), textColor: .white)
        
     
@@ -115,7 +110,6 @@ final class AddLottoViewController: UIViewController {
             make.top.equalTo(30)
         }
     
-        
         lottoSegmentedControl.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(typeLabel.snp.bottom).offset(25)
@@ -126,7 +120,6 @@ final class AddLottoViewController: UIViewController {
             make.leading.equalToSuperview().offset(30)
             make.top.equalTo(lottoSegmentedControl.snp.bottom).offset(40)
         }
-        
         
         purchaseTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
@@ -323,7 +316,4 @@ extension AddLottoViewController: UITextFieldDelegate {
         // textFeild의 내용이 전부 지워질때 델리게이트 단에서 내용을 지워준다.
         return true
     }
-    
-    
-    
 }

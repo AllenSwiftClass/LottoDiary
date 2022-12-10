@@ -16,7 +16,7 @@ extension LottoCalendarViewController {
     // 셀의 데이터가 변경되었을 때마다 snapShot을 업데이트하고, apply시켜야 적용이 됨.
     func updateSnapShot(reloading idsThatChanged: [Lotto.ID] = []) {
         viewModel.filteredLottos
-            .map{$0}
+            .map{ $0 }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (lottos) in
                 var snapshot = SnapShot()
@@ -60,12 +60,12 @@ extension LottoCalendarViewController {
     // header등록 시 사용되는 completionHandler
     func headerRegistrationHandler(dateHeaderView: DateHeaderView, elementKind: String, indexPath: IndexPath) {
         self.headerView = dateHeaderView
-        headerView?.label.text = viewModel.selectedDate.dateStringToHeaderView
+        headerView?.headerLabel.text = viewModel.selectedDate.dateStringToHeaderView
     }
     
     // footer등록 시 사용되는 completionHandler
     func footerRegistrationHandler(addLottoFooterView: AddLottoFooterView, elementKind: String, indexPath: IndexPath) {
-        addLottoFooterView.label.text = "새로운 로또 추가"
+        addLottoFooterView.footerLabel.text = "새로운 로또 추가"
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.didPressAddButton))
         addLottoFooterView.addGestureRecognizer(gesture)
     }

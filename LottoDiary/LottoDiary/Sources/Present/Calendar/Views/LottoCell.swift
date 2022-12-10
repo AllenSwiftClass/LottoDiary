@@ -9,51 +9,22 @@ import UIKit
 import SnapKit
 
 final class LottoCell: UICollectionViewCell {
+    
     static let reuseIdentifier = "lotto-item-cell-reuse-identifier"
     let lottoImageView = UIImageView()
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "로또"
-        label.textColor = .white
-        label.font = .gmarksans(weight: .bold, size: ._19)
-        return label
-    }()
     
-    lazy var purchaseLabel: UILabel = {
-        let label = UILabel()
-        label.text = "구매 금액:"
-        label.textColor = .white
-        label.font = .gmarksans(weight: .regular, size: ._15)
-        label.textAlignment = .left
-        return label
-    }()
+    lazy var titleLabel = GmarkLabel(text: "로또", font: .gmarksans(weight: .bold, size: ._19), textColor: .white)
     
-    lazy var winningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "당첨 금액:"
-        label.textColor = .white
-        label.font = .gmarksans(weight: .regular, size: ._15)
-        label.textAlignment = .left
-        return label
-    }()
+    lazy var purchaseLabel = GmarkLabel(text: "구매 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
     
-    lazy var purchaseAmount: UILabel = {
-        let label = UILabel()
-        label.text = "10000원"
-        label.textColor = .white
-        label.font = .gmarksans(weight: .bold, size: ._15)
-        label.textAlignment = .right
-        return label
-    }()
+    lazy var winningLabel =  GmarkLabel(text: "당첨 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
+
     
-    lazy var winningAmount: UILabel = {
-        let label = UILabel()
-        label.text = "5000원"
-        label.textColor = .white
-        label.font = .gmarksans(weight: .bold, size: ._15)
-        label.textAlignment = .right
-        return label
-    }()
+    lazy var purchaseAmount =  GmarkLabel(text: "10000원", font: .gmarksans(weight: .bold, size: ._15), textColor: .white)
+
+    
+    lazy var winningAmount =  GmarkLabel(text: "5000원", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
+
     
     var type: LottoType = .lotto {
         didSet {

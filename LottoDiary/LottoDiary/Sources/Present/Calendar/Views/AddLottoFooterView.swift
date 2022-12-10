@@ -13,12 +13,7 @@ final class AddLottoFooterView: UICollectionReusableView {
 
     let plusImageView = UIImageView()
     
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = .gmarksans(weight: .bold, size: ._17)
-        return label
-    }()
+    lazy var footerLabel = GmarkLabel(text: "footer", font: .gmarksans(weight: .bold, size: ._17), textColor: .white)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,8 +35,8 @@ final class AddLottoFooterView: UICollectionReusableView {
 extension AddLottoFooterView {
     func configure() {
         self.backgroundColor = .clear
-        addSubview(label)
-        label.snp.makeConstraints { make in
+        addSubview(footerLabel)
+        footerLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
@@ -49,7 +44,7 @@ extension AddLottoFooterView {
         plusImageView.image = UIImage(named: "add")
         plusImageView.snp.makeConstraints { make in
             make.width.height.equalTo(18)
-            make.trailing.equalTo(label.snp.leading).offset(-10)
+            make.trailing.equalTo(footerLabel.snp.leading).offset(-10)
             make.centerY.equalToSuperview()
         }
     }

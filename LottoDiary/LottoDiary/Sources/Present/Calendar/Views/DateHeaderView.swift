@@ -10,7 +10,8 @@ import SnapKit
 final class DateHeaderView: UICollectionReusableView {
     static var elementKind: String { UICollectionView.elementKindSectionHeader}
 
-    let label = UILabel()
+    let headerLabel =  GmarkLabel(text: "날짜", font: .gmarksans(weight: .bold, size: ._16), textColor: .white)
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,13 +26,11 @@ final class DateHeaderView: UICollectionReusableView {
 
 extension DateHeaderView {
     func configure() {
-        addSubview(label)
-        label.textColor = .white
-        label.snp.makeConstraints { make in
+        addSubview(headerLabel)
+        headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.width.height.equalToSuperview()
         }
         
-        label.font = .gmarksans(weight: .bold, size: ._16)
     }
 }
