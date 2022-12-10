@@ -53,55 +53,14 @@ final class AddLottoViewController: UIViewController {
     
     private lazy var warningWinningLabel = GmarkLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
     
-    
-    private lazy var purchaseTextFieldView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.addSubview(purchaseTextField)
-        view.addSubview(purchaseLabel)
-        return view
-    }()
-    
     private lazy var purchaseLabel = GmarkLabel(text: "구입금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
 
     
-    private lazy var purchaseTextField: UITextField = {
-        let tf = UITextField()
-        tf.backgroundColor = .clear
-        tf.textColor = .white
-        tf.tintColor = .white
-        tf.font = .gmarksans(weight: .regular, size: ._25)
-        tf.keyboardType = .numberPad
-        tf.autocapitalizationType = .none
-        tf.autocorrectionType = .no
-        tf.spellCheckingType = .no
-        tf.clearsOnBeginEditing = false
-        return tf
-    }()
-    
-    private lazy var winningTextFieldView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.addSubview(winningLabel)
-        view.addSubview(winningTextField)
-        return view
-    }()
+    private lazy var purchaseTextField = CustomTextField(placeholder: "구매금액을 입력해주세요")
     
     private lazy var winningLabel = GmarkLabel(text: "당첨금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
     
-    private lazy var winningTextField: UITextField = {
-        let tf = UITextField()
-        tf.backgroundColor = .clear
-        tf.textColor = .white
-        tf.tintColor = .white
-        tf.font = .gmarksans(weight: .regular, size: ._25)
-        tf.keyboardType = .numberPad
-        tf.autocapitalizationType = .none
-        tf.autocorrectionType = .no
-        tf.spellCheckingType = .no
-        tf.clearsOnBeginEditing = false
-        return tf
-    }()
+    private lazy var winningTextField = CustomTextField(placeholder: "당첨금액을 입력해주세요")
     
     private lazy var okButton: UIButton = {
         let button = UIButton()
@@ -148,37 +107,29 @@ final class AddLottoViewController: UIViewController {
     
     
     func setUI() {
-        [typeLabel, lottoSegmentedControl, purchaseTextFieldView, winningTextFieldView, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton]
+        [typeLabel, lottoSegmentedControl, purchaseLabel, purchaseTextField, winningLabel, winningTextField, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton]
             .forEach{ self.view.addSubview($0) }
         
         typeLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(30)
         }
     
         
         lottoSegmentedControl.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(typeLabel.snp.bottom).offset(25)
             make.height.equalTo(40)
         }
 
-        purchaseTextFieldView.snp.makeConstraints { make in
-            make.top.equalTo(lottoSegmentedControl.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(80)
-        }
-        
         purchaseLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(30)
+            make.top.equalTo(lottoSegmentedControl.snp.bottom).offset(40)
         }
-        
-        purchaseTextField.attributedPlaceholder = NSAttributedString(string: "구매금액을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.designSystem(.gray63626B)!])
         
         
         purchaseTextField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(30)
             make.top.equalTo(purchaseLabel.snp.bottom).offset(5)
             make.height.equalTo(30)
             make.width.equalToSuperview()
@@ -189,22 +140,14 @@ final class AddLottoViewController: UIViewController {
             make.leading.equalToSuperview().offset(40)
         }
         
-        winningTextFieldView.snp.makeConstraints { make in
-            make.top.equalTo(purchaseTextFieldView.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(80)
-        }
-        
         winningLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().inset(30)
+            make.top.equalTo(warningPurchaseLabel.snp.bottom).offset(10)
         }
         
-        
-        winningTextField.attributedPlaceholder = NSAttributedString(string: "당첨금액을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.designSystem(.gray63626B)!])
         
         winningTextField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(30)
             make.top.equalTo(winningLabel.snp.bottom).offset(5)
             make.height.equalTo(30)
             make.width.equalToSuperview()
@@ -219,14 +162,14 @@ final class AddLottoViewController: UIViewController {
         cancelButton.layer.cornerRadius = 5.0
         
         okButton.snp.makeConstraints { make in
-            make.top.equalTo(winningTextFieldView.snp.bottom).offset(20)
+            make.top.equalTo(winningTextField.snp.bottom).offset(40)
             make.centerX.equalToSuperview().offset(-60)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
         
         cancelButton.snp.makeConstraints { make in
-            make.top.equalTo(winningTextFieldView.snp.bottom).offset(20)
+            make.top.equalTo(winningTextField.snp.bottom).offset(40)
             make.leading.equalTo(okButton.snp.trailing).offset(20)
             make.width.equalTo(100)
             make.height.equalTo(50)
