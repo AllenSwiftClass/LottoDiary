@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTextField: UITextField {
+final class CustomTextField: UITextField {
     convenience init(placeholder: String) {
         self.init(frame: .zero)
         backgroundColor = .clear
