@@ -121,18 +121,18 @@ extension LottoCalendarViewController {
         let headerRegistration = UICollectionView.SupplementaryRegistration(elementKind: DateHeaderView.elementKind, handler: headerRegistrationHandler)
         let footerRegistration = UICollectionView.SupplementaryRegistration(elementKind: AddLottoFooterView.elementKind, handler: footerRegistrationHandler)
         
-        dataSource.supplementaryViewProvider = { [unowned self]
+        dataSource.supplementaryViewProvider = { 
             (collectionView, elementKind, indexPath) -> UICollectionReusableView? in
             
             if elementKind == DateHeaderView.elementKind {
                 
                 // Dequeue header view
-                return self.lottosCollectionView.dequeueConfiguredReusableSupplementary(
+                return collectionView.dequeueConfiguredReusableSupplementary(
                     using: headerRegistration, for: indexPath)
                 
             } else {
                 // Dequeue footer view
-                return self.lottosCollectionView.dequeueConfiguredReusableSupplementary(
+                return collectionView.dequeueConfiguredReusableSupplementary(
                     using: footerRegistration, for: indexPath)
             }
         }
