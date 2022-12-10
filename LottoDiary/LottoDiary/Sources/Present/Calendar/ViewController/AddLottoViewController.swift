@@ -28,7 +28,7 @@ final class AddLottoViewController: UIViewController {
     private lazy var typeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 26)
+        label.font = .gmarksans(weight: .bold, size: ._22)
         label.text = "로또 종류"
         return label
     }()
@@ -38,10 +38,10 @@ final class AddLottoViewController: UIViewController {
         // 선택된 인덱스
         segmentedControl.selectedSegmentIndex = 0
         // 선택되었을 때 글자의 색상
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.designSystem(.whiteEAE9EE)!, NSAttributedString.Key.font: UIFont.gmarksans(weight: .bold, size: ._19)], for: .selected)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.designSystem(.whiteEAE9EE)!, NSAttributedString.Key.font: UIFont.gmarksans(weight: .bold, size: ._17)], for: .selected)
         
         // 선택되지 않았을 때 글자의 색상
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.designSystem(.grayA09FA7)!, NSAttributedString.Key.font: UIFont.gmarksans(weight: .bold, size: ._19)], for: .normal)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.designSystem(.grayA09FA7)!, NSAttributedString.Key.font: UIFont.gmarksans(weight: .bold, size: ._17)], for: .normal)
         
         // 선택되었을때 배경색
         segmentedControl.selectedSegmentTintColor = .designSystem(.gray4D4D59)
@@ -180,14 +180,14 @@ final class AddLottoViewController: UIViewController {
         
         typeLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(100)
+            make.top.equalTo(30)
         }
     
         
         lottoSegmentedControl.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(typeLabel.snp.bottom).offset(20)
-            make.height.equalTo(45)
+            make.top.equalTo(typeLabel.snp.bottom).offset(25)
+            make.height.equalTo(40)
         }
 
         purchaseTextFieldView.snp.makeConstraints { make in
