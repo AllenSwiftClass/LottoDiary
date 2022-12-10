@@ -25,13 +25,8 @@ final class AddLottoViewController: UIViewController {
         return label
     }()
     
-    private lazy var typeLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = .gmarksans(weight: .bold, size: ._22)
-        label.text = "로또 종류"
-        return label
-    }()
+    private lazy var typeLabel = GmarkLabel(text: "로또 종류", font: .gmarksans(weight: .bold, size: ._22), textColor: .white)
+       
     
     private lazy var lottoSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["로또", "스피또"])
@@ -52,22 +47,11 @@ final class AddLottoViewController: UIViewController {
         return segmentedControl
     }()
     
-    private lazy var warningPurchaseLabel: UILabel = {
-        let label = UILabel()
-        label.text = "100,000,000 이하의 숫자만 입력 가능합니다."
-        label.font = .gmarksans(weight: .regular, size: ._11)
-        label.textColor = .clear
-        return label
-    }()
+    private lazy var warningPurchaseLabel = GmarkLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
     
     
-    private lazy var warningWinningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "100,000,000 이하의 숫자만 입력 가능합니다."
-        label.font = .gmarksans(weight: .regular, size: ._11)
-        label.textColor = .clear
-        return label
-    }()
+    
+    private lazy var warningWinningLabel = GmarkLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
     
     
     private lazy var purchaseTextFieldView: UIView = {
@@ -78,13 +62,8 @@ final class AddLottoViewController: UIViewController {
         return view
     }()
     
-    private lazy var purchaseLabel: UILabel = {
-        let label = UILabel()
-        label.text = "구입급액"
-        label.font = .gmarksans(weight: .regular, size: ._13)
-        label.textColor = .designSystem(.grayA09FA7)
-        return label
-    }()
+    private lazy var purchaseLabel = GmarkLabel(text: "구입금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
+
     
     private lazy var purchaseTextField: UITextField = {
         let tf = UITextField()
@@ -108,13 +87,7 @@ final class AddLottoViewController: UIViewController {
         return view
     }()
     
-    private lazy var winningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "당첨금액"
-        label.font = .gmarksans(weight: .regular, size: ._13)
-        label.textColor = .designSystem(.grayA09FA7)
-        return label
-    }()
+    private lazy var winningLabel = GmarkLabel(text: "당첨금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
     
     private lazy var winningTextField: UITextField = {
         let tf = UITextField()

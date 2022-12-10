@@ -27,6 +27,8 @@
 		6240F86A293C97B500A2C781 /* LottoCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F869293C97B500A2C781 /* LottoCalendarViewModel.swift */; };
 		6240F86C293C993600A2C781 /* AddLottoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6240F86B293C993600A2C781 /* AddLottoViewController.swift */; };
 		6240F86F293CB22A00A2C781 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6240F86E293CB22A00A2C781 /* AudioToolbox.framework */; };
+		625F05ED2944926B00231A9D /* GmarkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F05EC2944926B00231A9D /* GmarkLabel.swift */; };
+		625F05F029449ACA00231A9D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F05EF29449ACA00231A9D /* CustomTextField.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -66,6 +68,8 @@
 		6240F869293C97B500A2C781 /* LottoCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCalendarViewModel.swift; sourceTree = "<group>"; };
 		6240F86B293C993600A2C781 /* AddLottoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLottoViewController.swift; sourceTree = "<group>"; };
 		6240F86E293CB22A00A2C781 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		625F05EC2944926B00231A9D /* GmarkLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmarkLabel.swift; sourceTree = "<group>"; };
+		625F05EF29449ACA00231A9D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				6240F85B293C7DD500A2C781 /* LottoCell.swift */,
 				6240F85D293C7EC100A2C781 /* DateHeaderView.swift */,
 				6240F85F293C7FE100A2C781 /* AddLottoFooterView.swift */,
+				625F05EF29449ACA00231A9D /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,6 +171,14 @@
 				6240F86E293CB22A00A2C781 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		625F05EE2944967B00231A9D /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				625F05EC2944926B00231A9D /* GmarkLabel.swift */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 		C050B300292E30E700E664DB = {
@@ -254,6 +267,7 @@
 		C050B328292E31E000E664DB /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				625F05EE2944967B00231A9D /* Label */,
 				C050B32A292E320D00E664DB /* Font */,
 				C050B329292E320300E664DB /* Color */,
 			);
@@ -393,7 +407,9 @@
 				6240F856293C63E400A2C781 /* LottoCalendar.swift in Sources */,
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
 				6240F86C293C993600A2C781 /* AddLottoViewController.swift in Sources */,
+				625F05ED2944926B00231A9D /* GmarkLabel.swift in Sources */,
 				4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */,
+				625F05F029449ACA00231A9D /* CustomTextField.swift in Sources */,
 				4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */,
 				6240F85C293C7DD500A2C781 /* LottoCell.swift in Sources */,
 				4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */,
