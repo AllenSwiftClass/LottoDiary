@@ -82,6 +82,12 @@ extension LottoCalendarViewController {
             self?.dismiss(animated: true)
         }
         vc.selectedDate = viewModel.selectedDate
+        vc.modalPresentationStyle = .pageSheet
+        if let sheet = vc.sheetPresentationController {
+            // 지원하는 크기 지정
+            sheet.detents = [.medium()]
+        }
+        
         self.present(vc, animated: true)
     }
 
