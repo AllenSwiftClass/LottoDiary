@@ -20,7 +20,7 @@ final class AddLottoViewController: UIViewController {
     
     lazy var selectedDate: String? = nil
     
-    private lazy var typeLabel = GmarkLabel(text: "로또 종류", font: .gmarksans(weight: .bold, size: ._22), textColor: .white)
+    private lazy var typeLabel = CustomLabel(text: "로또 종류", font: .gmarksans(weight: .bold, size: ._22), textColor: .white)
        
     
     private lazy var lottoSegmentedControl: UISegmentedControl = {
@@ -42,18 +42,18 @@ final class AddLottoViewController: UIViewController {
         return segmentedControl
     }()
     
-    private lazy var warningPurchaseLabel = GmarkLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
+    private lazy var warningPurchaseLabel = CustomLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
     
     
     
-    private lazy var warningWinningLabel = GmarkLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
+    private lazy var warningWinningLabel = CustomLabel(text: "100,000,000 이하의 숫자만 입력 가능합니다.", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
     
-    private lazy var purchaseLabel = GmarkLabel(text: "구입금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
+    private lazy var purchaseLabel = CustomLabel(text: "구입금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
 
     
     private lazy var purchaseTextField = CustomTextField(placeholder: "구매금액을 입력해주세요")
     
-    private lazy var winningLabel = GmarkLabel(text: "당첨금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
+    private lazy var winningLabel = CustomLabel(text: "당첨금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
     
     private lazy var winningTextField = CustomTextField(placeholder: "당첨금액을 입력해주세요")
     

@@ -10,7 +10,7 @@ import SnapKit
 final class DateHeaderView: UICollectionReusableView {
     static var elementKind: String { UICollectionView.elementKindSectionHeader}
 
-    let headerLabel =  GmarkLabel(text: "날짜", font: .gmarksans(weight: .bold, size: ._16), textColor: .white)
+    let headerLabel =  CustomLabel(text: "날짜", font: .gmarksans(weight: .bold, size: ._16), textColor: .white)
 
     
     override init(frame: CGRect) {

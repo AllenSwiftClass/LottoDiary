@@ -41,9 +41,9 @@ final class ExpandButton: UIButton {
         return view
     }()
     
-    private var weekLabel = GmarkLabel(text: "월간", font: .gmarksans(weight: .bold, size: ._15), textColor: .white)
+    private var weekLabel = CustomLabel(text: "월간", font: .gmarksans(weight: .bold, size: ._15), textColor: .white)
     
-    private var monthLabel = GmarkLabel(text: "주간", font: .gmarksans(weight: .bold, size: ._15), textColor: .white.withAlphaComponent(0.5))
+    private var monthLabel = CustomLabel(text: "주간", font: .gmarksans(weight: .bold, size: ._15), textColor: .white.withAlphaComponent(0.5))
 
     
     

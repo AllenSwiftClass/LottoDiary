@@ -13,17 +13,17 @@ final class LottoCell: UICollectionViewCell {
     static let reuseIdentifier = "lotto-item-cell-reuse-identifier"
     let lottoImageView = UIImageView()
     
-    lazy var titleLabel = GmarkLabel(text: "로또", font: .gmarksans(weight: .bold, size: ._19), textColor: .white)
+    lazy var titleLabel = CustomLabel(text: "로또", font: .gmarksans(weight: .bold, size: ._19), textColor: .white)
     
-    lazy var purchaseLabel = GmarkLabel(text: "구매 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
+    lazy var purchaseLabel = CustomLabel(text: "구매 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
     
-    lazy var winningLabel =  GmarkLabel(text: "당첨 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
+    lazy var winningLabel =  CustomLabel(text: "당첨 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
 
     
-    lazy var purchaseAmount =  GmarkLabel(text: "10000원", font: .gmarksans(weight: .bold, size: ._15), textColor: .white)
+    lazy var purchaseAmount =  CustomLabel(text: "10000원", font: .gmarksans(weight: .bold, size: ._15), textColor: .white)
 
     
-    lazy var winningAmount =  GmarkLabel(text: "5000원", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
+    lazy var winningAmount =  CustomLabel(text: "5000원", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
 
     
     var type: LottoType = .lotto {

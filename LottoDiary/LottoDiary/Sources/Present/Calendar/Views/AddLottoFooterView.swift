@@ -13,7 +13,7 @@ final class AddLottoFooterView: UICollectionReusableView {
 
     let plusImageView = UIImageView()
     
-    lazy var footerLabel = GmarkLabel(text: "footer", font: .gmarksans(weight: .bold, size: ._17), textColor: .white)
+    lazy var footerLabel = CustomLabel(text: "footer", font: .gmarksans(weight: .bold, size: ._17), textColor: .white)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

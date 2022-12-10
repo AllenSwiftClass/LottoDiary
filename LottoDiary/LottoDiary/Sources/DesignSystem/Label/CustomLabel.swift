@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GmarkLabel: UILabel {
+final class CustomLabel: UILabel {
     // MARK: - initializer
     
     convenience init(text: String, font: UIFont = .gmarksans(weight: .regular, size: ._15), textColor: UIColor = .white) {
