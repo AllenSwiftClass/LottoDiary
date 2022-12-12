@@ -16,6 +16,9 @@ final class ChartLottoListViewController: UIViewController {
     let chartViewModel = ChartViewModel()
     let lottoListViewModel = LottoListViewModel()
     
+    // chartView에서만 월별 목표,구매,당첨 금액을 계산하면 되기 때문에 데이터를 따로 저장하지 않고, 클릭시 그때 그때 월별 데이터 계산
+    var selectedAmount: [Amount] = []
+    
     // 앱 실행시, 초기 설정은 오늘 년도와 날짜
     lazy var selectedYear: Double = self.lottoListViewModel.getTodayDate()[0] {
         didSet {
@@ -124,30 +127,38 @@ final class ChartLottoListViewController: UIViewController {
     }
     
     private func setupLottoListDataSource() {
-        self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoListView) { (tableView, indexPath, identifier) -> UITableViewCell? in
+        self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoListView) { [weak self] (tableView, indexPath, identifier) -> UITableViewCell? in
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as? LottoListCell else {
-                print("cell dequeueReusable 실패")
-                return
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as! LottoListCell
             
-            cell.amountLabel.text = String("\(Int(identifier.amount!).formattedWithSeparator) 원")
-            cell.resultLabel.text = identifier.result?.title
-            cell.resultLabel.textColor = identifier.result?.textColor
-            cell.setupCellDetail(section: indexPath.section, percent: identifier.percent)
+            // snapshot실행 후 dataSource 실행
+            // selectedAmount에는 이미 해당 달의 목표/구매/당첨 Amount가 들어가 있음. 이중 identifier 즉, id가 동일한 Amount 빼내기.
+            let data = self?.selectedAmount.filter { $0.id == identifier }
+            guard let item = data?.first else { return UITableViewCell() }
+            
+            cell.amountLabel.text = String("\(Int(item.amount ?? 00).formattedWithSeparator) 원")
+            cell.resultLabel.text = item.result?.title
+            cell.resultLabel.textColor = item.result?.textColor
+            cell.setupCellDetail(section: indexPath.section, percent: item.percent)
             return cell
         }
-        
     }
     
     private func setupLottoListSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Amount.ID>()
         
         snapshot.appendSections([.goal, .buy, .win])
-        let items = lottoListViewModel.makeAmountData(year: selectedYear, month: selectedMonth)
-        snapshot.appendItems([items[0]], toSection: .goal)
-        snapshot.appendItems([items[1]], toSection: .buy)
-        snapshot.appendItems([items[2]], toSection: .win)
+        
+        // 월별 목표,구매,당첨 금액 Amount 객체 생성 후 selectedAmount에 저장
+        self.selectedAmount = lottoListViewModel.makeAmountData(year: self.selectedYear, month: self.selectedMonth)
+        
+        let item1 = selectedAmount[0]
+        let item2 = selectedAmount[1]
+        let item3 = selectedAmount[2]
+
+        snapshot.appendItems([item1.id], toSection: .goal)
+        snapshot.appendItems([item2.id], toSection: .buy)
+        snapshot.appendItems([item3.id], toSection: .win)
         
         self.dataSource.apply(snapshot, animatingDifferences: false)
     }
