@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LottoListHeader: UIView {
+final class LottoListHeader: UIView {
     
     weak var lottoListHeaderDelegate: LottoListHeaderDelegate?
     
@@ -134,7 +134,8 @@ class LottoListHeader: UIView {
 // PickerViewDataSource
 extension LottoListHeader: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        let yearMonthComponents = 2
+        return yearMonthComponents
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

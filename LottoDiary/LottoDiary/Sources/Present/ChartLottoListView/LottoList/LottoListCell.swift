@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LottoListCell: UITableViewCell {
+final class LottoListCell: UITableViewCell {
     
     typealias Section = LottoListDataSourceController.Section
     

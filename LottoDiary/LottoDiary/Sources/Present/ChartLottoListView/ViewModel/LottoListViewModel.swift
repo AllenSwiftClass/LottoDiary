@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LottoListViewModel {
+final class LottoListViewModel {
     
     typealias GoalResult = LottoListDataSourceController.GoalResult
     typealias Amount = LottoListDataSourceController.Amount

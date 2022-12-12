@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 
-class ChartViewModel {
+final class ChartViewModel {
     
     // 1. BarChartDataEntry 변환하기.
     // BarChartDataEntry의 x, y는 모두 Double 타입
