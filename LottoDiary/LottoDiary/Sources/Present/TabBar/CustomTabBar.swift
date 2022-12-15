@@ -35,8 +35,8 @@ class CustomTabBar: UITabBar {
         return UIButton(configuration: config)
     }()
     
-    let middleBtnWH: Double = 80
-
+    let middleButtonSize: Double = 80
+    
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,7 +47,7 @@ class CustomTabBar: UITabBar {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func draw(_ rect: CGRect) {
         addShape()
     }
@@ -75,21 +75,21 @@ class CustomTabBar: UITabBar {
     private func setupMiddleBtn() {
         self.addSubview(middleButton)
         
-        middleButton.frame = CGRect(x: ( self.bounds.width / 2)-(middleBtnWH / 2), y: -(middleBtnWH / 2), width: middleBtnWH, height: middleBtnWH)
+        middleButton.frame = CGRect(x: ( self.bounds.width / 2)-(middleButtonSize / 2), y: -(middleButtonSize / 2), width: middleButtonSize, height: middleButtonSize)
         middleButton.clipsToBounds = true
         middleButton.layer.cornerRadius = middleButton.frame.width / 2
         middleButton.addTarget(self, action: #selector(middleBtnAction), for: .touchUpInside)
     }
-
+    
     @objc func middleBtnAction() {
         middleBtnActionHandler()
     }
     
     // middleButton 전역 touch 활성화
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-      guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }
-
-      return self.middleButton.frame.contains(point) ? self.middleButton : super.hitTest(point, with: event)
+        guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }
+        
+        return self.middleButton.frame.contains(point) ? self.middleButton : super.hitTest(point, with: event)
     }
     
     // 곡선 TabBar
@@ -99,7 +99,7 @@ class CustomTabBar: UITabBar {
         shapeLayer.strokeColor = UIColor.clear.cgColor
         shapeLayer.fillColor = UIColor.designSystem(.gray2B2C35)?.cgColor
         shapeLayer.lineWidth = 0
-
+        
         if let oldShapeLayer = self.shapeLayer {
             self.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
         } else {
@@ -107,24 +107,23 @@ class CustomTabBar: UITabBar {
         }
         self.shapeLayer = shapeLayer
         self.setupMiddleBtn()
-        }
+    }
     
     private func createPath() -> CGPath {
-        let f = CGFloat(middleBtnWH / 2.0) + 5
-        let h = frame.height
-        let w = frame.width
-        let halfW = frame.width/2.0
-        let r = CGFloat(10)
+        // (middleButton+추가여백) 을 만들 원의 반지름
+        let extraRadius = CGFloat(middleButtonSize / 2.0) + 5
+        let height = frame.height
+        let width = frame.width
+        let halfWidth = frame.width/2.0
         let path = UIBezierPath()
         path.move(to: .zero)
         
-        path.addLine(to: CGPoint(x: halfW-f-(r/2.0), y: 0))
+        // middleButton + 추가 여백 만큼 원 그리기
+        path.addArc(withCenter: CGPoint(x: halfWidth , y: 0), radius: extraRadius , startAngle: .pi, endAngle: 0, clockwise: false)
         
-        path.addArc(withCenter: CGPoint(x: halfW , y: (r/2.0) - 5), radius: f , startAngle: .pi, endAngle: 0, clockwise: false)
-        
-        path.addLine(to: CGPoint(x: w, y: 0))
-        path.addLine(to: CGPoint(x: w, y: h))
-        path.addLine(to: CGPoint(x: 0.0, y: h))
+        path.addLine(to: CGPoint(x: width, y: 0))
+        path.addLine(to: CGPoint(x: width, y: height))
+        path.addLine(to: CGPoint(x: 0.0, y: height))
         
         return path.cgPath
     }
