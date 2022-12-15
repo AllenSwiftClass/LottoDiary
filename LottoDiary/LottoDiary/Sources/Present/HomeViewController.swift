@@ -18,6 +18,14 @@ final class HomeViewController: UIViewController {
         v.layer.borderColor = UIColor.designSystem(.mainOrange)?.cgColor
         return v
     }()
+    
+    let codeReviewLabel: UILabel = {
+        let v = UILabel()
+        v.text = "코드리뷰설명 PR을 위한 라벨입니다"
+        v.font = .systemFont(ofSize: 15, weight: .bold)
+        v.textColor = .red
+        return v
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +36,14 @@ final class HomeViewController: UIViewController {
             make.size.equalTo(200)
         }
         // Do any additional setup after loading the view.
+        
+        view.addSubview(codeReviewLabel)
+        codeReviewLabel.snp.makeConstraints { make in
+            make.top.equalTo(testLabel.snp.bottom).inset(20)
+            make.leading.trailing.equalToSuperview().offset(30)
+            make.width.equalToSuperview()
+            make.height.equalTo(50)
+        }
     }
 
 

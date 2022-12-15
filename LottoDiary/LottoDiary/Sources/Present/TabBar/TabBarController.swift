@@ -8,7 +8,7 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,7 +26,7 @@ final class TabBarController: UITabBarController {
         
         let calendar = naviController(image: UIImage(systemName: "calendar.badge.plus"), title: "달력", rootViewController: LottoCalendarViewController())
         let home = naviController(image: UIImage(systemName: "house"), title: "홈", rootViewController: HomeViewController())
-        let chart = naviController(image: UIImage(systemName: "chart.bar"), title: "차트", rootViewController: ChartLottoListViewController())
+        let chart = naviController(image: UIImage(systemName: "chart.bar"), title: "차트", rootViewController:ChartLottoListViewController())
         let num = naviController(image: UIImage(systemName: "number.circle"), title: "번호 추첨", rootViewController: RandomLottoNumberViewController())
         
         self.viewControllers = [ calendar, home, UIViewController() , chart, num ]
@@ -66,10 +66,6 @@ extension TabBarController: UITabBarControllerDelegate {
         guard let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {
             return true
         }
-        
-        if selectedIndex == 2 {
-            return false
-        }
-        return true
+        return selectedIndex == 2 ? false : true
     }
 }
