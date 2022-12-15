@@ -43,6 +43,14 @@ final class TabBarController: UITabBarController {
         let navi = UINavigationController(rootViewController: rootViewController)
         navi.tabBarItem.title = title
         navi.tabBarItem.image = image
+        
+        // ios13이후로 navigation style관련은 UINavigationBarAppearance를 사용
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        
+        
+        navi.navigationBar.standardAppearance = navigationBarAppearance
+        navi.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         return navi
     }
 }
