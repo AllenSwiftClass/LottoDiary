@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F352FBB294B033D004F65AA /* QRCodeReader in Frameworks */ = {isa = PBXBuildFile; productRef = 4F352FBA294B033D004F65AA /* QRCodeReader */; };
 		4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */; };
 		4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */; };
-		4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */; };
+		4F5CC8252939EB7B000F8AB3 /* LottoQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8242939EB7B000F8AB3 /* LottoQRView.swift */; };
 		4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */; };
 		4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8292939EB9B000F8AB3 /* CustomTabBar.swift */; };
 		4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC82B2939EBAA000F8AB3 /* TabBarController.swift */; };
@@ -36,7 +37,7 @@
 /* Begin PBXFileReference section */
 		4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLottoListViewController.swift; sourceTree = "<group>"; };
 		4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCalendarViewController.swift; sourceTree = "<group>"; };
-		4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoQRViewController.swift; sourceTree = "<group>"; };
+		4F5CC8242939EB7B000F8AB3 /* LottoQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoQRView.swift; sourceTree = "<group>"; };
 		4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLottoNumberViewController.swift; sourceTree = "<group>"; };
 		4F5CC8292939EB9B000F8AB3 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		4F5CC82B2939EBAA000F8AB3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C050B33A292E3A4E00E664DB /* SnapKit in Frameworks */,
+				4F352FBB294B033D004F65AA /* QRCodeReader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +160,7 @@
 				C050B310292E30E700E664DB /* HomeViewController.swift */,
 				4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */,
 				4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */,
-				4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */,
+				4F5CC8242939EB7B000F8AB3 /* LottoQRView.swift */,
 				4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */,
 			);
 			path = Present;
@@ -234,6 +236,7 @@
 			name = LottoDiary;
 			packageProductDependencies = (
 				C050B339292E3A4E00E664DB /* SnapKit */,
+				4F352FBA294B033D004F65AA /* QRCodeReader */,
 			);
 			productName = LottoDiary;
 			productReference = C050B309292E30E700E664DB /* LottoDiary.app */;
@@ -265,6 +268,7 @@
 			mainGroup = C050B300292E30E700E664DB;
 			packageReferences = (
 				C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				4F352FB9294B033D004F65AA /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */,
 			);
 			productRefGroup = C050B30A292E30E700E664DB /* Products */;
 			projectDirPath = "";
@@ -308,7 +312,7 @@
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
-				4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */,
+				4F5CC8252939EB7B000F8AB3 /* LottoQRView.swift in Sources */,
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
 				4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */,
 				C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */,
@@ -462,6 +466,7 @@
 				DEVELOPMENT_TEAM = F2W258F5P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LottoDiary/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed to scan Lotto QR codes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -491,6 +496,7 @@
 				DEVELOPMENT_TEAM = F2W258F5P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LottoDiary/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed to scan Lotto QR codes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -534,6 +540,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4F352FB9294B033D004F65AA /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yannickl/QRCodeReader.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -545,6 +559,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4F352FBA294B033D004F65AA /* QRCodeReader */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F352FB9294B033D004F65AA /* XCRemoteSwiftPackageReference "QRCodeReader.swift" */;
+			productName = QRCodeReader;
+		};
 		C050B339292E3A4E00E664DB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C050B338292E3A4E00E664DB /* XCRemoteSwiftPackageReference "SnapKit" */;
