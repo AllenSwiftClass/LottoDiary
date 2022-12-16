@@ -24,7 +24,7 @@ final class CustomTextField: UITextField {
         backgroundColor = .clear
         textColor = .white
         tintColor = .white
-        font = .gmarksans(weight: .regular, size: ._25)
+        font = .gmarksans(weight: .bold, size: ._25)
         autocapitalizationType = .none
         autocorrectionType = .no
         spellCheckingType = .no
