@@ -62,6 +62,9 @@ final class MyInfomationSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nameTextField.delegate = self
+        targetAmountTextField.delegate = self
+        
         configurePickView()
         setUI()
     }
@@ -138,8 +141,130 @@ final class MyInfomationSettingViewController: UIViewController {
         }
         
     }
+    
+    private func nameValidation(name: String) -> Bool {
+        // String -> Array
+        let arr = Array(name)
+        // 정규식 pattern. 한글, 영어, 숫자만 있어야 함
+        let pattern = "[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]"
+        if let regex = try? NSRegularExpression(pattern: pattern, options:  .caseInsensitive) {
+            var index = 0
+            while index < arr.count {
+                let results = regex.matches(in: String(arr[index]), range: NSRange(location: 0, length: 1))
+                if results.count == 0 {
+                    return false
+                } else {
+                    index += 1
+                }
+            }
+        }
+        return true
+    }
+    
+    
+    // 폰트, 텍스트내용, 텍스트 색을 통해 warningLabel을 디자인하는 메서드
+    // font는 11크기의 regular가 기본값이며 다른 크기나 굵기를 주고 싶다면 직접 인수로 넣어줘야 함.
+    private func setWarningLabel(target label: UILabel, font: UIFont = .designSystem(weight: .regular, size: ._11), text: String, textColor: UIColor) {
+        label.font = font
+        label.text = text
+        label.textColor = textColor
+    }
+    
 }
 
+
+// MARK: - textField Delegate
+extension MyInfomationSettingViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == nameTextField {
+            textFieldCheck(nameTextField, .letter)
+        } else if textField == targetAmountTextField {
+            textFieldCheck(targetAmountTextField, .number)
+        }
+    }
+    
+    // 텍스트필드가 유효성에 따라 warningLabel의 상태를 정하는 메서드
+    func textFieldCheck(_ tf: UITextField, _ type: TextFieldType) {
+        switch type {
+        case .letter:
+            if !textFieldNullCheck(tf) {
+            } else if tf.text!.count < 2 || tf.text!.count > 7 {
+                setWarningLabel(target: warningNameLabel, text: "닉네임은 2자 이상 7자 이하로 입력해주세요", textColor: .systemRed)
+            } else if !nameValidation(name: tf.text!) {
+                setWarningLabel(target: warningNameLabel, text: "닉네임은 한글, 영문, 숫자만 가능해요", textColor: .systemRed)
+            } else {
+                setWarningLabel(target: warningNameLabel, font: .designSystem(weight: .regular, size: ._0), text: "" , textColor: .clear)
+            }
+        case .number:
+            if !textFieldNullCheck(tf){
+            } else if tf.text!.count > 13 { // 구분자 ,도 포함한다.
+                setWarningLabel(target: warningAmountLabel, text: "100억 미만의 숫자만 입력해주세요", textColor: .systemRed)
+            } else {
+                setWarningLabel(target: warningAmountLabel, font: .designSystem(weight: .regular, size: ._0), text: "", textColor: .clear)
+            }
+        }
+    }
+    
+    func textFieldNullCheck(_ tf: UITextField) -> Bool {
+        if tf.text == "" {
+            warningNameLabel.text = "값을 입력해주세요"
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    // 텍스트 필드에 1000단위로 , 붙여주는 델리게이트, replacementString인 string은 입력한 길이 1인 문자이다.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            guard textField == targetAmountTextField else { return true }
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.locale = Locale.current
+            formatter.maximumFractionDigits = 0
+            if let removeAllSeparator = textField.text?.replacingOccurrences(of: formatter.groupingSeparator, with: "") {
+                var beforeFormattedString = removeAllSeparator + string
+                // 입력된 수가 100억 보다 크다면
+//                if beforeFormattedString.count > 10 {
+//                    shakeTextField(textField)
+//                    return false
+//                } else {
+//                    if textField == purchaseTextField {
+//                        warningPurchaseLabel.textColor = .clear
+//                    } else {
+//                        warningWinningLabel.textColor = .clear
+//                    }
+//                }
+                if formatter.number(from: string) != nil { // 백스페이스가 들어오면 숫자로 변환이 안되기 때문에 nil
+                    // 숫자로 만든 후에 formatter.string으로 문자열을 만드는 과정에서 ,을 붙이게 된다.
+                    if let formattedNumber = formatter.number(from: beforeFormattedString), let formattedString = formatter.string(from: formattedNumber) {
+                        textField.text = formattedString
+//                        validateOkButton()
+                        return false
+                    }
+                } else {
+                    if string == "" { // 들어온 값이 백스패이스라면
+                        let lastIndex = beforeFormattedString.index(beforeFormattedString.endIndex, offsetBy: -1)
+                        beforeFormattedString = String(beforeFormattedString[..<lastIndex]) //String의 서브스크립트에서는 ..<를 사용할 때 앞에 빈 공간은 첫번째 인덱스를 뜻한다
+                        if let formattedNumber = formatter.number(from: beforeFormattedString), let formattedString = formatter.string(from: formattedNumber) {
+                            textField.text = formattedString
+//                            validateOkButton()
+                            return false
+                        } else {
+//                            okButton.backgroundColor = .black
+//                            okButton.setTitleColor(UIColor.white, for: .normal)
+//                            okButton.isEnabled = false
+//                            okButton.alpha = 0.3
+                        }
+                    } else {
+                        return false
+                    }
+                }
+            }
+        // textFeild의 내용이 전부 지워질때 델리게이트 단에서 내용을 지워준다.
+        return true
+    }
+    
+}
 
 
 // MARK: - UIPickview Method, DataSource, Delegate
