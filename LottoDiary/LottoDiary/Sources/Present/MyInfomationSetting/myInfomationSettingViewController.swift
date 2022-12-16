@@ -14,6 +14,9 @@ final class MyInfomationSettingViewController: UIViewController {
     
     // MARK: - Property
     
+    // 경고알림 주기를 담고있는 배열
+    private let notificationCycleArray = ["설정 안함", "하루", "일주일", "한달"]
+    
     private lazy var myInfoLabel = CustomLabel(text: "내 정보", font: .gmarksans(weight: .bold, size: ._28), textColor: .white)
     
     private lazy var nameTextFieldView: UIView = {
@@ -50,23 +53,30 @@ final class MyInfomationSettingViewController: UIViewController {
     
     private lazy var notificationLabel = CustomLabel(text: "일정 주기마다 로또 경고 알림", font: .gmarksans(weight: .bold, size: ._20), textColor: .white)
     
+    private lazy var notificationTextField = CustomTextField(placeholder: "주기를 선택해주세요", type: .number, align: .natural)
+    
+    private let pickerView = UIPickerView()
+    
     // MARK: - lifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configurePickView()
         setUI()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.resignFirstResponder()
         targetAmountTextField.resignFirstResponder()
+        notificationTextField.resignFirstResponder()
     }
     
-    func setUI() {
-        
+    
+    private func setUI() {
         view.backgroundColor = .designSystem(.backgroundBlack)
         
-        [myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel]
+        [myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField]
             .forEach{ view.addSubview($0) }
         
         myInfoLabel.snp.makeConstraints { make in
@@ -122,8 +132,80 @@ final class MyInfomationSettingViewController: UIViewController {
             make.leading.equalToSuperview().offset(15)
         }
         
+        notificationTextField.snp.makeConstraints { make in
+            make.top.equalTo(notificationLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(15)
+        }
         
     }
+}
+
+
+
+// MARK: - UIPickview Method, DataSource, Delegate
+
+extension MyInfomationSettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
+    private func configurePickView() {
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        // textField에 반응하는 view를 pickerView로 설정
+        notificationTextField.inputView = pickerView
+        notificationTextField.textColor = .designSystem(.mainBlue)
+        configureToolbar()
+    }
+    
+    // 취소, 완료버튼이 있는 toolBar 설정
+    private func configureToolbar() {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = .white
+        toolBar.sizeToFit()
+        
+        // flexibleSpace는 취소~완료 간의 거리를 만들어준다.
+        let doneBT = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(self.doneButtonTapped))
+        doneBT.tintColor = .black
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelBT = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(self.cancelButtonTapped))
+        cancelBT.tintColor = .black
+        toolBar.setItems([cancelBT, flexibleSpace, doneBT], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        notificationTextField.inputAccessoryView = toolBar
+    }
+    
+    // "완료" 클릭 시 데이터를 textField에 입력 후 입력창 내리기
+    @objc func doneButtonTapped() {
+        let row = self.pickerView.selectedRow(inComponent: 0)
+        self.pickerView.selectRow(row, inComponent: 0, animated: false)
+        self.notificationTextField.text = self.notificationCycleArray[row]
+        self.notificationTextField.resignFirstResponder()
+    }
+    
+    // "취소" 클릭 시 textfield의 텍스트 값을 nil로 처리 후 입력창 내리기
+    @objc func cancelButtonTapped() {
+        self.notificationTextField.text = nil
+        self.notificationTextField.resignFirstResponder()
+    }
+    
+    // pickview는 1개만 설정
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return notificationCycleArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return notificationCycleArray[row]
+    }
+    
+    // textfield의 텍스트에 pickerview에서 선택한 값을 넣어준다.
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.notificationTextField.text = self.notificationCycleArray[row]
+    }
     
 }
+
