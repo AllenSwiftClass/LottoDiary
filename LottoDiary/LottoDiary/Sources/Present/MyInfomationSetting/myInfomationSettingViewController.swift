@@ -17,6 +17,8 @@ final class MyInfomationSettingViewController: UIViewController {
     // 경고알림 주기를 담고있는 배열
     private let notificationCycleArray = ["설정 안함", "하루", "일주일", "한달"]
     
+    private var validation = Validation()
+    
     private lazy var myInfoLabel = CustomLabel(text: "내 정보", font: .gmarksans(weight: .bold, size: ._28), textColor: .white)
     
     private lazy var nameTextFieldView: UIView = {
@@ -57,6 +59,19 @@ final class MyInfomationSettingViewController: UIViewController {
     
     private let pickerView = UIPickerView()
     
+    private lazy var okButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("확인", for: .normal)
+        button.tintColor = .designSystem(.grayD8D8D8)
+        button.titleLabel!.font = .gmarksans(weight: .bold, size: ._20)
+        button.backgroundColor = .designSystem(.gray63626B)
+        button.layer.cornerRadius = 15
+        button.alpha = 0.3
+        button.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
+        return button
+    }()
+    
     // MARK: - lifeCycle
     
     override func viewDidLoad() {
@@ -79,7 +94,7 @@ final class MyInfomationSettingViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .designSystem(.backgroundBlack)
         
-        [myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField]
+        [myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton]
             .forEach{ view.addSubview($0) }
         
         myInfoLabel.snp.makeConstraints { make in
@@ -99,7 +114,7 @@ final class MyInfomationSettingViewController: UIViewController {
         }
         
         nameTextField.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.25)
+            make.width.equalToSuperview().multipliedBy(0.4)
             make.trailing.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
         }
@@ -140,6 +155,12 @@ final class MyInfomationSettingViewController: UIViewController {
             make.leading.equalToSuperview().offset(15)
         }
         
+        okButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview().offset(-40)
+            make.height.equalTo(50)
+        }
+        
     }
     
     private func nameValidation(name: String) -> Bool {
@@ -170,6 +191,26 @@ final class MyInfomationSettingViewController: UIViewController {
         label.textColor = textColor
     }
     
+    // 확인버튼이 유효성을 검사하고 스타일변화
+    func validateOkButton() {
+        if let notification = notificationTextField.text, !notification.isEmpty {
+            let nameValid = validation.validateName(name: nameTextField.text).isValid
+            let targetAmountValid = validation.validateTargetAmount(number: targetAmountTextField.text).isValid
+            if nameValid && targetAmountValid {
+                okButton.isEnabled = true
+                okButton.alpha = 1
+                return
+            }
+        }
+        okButton.isEnabled = false
+        okButton.alpha = 0.3
+    }
+    
+    // 확인 버튼 클릭 시(닉네임, 목표금액, 경고 알림 선택시 활성화)
+    @objc func okButtonTapped() {
+        
+    }
+    
 }
 
 
@@ -187,31 +228,25 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
     func textFieldCheck(_ tf: UITextField, _ type: TextFieldType) {
         switch type {
         case .letter:
-            if !textFieldNullCheck(tf) {
-            } else if tf.text!.count < 2 || tf.text!.count > 7 {
-                setWarningLabel(target: warningNameLabel, text: "닉네임은 2자 이상 7자 이하로 입력해주세요", textColor: .systemRed)
-            } else if !nameValidation(name: tf.text!) {
-                setWarningLabel(target: warningNameLabel, text: "닉네임은 한글, 영문, 숫자만 가능해요", textColor: .systemRed)
-            } else {
-                setWarningLabel(target: warningNameLabel, font: .designSystem(weight: .regular, size: ._0), text: "" , textColor: .clear)
-            }
+            let ResultWithLabel = validation.validateName(name: tf.text)
+            ResultWithLabel.isValid ? setWarningLabel(target: warningNameLabel,
+                                                      font: .designSystem(weight: .regular, size: ._0),
+                                                      text: "" ,
+                                                      textColor: .clear)
+                                    : setWarningLabel(target: warningNameLabel,
+                                                      text: ResultWithLabel.errorLabel,
+                                                      textColor: .systemRed)
         case .number:
-            if !textFieldNullCheck(tf){
-            } else if tf.text!.count > 13 { // 구분자 ,도 포함한다.
-                setWarningLabel(target: warningAmountLabel, text: "100억 미만의 숫자만 입력해주세요", textColor: .systemRed)
-            } else {
-                setWarningLabel(target: warningAmountLabel, font: .designSystem(weight: .regular, size: ._0), text: "", textColor: .clear)
-            }
+            let ResultWithLabel = validation.validateTargetAmount(number: tf.text)
+            ResultWithLabel.isValid ? setWarningLabel(target: warningAmountLabel,
+                                                      font: .designSystem(weight: .regular, size: ._0),
+                                                      text: "",
+                                                      textColor: .clear)
+                                    : setWarningLabel(target: warningAmountLabel,
+                                                      text: ResultWithLabel.errorLabel,
+                                                      textColor: .systemRed)
         }
-    }
-    
-    func textFieldNullCheck(_ tf: UITextField) -> Bool {
-        if tf.text == "" {
-            warningNameLabel.text = "값을 입력해주세요"
-            return false
-        } else {
-            return true
-        }
+        validateOkButton()
     }
     
     // 텍스트 필드에 1000단위로 , 붙여주는 델리게이트, replacementString인 string은 입력한 길이 1인 문자이다.
@@ -223,22 +258,10 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
             formatter.maximumFractionDigits = 0
             if let removeAllSeparator = textField.text?.replacingOccurrences(of: formatter.groupingSeparator, with: "") {
                 var beforeFormattedString = removeAllSeparator + string
-                // 입력된 수가 100억 보다 크다면
-//                if beforeFormattedString.count > 10 {
-//                    shakeTextField(textField)
-//                    return false
-//                } else {
-//                    if textField == purchaseTextField {
-//                        warningPurchaseLabel.textColor = .clear
-//                    } else {
-//                        warningWinningLabel.textColor = .clear
-//                    }
-//                }
                 if formatter.number(from: string) != nil { // 백스페이스가 들어오면 숫자로 변환이 안되기 때문에 nil
                     // 숫자로 만든 후에 formatter.string으로 문자열을 만드는 과정에서 ,을 붙이게 된다.
                     if let formattedNumber = formatter.number(from: beforeFormattedString), let formattedString = formatter.string(from: formattedNumber) {
                         textField.text = formattedString
-//                        validateOkButton()
                         return false
                     }
                 } else {
@@ -247,13 +270,7 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
                         beforeFormattedString = String(beforeFormattedString[..<lastIndex]) //String의 서브스크립트에서는 ..<를 사용할 때 앞에 빈 공간은 첫번째 인덱스를 뜻한다
                         if let formattedNumber = formatter.number(from: beforeFormattedString), let formattedString = formatter.string(from: formattedNumber) {
                             textField.text = formattedString
-//                            validateOkButton()
                             return false
-                        } else {
-//                            okButton.backgroundColor = .black
-//                            okButton.setTitleColor(UIColor.white, for: .normal)
-//                            okButton.isEnabled = false
-//                            okButton.alpha = 0.3
                         }
                     } else {
                         return false
@@ -263,7 +280,6 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
         // textFeild의 내용이 전부 지워질때 델리게이트 단에서 내용을 지워준다.
         return true
     }
-    
 }
 
 
@@ -306,12 +322,14 @@ extension MyInfomationSettingViewController: UIPickerViewDataSource, UIPickerVie
         self.pickerView.selectRow(row, inComponent: 0, animated: false)
         self.notificationTextField.text = self.notificationCycleArray[row]
         self.notificationTextField.resignFirstResponder()
+        validateOkButton()
     }
     
     // "취소" 클릭 시 textfield의 텍스트 값을 nil로 처리 후 입력창 내리기
     @objc func cancelButtonTapped() {
         self.notificationTextField.text = nil
         self.notificationTextField.resignFirstResponder()
+        validateOkButton()
     }
     
     // pickview는 1개만 설정
