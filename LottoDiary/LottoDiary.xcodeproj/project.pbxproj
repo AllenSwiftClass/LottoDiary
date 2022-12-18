@@ -61,6 +61,7 @@
 		C0513CAB294F202E00711417 /* LastLottoNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA8294F202E00711417 /* LastLottoNumberTableViewCell.swift */; };
 		C0513CAC294F202E00711417 /* LottoNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA9294F202E00711417 /* LottoNumbersView.swift */; };
 		C0513CAE294F208F00711417 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CAD294F208F00711417 /* UIView+.swift */; };
+		C0513CB2294F27BF00711417 /* DummyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CB1294F27BF00711417 /* DummyUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		C0513CA8294F202E00711417 /* LastLottoNumberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastLottoNumberTableViewCell.swift; sourceTree = "<group>"; };
 		C0513CA9294F202E00711417 /* LottoNumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottoNumbersView.swift; sourceTree = "<group>"; };
 		C0513CAD294F208F00711417 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		C0513CB1294F27BF00711417 /* DummyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,11 +330,11 @@
 		C050B327292E31D700E664DB /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				C0513CAF294F27A300711417 /* Home */,
 				C0513CA0294F1FC100711417 /* NumberDraw */,
 				6240F850293C62D000A2C781 /* Calendar */,
 				4F5CC8282939EB89000F8AB3 /* TabBar */,
 				4FE0817D293E142C006F9A1C /* ChartLottoListView */,
-				C050B310292E30E700E664DB /* HomeViewController.swift */,
 				4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */,
 				4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */,
 			);
@@ -420,6 +422,23 @@
 			isa = PBXGroup;
 			children = (
 				C0513CA5294F201400711417 /* LottoData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C0513CAF294F27A300711417 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C0513CB0294F27B000711417 /* Models */,
+				C050B310292E30E700E664DB /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C0513CB0294F27B000711417 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0513CB1294F27BF00711417 /* DummyUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -524,6 +543,7 @@
 				4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */,
 				C050B311292E30E700E664DB /* HomeViewController.swift in Sources */,
 				C0513CAC294F202E00711417 /* LottoNumbersView.swift in Sources */,
+				C0513CB2294F27BF00711417 /* DummyUser.swift in Sources */,
 				4FE08185293E2B58006F9A1C /* LottoListViewModel.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
