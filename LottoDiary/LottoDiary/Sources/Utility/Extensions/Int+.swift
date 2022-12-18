@@ -8,7 +8,7 @@
 import UIKit
 
 extension Int {
-    
+    //
     static let lottoRange: Range<Int> = 1..<46
     
     static func makeRandomIntArray(count: Int) -> [Int] {
