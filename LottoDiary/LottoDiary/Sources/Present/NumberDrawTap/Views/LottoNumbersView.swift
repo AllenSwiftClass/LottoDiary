@@ -24,12 +24,12 @@ class LottoNumbersView: UIView {
         }
     }
 
-    lazy var firstNumberBall = LottoBall(lottoType: .oneTwoThree)
-    lazy var secondNumberBall = LottoBall(lottoType: .oneTwoThree)
-    lazy var thirdNumberBall = LottoBall(lottoType: .oneTwoThree)
-    lazy var fourthNumberBall = LottoBall(lottoType: .four)
-    lazy var fifthNumberBall = LottoBall(lottoType: .five)
-    lazy var sixthNumberBall = LottoBall(lottoType: .six)
+    lazy var firstNumberBall = LottoBall()
+    lazy var secondNumberBall = LottoBall()
+    lazy var thirdNumberBall = LottoBall()
+    lazy var fourthNumberBall = LottoBall()
+    lazy var fifthNumberBall = LottoBall()
+    lazy var sixthNumberBall = LottoBall()
     
     lazy var plusImage: UIImageView = {
         let imageView = UIImageView()
@@ -37,7 +37,7 @@ class LottoNumbersView: UIView {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    lazy var bounusNumberBall = LottoBall(lottoType: .bonuns)
+    lazy var bounusNumberBall = LottoBall()
 
     init(numbers: [Int]) {
         self.lottoNumbers = numbers

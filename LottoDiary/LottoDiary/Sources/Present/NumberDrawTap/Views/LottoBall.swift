@@ -8,27 +8,6 @@
 import UIKit
 import SnapKit
 
-enum LottoType {
-    case oneTwoThree
-    case four
-    case five
-    case six
-    case bonuns
-    
-    var ballColor: UIColor {
-        switch self {
-        case .oneTwoThree:
-            return .designSystem(.mainYellow)!
-        case .four:
-            return .designSystem(.mainBlue)!
-        case .five, .bonuns:
-            return .designSystem(.mainOrange)!
-        case .six:
-            return .designSystem(.mainGreen)!
-        }
-    }
-}
-
 class LottoBall: UIView {
     
     static let ballSize = 38
@@ -36,6 +15,18 @@ class LottoBall: UIView {
     var ballNumber: Int {
         didSet {
             self.ballNumberLabel.text = String(ballNumber)
+            switch ballNumber {
+            case 1..<10:
+                self.backgroundColor = .designSystem(.mainYellow)
+            case 10..<20:
+                self.backgroundColor = .designSystem(.mainOrange)
+            case 20..<30:
+                self.backgroundColor = .designSystem(.mainBlue)
+            case 30..<40:
+                self.backgroundColor = .designSystem(.gray2B2C35)
+            default:
+                self.backgroundColor = .designSystem(.mainGreen)
+            }
         }
     }
     
@@ -47,11 +38,10 @@ class LottoBall: UIView {
         return label
     }()
     
-    init(lottoType: LottoType, LottoNumber: Int = .random(in: Int.lottoRange)) {
-        ballNumber = LottoNumber
+    init(lottoNumber: Int = .random(in: Int.lottoRange)) {
+        ballNumber = lottoNumber
         super.init(frame: .zero)
-        self.backgroundColor = lottoType.ballColor
-        self.ballNumberLabel.text = String(LottoNumber)
+        self.ballNumberLabel.text = String(lottoNumber)
         setUI()
     }
     
@@ -60,6 +50,18 @@ class LottoBall: UIView {
     }
     
     func setUI() {
+        switch ballNumber {
+        case 1..<10:
+            self.backgroundColor = .designSystem(.mainYellow)
+        case 10..<20:
+            self.backgroundColor = .designSystem(.mainOrange)
+        case 20..<30:
+            self.backgroundColor = .designSystem(.mainBlue)
+        case 30..<40:
+            self.backgroundColor = .designSystem(.gray2B2C35)
+        default:
+            self.backgroundColor = .designSystem(.mainGreen)
+        }
         self.clipsToBounds = true
         self.layer.cornerRadius = CGFloat(LottoBall.ballSize / 2)
         addSubview(ballNumberLabel)
