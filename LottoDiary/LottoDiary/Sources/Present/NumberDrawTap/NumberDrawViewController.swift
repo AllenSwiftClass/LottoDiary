@@ -44,7 +44,7 @@ final class NumberDrawViewController: UIViewController {
         return view
     }()
 
-    let randomNumberDraw = LottoNumbersView(numbers: Int.makeRandomIntArray(count: 7))
+    let randomNumberDraw = LottoNumbersView()
     
     lazy var changeButton: UIButton = {
         let button = UIButton(type: .system)

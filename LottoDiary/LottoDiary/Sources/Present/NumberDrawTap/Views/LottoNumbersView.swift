@@ -39,7 +39,7 @@ class LottoNumbersView: UIView {
     }()
     lazy var bounusNumberBall = LottoBall()
 
-    init(numbers: [Int]) {
+    init(numbers: [Int] = Int.makeRandomIntArray(count: 7)) {
         self.lottoNumbers = numbers
         super.init(frame: .zero)
         setUI()
