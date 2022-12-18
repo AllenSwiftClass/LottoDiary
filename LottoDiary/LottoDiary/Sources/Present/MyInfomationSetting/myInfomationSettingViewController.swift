@@ -159,26 +159,7 @@ final class MyInfomationSettingViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
-    private func nameValidation(name: String) -> Bool {
-        // String -> Array
-        let arr = Array(name)
-        // 정규식 pattern. 한글, 영어, 숫자만 있어야 함
-        let pattern = "[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]"
-        if let regex = try? NSRegularExpression(pattern: pattern, options:  .caseInsensitive) {
-            var index = 0
-            while index < arr.count {
-                let results = regex.matches(in: String(arr[index]), range: NSRange(location: 0, length: 1))
-                if results.count == 0 {
-                    return false
-                } else {
-                    index += 1
-                }
-            }
-        }
-        return true
-    }
-    
+
     
     // 폰트, 텍스트내용, 텍스트 색을 통해 warningLabel을 디자인하는 메서드
     // font는 11크기의 regular가 기본값이며 다른 크기나 굵기를 주고 싶다면 직접 인수로 넣어줘야 함.
@@ -205,10 +186,9 @@ final class MyInfomationSettingViewController: UIViewController {
     
     // 확인 버튼 클릭 시(닉네임, 목표금액, 경고 알림 선택시 활성화)
     @objc func okButtonTapped() {
-
         let tabBarvc = TabBarController()
         navigationController?.pushViewController(tabBarvc, animated: true)
-        
+        // 유저 데이터 생성 부분
     }
     
 }
