@@ -38,6 +38,7 @@
 		6240F86F293CB22A00A2C781 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6240F86E293CB22A00A2C781 /* AudioToolbox.framework */; };
 		625F05ED2944926B00231A9D /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F05EC2944926B00231A9D /* CustomLabel.swift */; };
 		625F05F029449ACA00231A9D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F05EF29449ACA00231A9D /* CustomTextField.swift */; };
+		C01F3B54294F37C70094369C /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3B53294F37C70094369C /* InfoView.swift */; };
 		C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30C292E30E700E664DB /* AppDelegate.swift */; };
 		C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B30E292E30E700E664DB /* SceneDelegate.swift */; };
 		C050B311292E30E700E664DB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B310292E30E700E664DB /* HomeViewController.swift */; };
@@ -92,6 +93,7 @@
 		6240F86E293CB22A00A2C781 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		625F05EC2944926B00231A9D /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		625F05EF29449ACA00231A9D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C01F3B53294F37C70094369C /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C050B309292E30E700E664DB /* LottoDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C050B30C292E30E700E664DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C050B30E292E30E700E664DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 			children = (
 				C0513CB0294F27B000711417 /* Models */,
 				C050B310292E30E700E664DB /* HomeViewController.swift */,
+				C01F3B53294F37C70094369C /* InfoView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				C050B342292E3D9200E664DB /* UIColor+.swift in Sources */,
 				6240F860293C7FE100A2C781 /* AddLottoFooterView.swift in Sources */,
 				6240F85E293C7EC100A2C781 /* DateHeaderView.swift in Sources */,
+				C01F3B54294F37C70094369C /* InfoView.swift in Sources */,
 				4FE08183293E2B4C006F9A1C /* ChartViewModel.swift in Sources */,
 				4FE0818C293E2BA8006F9A1C /* LottoListHeader.swift in Sources */,
 				4FE0818A293E2BA1006F9A1C /* LottoListCell.swift in Sources */,
