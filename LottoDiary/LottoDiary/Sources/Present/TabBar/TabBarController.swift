@@ -65,7 +65,28 @@ final class TabBarController: UITabBarController {
         readerVC.delegate = self
         
         self.readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-            print(result!)
+            
+            // 예시) "http://m.dhlottery.co.kr/?v=0868m041120213645m010306132438m142933354042m021823262731m1217284143441293818248"
+            // 1. components(separatedBy: "=")[1] : 로또QR 주소 중 = 이후 회차번호,로또 번호들이 나열되어있음. = 를 기준으로 나눈 후 [1]을 부르면 회차번호, 로또 번호들만 추출
+            // 2. .dropLast(10) : 맨 마지막 번호 중 마지막 10자리는 TR 번호이다. 우리는 TR번호가 쓸모 없기 때문에 마지막 10자리는 삭제
+            // lottoTotalNumber : m을 기준으로 회차번호, 로또번호
+            guard let lottoURL = result?.value.components(separatedBy: "=")[1]  else { return }
+                
+            // TR번호
+            let startIndex = lottoURL.index(lottoURL.endIndex, offsetBy: -10)
+            let TRNumber = lottoURL[startIndex...]
+            
+            var lottoTotalNumber = lottoURL.dropLast(10).components(separatedBy: "m")
+            // 회차번호
+            let roundNumber = lottoTotalNumber.removeFirst()
+            // 구매금액
+            let buyAmount = (lottoTotalNumber.count) * 1000
+            // 로또 번호
+            let lottoNumber = lottoTotalNumber
+            
+            print(lottoURL)
+            
+            print(TRNumber, roundNumber, buyAmount, lottoNumber)
         }
         
         // 로또QR 카메라 화면 push
