@@ -23,7 +23,7 @@ class LottoBall: UIView {
             case 20..<30:
                 self.backgroundColor = .designSystem(.mainBlue)
             case 30..<40:
-                self.backgroundColor = .designSystem(.gray2B2C35)
+                self.backgroundColor = .designSystem(.gray17181D)
             default:
                 self.backgroundColor = .designSystem(.mainGreen)
             }
