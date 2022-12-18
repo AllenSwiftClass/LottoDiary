@@ -83,6 +83,7 @@ class CustomTabBar: UITabBar {
     
     @objc func middleBtnAction() {
         middleBtnActionHandler()
+        print("tapped")
     }
     
     // middleButton 전역 touch 활성화
