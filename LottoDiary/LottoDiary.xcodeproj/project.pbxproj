@@ -55,7 +55,12 @@
 		C050B340292E3D7100E664DB /* CGColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33F292E3D7100E664DB /* CGColor+.swift */; };
 		C050B342292E3D9200E664DB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B341292E3D9200E664DB /* UIColor+.swift */; };
 		C050B344292E40CD00E664DB /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C050B343292E40CD00E664DB /* Colors.xcassets */; };
-		C0513C9F294F1ECD00711417 /* NumberDrawTap in Resources */ = {isa = PBXBuildFile; fileRef = C0513C9E294F1ECD00711417 /* NumberDrawTap */; };
+		C0513CA4294F1FF800711417 /* NumberDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA3294F1FF800711417 /* NumberDrawViewController.swift */; };
+		C0513CA6294F201400711417 /* LottoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA5294F201400711417 /* LottoData.swift */; };
+		C0513CAA294F202E00711417 /* LottoBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA7294F202E00711417 /* LottoBall.swift */; };
+		C0513CAB294F202E00711417 /* LastLottoNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA8294F202E00711417 /* LastLottoNumberTableViewCell.swift */; };
+		C0513CAC294F202E00711417 /* LottoNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CA9294F202E00711417 /* LottoNumbersView.swift */; };
+		C0513CAE294F208F00711417 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0513CAD294F208F00711417 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +110,12 @@
 		C050B33F292E3D7100E664DB /* CGColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+.swift"; sourceTree = "<group>"; };
 		C050B341292E3D9200E664DB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		C050B343292E40CD00E664DB /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		C0513C9E294F1ECD00711417 /* NumberDrawTap */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NumberDrawTap; path = ../../../../../../../Downloads/NumberDrawTap; sourceTree = "<group>"; };
+		C0513CA3294F1FF800711417 /* NumberDrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDrawViewController.swift; sourceTree = "<group>"; };
+		C0513CA5294F201400711417 /* LottoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoData.swift; sourceTree = "<group>"; };
+		C0513CA7294F202E00711417 /* LottoBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottoBall.swift; sourceTree = "<group>"; };
+		C0513CA8294F202E00711417 /* LastLottoNumberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastLottoNumberTableViewCell.swift; sourceTree = "<group>"; };
+		C0513CA9294F202E00711417 /* LottoNumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottoNumbersView.swift; sourceTree = "<group>"; };
+		C0513CAD294F208F00711417 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,7 +328,7 @@
 		C050B327292E31D700E664DB /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				C0513C9E294F1ECD00711417 /* NumberDrawTap */,
+				C0513CA0294F1FC100711417 /* NumberDraw */,
 				6240F850293C62D000A2C781 /* Calendar */,
 				4F5CC8282939EB89000F8AB3 /* TabBar */,
 				4FE0817D293E142C006F9A1C /* ChartLottoListView */,
@@ -381,8 +391,37 @@
 				6240F863293C831600A2C781 /* Int+.swift */,
 				6240F865293C843B00A2C781 /* String+.swift */,
 				4FE08196293E4537006F9A1C /* Int+.swift */,
+				C0513CAD294F208F00711417 /* UIView+.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C0513CA0294F1FC100711417 /* NumberDraw */ = {
+			isa = PBXGroup;
+			children = (
+				C0513CA2294F1FDA00711417 /* Models */,
+				C0513CA1294F1FD300711417 /* Views */,
+				C0513CA3294F1FF800711417 /* NumberDrawViewController.swift */,
+			);
+			path = NumberDraw;
+			sourceTree = "<group>";
+		};
+		C0513CA1294F1FD300711417 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0513CA8294F202E00711417 /* LastLottoNumberTableViewCell.swift */,
+				C0513CA7294F202E00711417 /* LottoBall.swift */,
+				C0513CA9294F202E00711417 /* LottoNumbersView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C0513CA2294F1FDA00711417 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0513CA5294F201400711417 /* LottoData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,7 +495,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C050B31C292E30E700E664DB /* LaunchScreen.storyboard in Resources */,
-				C0513C9F294F1ECD00711417 /* NumberDrawTap in Resources */,
 				C050B331292E327E00E664DB /* GmarketSansTTFLight.ttf in Resources */,
 				C050B319292E30E700E664DB /* Assets.xcassets in Resources */,
 				C050B314292E30E700E664DB /* Main.storyboard in Resources */,
@@ -475,14 +513,17 @@
 			files = (
 				6240F856293C63E400A2C781 /* LottoCalendar.swift in Sources */,
 				C050B340292E3D7100E664DB /* CGColor+.swift in Sources */,
+				C0513CA4294F1FF800711417 /* NumberDrawViewController.swift in Sources */,
 				6240F86C293C993600A2C781 /* AddLottoViewController.swift in Sources */,
 				625F05ED2944926B00231A9D /* CustomLabel.swift in Sources */,
 				4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */,
 				625F05F029449ACA00231A9D /* CustomTextField.swift in Sources */,
 				4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */,
+				C0513CAE294F208F00711417 /* UIView+.swift in Sources */,
 				6240F85C293C7DD500A2C781 /* LottoCell.swift in Sources */,
 				4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */,
 				C050B311292E30E700E664DB /* HomeViewController.swift in Sources */,
+				C0513CAC294F202E00711417 /* LottoNumbersView.swift in Sources */,
 				4FE08185293E2B58006F9A1C /* LottoListViewModel.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
@@ -491,6 +532,7 @@
 				6240F866293C843B00A2C781 /* String+.swift in Sources */,
 				C050B33C292E3AB300E664DB /* UIFont+.swift in Sources */,
 				6240F864293C831600A2C781 /* Int+.swift in Sources */,
+				C0513CAB294F202E00711417 /* LastLottoNumberTableViewCell.swift in Sources */,
 				C050B337292E358F00E664DB /* Palette.swift in Sources */,
 				4FE08197293E4537006F9A1C /* Int+.swift in Sources */,
 				C050B317292E30E700E664DB /* LottoDiary.xcdatamodeld in Sources */,
@@ -499,6 +541,7 @@
 				C050B30F292E30E700E664DB /* SceneDelegate.swift in Sources */,
 				4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */,
 				6240F868293C84C300A2C781 /* LottoCalenderViewController+DataSource.swift in Sources */,
+				C0513CAA294F202E00711417 /* LottoBall.swift in Sources */,
 				6240F85A293C70CA00A2C781 /* Lotto.swift in Sources */,
 				6240F858293C64A700A2C781 /* ExpandButton.swift in Sources */,
 				C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */,
@@ -510,6 +553,7 @@
 				4FE0818A293E2BA1006F9A1C /* LottoListCell.swift in Sources */,
 				C050B33E292E3B6E00E664DB /* DeviceInfo.swift in Sources */,
 				C050B342292E3D9200E664DB /* UIColor+.swift in Sources */,
+				C0513CA6294F201400711417 /* LottoData.swift in Sources */,
 				4FE08188293E2B99006F9A1C /* LottoListDataSourceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
