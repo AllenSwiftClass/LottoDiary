@@ -55,6 +55,7 @@
 		C050B340292E3D7100E664DB /* CGColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B33F292E3D7100E664DB /* CGColor+.swift */; };
 		C050B342292E3D9200E664DB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C050B341292E3D9200E664DB /* UIColor+.swift */; };
 		C050B344292E40CD00E664DB /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C050B343292E40CD00E664DB /* Colors.xcassets */; };
+		C0513C9F294F1ECD00711417 /* NumberDrawTap in Resources */ = {isa = PBXBuildFile; fileRef = C0513C9E294F1ECD00711417 /* NumberDrawTap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		C050B33F292E3D7100E664DB /* CGColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor+.swift"; sourceTree = "<group>"; };
 		C050B341292E3D9200E664DB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		C050B343292E40CD00E664DB /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		C0513C9E294F1ECD00711417 /* NumberDrawTap */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NumberDrawTap; path = ../../../../../../../Downloads/NumberDrawTap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 		C050B327292E31D700E664DB /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				C0513C9E294F1ECD00711417 /* NumberDrawTap */,
 				6240F850293C62D000A2C781 /* Calendar */,
 				4F5CC8282939EB89000F8AB3 /* TabBar */,
 				4FE0817D293E142C006F9A1C /* ChartLottoListView */,
@@ -453,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C050B31C292E30E700E664DB /* LaunchScreen.storyboard in Resources */,
+				C0513C9F294F1ECD00711417 /* NumberDrawTap in Resources */,
 				C050B331292E327E00E664DB /* GmarketSansTTFLight.ttf in Resources */,
 				C050B319292E30E700E664DB /* Assets.xcassets in Resources */,
 				C050B314292E30E700E664DB /* Main.storyboard in Resources */,
