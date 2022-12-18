@@ -16,7 +16,10 @@ extension Int {
         for _ in 0..<count {
             returnArray.append(Int.random(in: lottoRange))
         }
-        return returnArray
+        
+        var sortedRandomReturnArray = returnArray.sorted()
+        
+        return sortedRandomReturnArray
     }
     
     static func makeRandomLottoNumber() -> Int {

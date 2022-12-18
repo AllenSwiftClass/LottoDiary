@@ -43,7 +43,7 @@ final class NumberDrawViewController: UIViewController {
         view.backgroundColor = .designSystem(.gray25262E)
         return view
     }()
-    
+
     let randomNumberDraw = LottoNumbersView(numbers: Int.makeRandomIntArray(count: 7))
     
     lazy var changeButton: UIButton = {
@@ -120,6 +120,7 @@ final class NumberDrawViewController: UIViewController {
             make.height.equalTo(172)
         }
         randomNumberDrawView.addSubview(randomNumberDraw)
+        randomNumberDraw.lottoNumbers = Int.makeRandomIntArray(count: 7)
         randomNumberDrawView.addSubview(changeButton)
         randomNumberDrawView.addSubview(warningLabel)
         randomNumberDraw.snp.makeConstraints { make in
