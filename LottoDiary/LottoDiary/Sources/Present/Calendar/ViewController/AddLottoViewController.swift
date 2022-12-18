@@ -102,8 +102,8 @@ final class AddLottoViewController: UIViewController {
     
     
     func setUI() {
-        [typeLabel, lottoSegmentedControl, purchaseLabel, purchaseTextField, winningLabel, winningTextField, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton]
-            .forEach{ self.view.addSubview($0) }
+        
+        view.addSubviews(typeLabel, lottoSegmentedControl, purchaseLabel, purchaseTextField, winningLabel, winningTextField, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton)
         
         typeLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)

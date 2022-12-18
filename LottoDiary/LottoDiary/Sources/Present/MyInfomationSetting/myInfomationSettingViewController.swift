@@ -93,8 +93,7 @@ final class MyInfomationSettingViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .designSystem(.backgroundBlack)
         
-        [myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton]
-            .forEach{ view.addSubview($0) }
+        view.addSubviews(myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton)
         
         myInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -159,7 +158,6 @@ final class MyInfomationSettingViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-40)
             make.height.equalTo(50)
         }
-        
     }
     
     private func nameValidation(name: String) -> Bool {
