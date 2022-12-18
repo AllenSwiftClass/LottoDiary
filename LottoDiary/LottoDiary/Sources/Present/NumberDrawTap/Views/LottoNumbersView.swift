@@ -13,6 +13,7 @@ class LottoNumbersView: UIView {
     let ballOffsetWidth: CGFloat = (DeviceInfo.screenWidth - (14 * 2 * 2) - (38 * 7) - 30) / 6
     
     var lottoNumbers: [Int] {
+        // MARK: - 변할때마다 이렇게하겟다지 초기값으로 이렇게 보여주겠다가 아님
         didSet {
             firstNumberBall.ballNumber = lottoNumbers[0]
             secondNumberBall.ballNumber = lottoNumbers[1]
