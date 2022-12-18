@@ -51,7 +51,7 @@ final class MyInfomationSettingViewController: UIViewController {
     
     private lazy var targetAmountTextField = CustomTextField(placeholder: "목표금액을 입력해주세요", type: .number, align: .right)
     
-    private lazy var warningAmountLabel = CustomLabel(text: "errorName", font: .gmarksans(weight: .regular, size: ._11), textColor: .clear)
+    private lazy var warningAmountLabel = CustomLabel(text: "errorName", font: .gmarksans(weight: .regular, size: ._0), textColor: .clear)
     
     private lazy var notificationLabel = CustomLabel(text: "일정 주기마다 로또 경고 알림", font: .gmarksans(weight: .bold, size: ._20), textColor: .white)
     
@@ -76,7 +76,6 @@ final class MyInfomationSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         nameTextField.delegate = self
         targetAmountTextField.delegate = self
         
@@ -208,6 +207,9 @@ final class MyInfomationSettingViewController: UIViewController {
     
     // 확인 버튼 클릭 시(닉네임, 목표금액, 경고 알림 선택시 활성화)
     @objc func okButtonTapped() {
+
+        let tabBarvc = TabBarController()
+        navigationController?.pushViewController(tabBarvc, animated: true)
         
     }
     
