@@ -312,7 +312,7 @@ extension MyInfomationSettingViewController: UIPickerViewDataSource, UIPickerVie
         validateOkButton()
     }
     
-    // pickview는 1개만 설정
+    // 알림 주기 pickview는 1개만 설정
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -329,6 +329,5 @@ extension MyInfomationSettingViewController: UIPickerViewDataSource, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.notificationTextField.text = self.notificationCycleArray[row]
     }
-    
 }
 
