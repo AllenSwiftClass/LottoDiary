@@ -11,6 +11,8 @@ import AVFoundation
 
 final class TabBarController: UITabBarController {
     
+    var networkManager = LottoQRNetworkManager.shared
+    
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
 //            let readerView = QRCodeReaderContainer(displayable: LottoQRView())
@@ -19,7 +21,7 @@ final class TabBarController: UITabBarController {
             
             // 플래시 버튼
             $0.showTorchButton = false
-            $0.showSwitchCameraButton = true
+            $0.showSwitchCameraButton = false
             $0.showCancelButton = false
             $0.showOverlayView = true
             // 가이드라인 선
@@ -85,8 +87,16 @@ final class TabBarController: UITabBarController {
             let lottoNumber = lottoTotalNumber
             
             print(lottoURL)
-            
             print(TRNumber, roundNumber, buyAmount, lottoNumber)
+            
+            self.networkManager.fetchLottoResult(roundNumber: roundNumber) { result in
+                switch result {
+                case .success(let lottoResult):
+                    print(lottoResult)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         }
         
         // 로또QR 카메라 화면 push
