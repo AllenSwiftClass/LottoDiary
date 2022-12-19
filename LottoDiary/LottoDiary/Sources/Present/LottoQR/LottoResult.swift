@@ -12,7 +12,13 @@ struct LottoResult: Codable {
     let returnValue, drwNoDate: String
     let firstWinamnt, firstPrzwnerCo: Int
     // 회차번호
-    let drwNo: Int
+    let drwNo: String
     let drwtNo5, bnusNo, drwtNo6, drwtNo4: Int
     let drwtNo2, drwtNo3, drwtNo1: Int
+}
+
+struct LottoResultSorted: Codable {
+    let lottoResultNumber: String
+    let roundNumber: String
+    let bonusNumber: String
 }
