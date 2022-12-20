@@ -22,7 +22,7 @@ final class LottoQRNetworkManager {
     static let shared = LottoQRNetworkManager()
     private init() {}
     
-    typealias NetworkCompletion = (Result<LottoResult, NetworkError>) -> Void
+    typealias NetworkCompletion = (Result<LottoResultSorted, NetworkError>) -> Void
     
     // 네트워킹 요청하는 함수
     func fetchLottoResult(roundNumber: String, completion: @escaping NetworkCompletion) {
@@ -61,7 +61,9 @@ final class LottoQRNetworkManager {
             // 3. 성공시
             if let lottoData = self.parseJSON(safeData) {
                 print("Parse 실행")
-                completion(.success(lottoData))
+                let numberArray = [lottoData.drwtNo1.insertZero, lottoData.drwtNo2.insertZero, lottoData.drwtNo3.insertZero, lottoData.drwtNo4.insertZero, lottoData.drwtNo5.insertZero, lottoData.drwtNo6.insertZero].sorted().joined()
+                let lottoResultSorted = LottoResultSorted(lottoResultNumber: numberArray, roundNumber: lottoData.drwNo, bonusNumber: lottoData.bnusNo.insertZero)
+                completion(.success(lottoResultSorted))
             } else {
                 print("Parse 실패")
                 completion(.failure(.parseError))
