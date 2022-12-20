@@ -84,8 +84,7 @@ final class TabBarController: UITabBarController {
             // 구매금액
             let buyAmount = (lottoTotalNumber.count) * 1000
             // 로또 번호
-            let lottoNumber = lottoTotalNumber.map { separateNumber(lottoQRNumber: $0)
-            }
+            let lottoNumber = lottoTotalNumber.map { $0.separateNumber }
             
             print(lottoURL)
             print(TRNumber, roundNumber, buyAmount, lottoNumber)
@@ -102,21 +101,8 @@ final class TabBarController: UITabBarController {
         }
         
         // 당첨 번호 비교하는 함수
-        func compareLottoNumbers(buyNumbers: [[String]], resultNumbers: LottoResult) {
+        func compareLottoNumbers(buyNumbers: [[Int]], resultNumbers: LottoResult) {
             print("당첨 번호 비교 함수")
-        }
-        
-        // string의 인덱스가 0-1, 2-3, 4-5에서 끊어서 return : QR로 들어온 번호는 모두 합쳐저서 하나의 String으로 오기 때문에 분리.
-        func separateNumber(lottoQRNumber number: String) -> [String] {
-            var separatedArray:[String] = []
-
-            for addIndex in 0...5 {
-                let startIndex = number.index(number.startIndex, offsetBy: addIndex * 2)
-                let endIndex = number.index(number.startIndex, offsetBy: addIndex * 2 + 1)
-                separatedArray.append(String(number[startIndex...endIndex]))
-            }
-
-            return separatedArray
         }
         
         // 로또QR 카메라 화면 push
