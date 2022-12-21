@@ -51,11 +51,11 @@ final class AddLottoViewController: UIViewController {
     private lazy var purchaseLabel = CustomLabel(text: "구입금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
 
     
-    private lazy var purchaseTextField = CustomTextField(placeholder: "구매금액을 입력해주세요")
+    private lazy var purchaseTextField = CustomTextField(placeholder: "구매금액을 입력해주세요", type: .number, align: .left)
     
     private lazy var winningLabel = CustomLabel(text: "당첨금액", font: .gmarksans(weight: .regular, size: ._13), textColor: .designSystem(.grayA09FA7)!)
     
-    private lazy var winningTextField = CustomTextField(placeholder: "당첨금액을 입력해주세요")
+    private lazy var winningTextField = CustomTextField(placeholder: "당첨금액을 입력해주세요", type: .number, align: .left)
     
     private lazy var okButton: UIButton = {
         let button = UIButton()
@@ -102,8 +102,8 @@ final class AddLottoViewController: UIViewController {
     
     
     func setUI() {
-        [typeLabel, lottoSegmentedControl, purchaseLabel, purchaseTextField, winningLabel, winningTextField, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton]
-            .forEach{ self.view.addSubview($0) }
+        
+        view.addSubviews(typeLabel, lottoSegmentedControl, purchaseLabel, purchaseTextField, winningLabel, winningTextField, warningPurchaseLabel, warningWinningLabel, okButton, cancelButton)
         
         typeLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
