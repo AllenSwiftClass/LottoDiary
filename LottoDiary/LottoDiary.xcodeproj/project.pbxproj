@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F4D69832948CC9900DE95F7 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D69822948CC9900DE95F7 /* IntroViewController.swift */; };
 		4F5CC8212939EB5C000F8AB3 /* ChartLottoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */; };
 		4F5CC8232939EB72000F8AB3 /* LottoCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */; };
 		4F5CC8252939EB7B000F8AB3 /* LottoQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */; };
@@ -68,6 +69,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F4D69822948CC9900DE95F7 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLottoListViewController.swift; sourceTree = "<group>"; };
 		4F5CC8202939EB5C000F8AB3 /* ChartLottoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartLottoListViewController.swift; path = LottoDiary/Sources/Present/ChartLottoListView/ChartLottoListViewController.swift; sourceTree = SOURCE_ROOT; };
 		4F5CC8222939EB72000F8AB3 /* LottoCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoCalendarViewController.swift; sourceTree = "<group>"; };
 		4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoQRViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 				4FE0817D293E142C006F9A1C /* ChartLottoListView */,
 				4F5CC8242939EB7B000F8AB3 /* LottoQRViewController.swift */,
 				4F5CC8262939EB85000F8AB3 /* RandomLottoNumberViewController.swift */,
+				4F4D69822948CC9900DE95F7 /* IntroViewController.swift */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -582,6 +586,7 @@
 				4FE08185293E2B58006F9A1C /* LottoListViewModel.swift in Sources */,
 				C050B30D292E30E700E664DB /* AppDelegate.swift in Sources */,
 				C050B335292E358600E664DB /* Font.swift in Sources */,
+				4F4D69832948CC9900DE95F7 /* IntroViewController.swift in Sources */,
 				6240F86A293C97B500A2C781 /* LottoCalendarViewModel.swift in Sources */,
 				4F5CC8272939EB85000F8AB3 /* RandomLottoNumberViewController.swift in Sources */,
 				6240F866293C843B00A2C781 /* String+.swift in Sources */,
