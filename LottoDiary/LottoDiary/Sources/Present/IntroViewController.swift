@@ -43,7 +43,7 @@ class IntroViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .black
+        view.backgroundColor = .designSystem(.backgroundBlack)
         
         setupView()
     }
