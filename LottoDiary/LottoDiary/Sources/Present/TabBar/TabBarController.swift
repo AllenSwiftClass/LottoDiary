@@ -68,11 +68,24 @@ final class TabBarController: UITabBarController {
         
         self.readerVC.completionBlock = { (result: QRCodeReaderResult?) in
             
+            // 로또 번호 주소가 올바르지 않을 경우
+            guard (result?.value.contains("http://m.dhlottery.co.kr/?v=")) == true else {
+                // 로또 번호가 맞지 않으면 alert 보내기
+                makeWrongAlert()
+                return
+            }
+            
             // 예시) "http://m.dhlottery.co.kr/?v=0868m041120213645m010306132438m142933354042m021823262731m1217284143441293818248"
             // 1. components(separatedBy: "=")[1] : 로또QR 주소 중 = 이후 회차번호,로또 번호들이 나열되어있음. = 를 기준으로 나눈 후 [1]을 부르면 회차번호, 로또 번호들만 추출
             // 2. .dropLast(10) : 맨 마지막 번호 중 마지막 10자리는 TR 번호이다. 우리는 TR번호가 쓸모 없기 때문에 마지막 10자리는 삭제
             // lottoTotalNumber : m을 기준으로 회차번호, 로또번호
-            guard let lottoURL = result?.value.components(separatedBy: "=")[1]  else { return }
+            
+            print(result)
+            
+            guard let lottoURL = result?.value.components(separatedBy: "=")[1]  else {
+                makeWrongAlert()
+                return
+            }
                 
             // TR번호
             let startIndex = lottoURL.index(lottoURL.endIndex, offsetBy: -10)
@@ -95,6 +108,8 @@ final class TabBarController: UITabBarController {
                     print(lottoResult)
                     compareLottoNumbers(buyNumbers: lottoNumber, resultNumbers: lottoResult)
                 case .failure(let error):
+                    // 로또 회차 로드가 안되는 경우 (ex. 이미 결과발표가 안된 회차)
+                    // 구매한 로또 번호만 저장하고, 달력 페이지로 넘어가기
                     print(error.localizedDescription)
                 }
             }
@@ -103,6 +118,20 @@ final class TabBarController: UITabBarController {
         // 당첨 번호 비교하는 함수
         func compareLottoNumbers(buyNumbers: [[Int]], resultNumbers: LottoResult) {
             print("당첨 번호 비교 함수")
+            
+            
+        }
+        
+        func makeWrongAlert() {
+            let wrongAlert = UIAlertController(title: "잘못된 로또 QR입니다.", message: "올바른 로또 QR을 인식해주세요." , preferredStyle: .alert)
+            
+            // Alert 창 구현
+            let wrongAlertConfirm = UIAlertAction(title: "확인", style: .default) { [self] _ in
+                readerVC.startScanning()
+            }
+            wrongAlert.addAction(wrongAlertConfirm)
+            present(wrongAlert, animated: true)
+          
         }
         
         // 로또QR 카메라 화면 push
@@ -136,13 +165,20 @@ extension TabBarController: UITabBarControllerDelegate {
 extension TabBarController: QRCodeReaderViewControllerDelegate {
     // QR 인식이 성공하면 실행되는 코드
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
-        reader.stopScanning()
         print("reader 완료")
         
-        // popViewController로 rederView 날리기
-        self.navigationController?.popViewController(animated: true)
-        // QR 인식 성공 후 calendarView로 넘어가기
-        self.selectedIndex = 0
+        let okAlert = UIAlertController(title: "로또 QR 인식에 성공하였습니다.", message: "로또 달력으로 이동합니다." , preferredStyle: .alert)
+        
+        // Alert 창 구현
+        let okAlertConfirm = UIAlertAction(title: "확인", style: .default) { action in
+            reader.stopScanning()
+            // popViewController로 rederView 날리기
+            self.navigationController?.popViewController(animated: true)
+            // QR 인식 성공 후 calendarView로 넘어가기
+            self.selectedIndex = 0
+        }
+        okAlert.addAction(okAlertConfirm)
+        present(okAlert, animated: true)
     }
     
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
