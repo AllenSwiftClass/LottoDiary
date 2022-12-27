@@ -19,7 +19,7 @@ struct LottoResult: Codable {
 
 // 스캔한 로또QR과 번호를 비교하기 위해 새로운 타입 생성
 struct LottoResultSorted: Codable {
-    let lottoResultNumber: String
+    let lottoResultNumber: [Int]
 //    let roundNumber: Int
-    let bonusNumber: String
+    let bonusNumber: Int
 }

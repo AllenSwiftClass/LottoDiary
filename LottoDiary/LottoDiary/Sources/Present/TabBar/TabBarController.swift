@@ -34,6 +34,8 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(Date())
+        
         tabBarConfigure()
         setupTabBar()
         setupLottoQR()
@@ -80,8 +82,6 @@ final class TabBarController: UITabBarController {
             // 2. .dropLast(10) : 맨 마지막 번호 중 마지막 10자리는 TR 번호이다. 우리는 TR번호가 쓸모 없기 때문에 마지막 10자리는 삭제
             // lottoTotalNumber : m을 기준으로 회차번호, 로또번호
             
-            print(result)
-            
             guard let lottoURL = result?.value.components(separatedBy: "=")[1]  else {
                 makeWrongAlert()
                 return
@@ -99,7 +99,6 @@ final class TabBarController: UITabBarController {
             // 로또 번호
             let lottoNumber = lottoTotalNumber.map { $0.separateNumber }
             
-            print(lottoURL)
             print(TRNumber, roundNumber, buyAmount, lottoNumber)
             
             self.networkManager.fetchLottoResult(roundNumber: roundNumber) { result in
@@ -116,10 +115,32 @@ final class TabBarController: UITabBarController {
         }
         
         // 당첨 번호 비교하는 함수
-        func compareLottoNumbers(buyNumbers: [[Int]], resultNumbers: LottoResult) {
+        func compareLottoNumbers(buyNumbers: [[Int]], resultNumbers: LottoResultSorted) {
             print("당첨 번호 비교 함수")
+
+            var matchResult: [Int] = []
             
-            
+            buyNumbers.forEach { rowNum in
+                var count = 0
+                resultNumbers.lottoResultNumber.forEach { resultNum in
+                    if rowNum.contains(resultNum) {
+                        count += 1
+                    }
+                }
+                
+                if count == 6 {
+                    matchResult.append(1)
+                } else if count == 5 {
+                    rowNum.contains(resultNumbers.bonusNumber) ? matchResult.append(2) : matchResult.append(3)
+                } else if count == 4 {
+                    matchResult.append(4)
+                } else if count == 3 {
+                    matchResult.append(5)
+                } else {
+                    matchResult.append(0)
+                }
+            }
+            print(matchResult)
         }
         
         func makeWrongAlert() {
@@ -131,7 +152,6 @@ final class TabBarController: UITabBarController {
             }
             wrongAlert.addAction(wrongAlertConfirm)
             present(wrongAlert, animated: true)
-          
         }
         
         // 로또QR 카메라 화면 push
@@ -139,6 +159,9 @@ final class TabBarController: UITabBarController {
         guard let tabBar = self.tabBar as? CustomTabBar else { return }
         tabBar.middleBtnActionHandler = {
             self.navigationController?.pushViewController(self.readerVC, animated: true)
+        }
+        
+        func loadLastResult() {
         }
     }
 }
@@ -163,12 +186,12 @@ extension TabBarController: UITabBarControllerDelegate {
 // MARK: - QRCodeReaderViewControllerDelegate
 
 extension TabBarController: QRCodeReaderViewControllerDelegate {
-    // QR 인식이 성공하면 실행되는 코드
+    // QR 인식이 성공하면(올바른 로또QR X, 인식이 성공되었을 때) 실행되는 코드
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         print("reader 완료")
         
         let okAlert = UIAlertController(title: "로또 QR 인식에 성공하였습니다.", message: "로또 달력으로 이동합니다." , preferredStyle: .alert)
-        
+
         // Alert 창 구현
         let okAlertConfirm = UIAlertAction(title: "확인", style: .default) { action in
             reader.stopScanning()
