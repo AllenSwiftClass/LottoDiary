@@ -34,8 +34,7 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(Date())
-        
+        navigationItem.hidesBackButton = true
         tabBarConfigure()
         setupTabBar()
         setupLottoQR()
@@ -51,8 +50,8 @@ final class TabBarController: UITabBarController {
         
         let calendar = naviController(image: UIImage(systemName: "calendar.badge.plus"), title: "달력", rootViewController: LottoCalendarViewController())
         let home = naviController(image: UIImage(systemName: "house"), title: "홈", rootViewController: HomeViewController())
-        let chart = naviController(image: UIImage(systemName: "chart.bar"), title: "차트", rootViewController: ChartLottoListViewController())
-        let num = naviController(image: UIImage(systemName: "number.circle"), title: "번호 추첨", rootViewController: RandomLottoNumberViewController())
+        let chart = naviController(image: UIImage(systemName: "chart.bar"), title: "차트", rootViewController:ChartLottoListViewController())
+        let num = naviController(image: UIImage(systemName: "number.circle"), title: "번호 추첨", rootViewController: NumberDrawViewController())
         
         self.viewControllers = [ calendar, home, UIViewController() , chart, num ]
     }
@@ -62,6 +61,14 @@ final class TabBarController: UITabBarController {
         let navi = UINavigationController(rootViewController: rootViewController)
         navi.tabBarItem.title = title
         navi.tabBarItem.image = image
+        
+        // ios13이후로 navigation style관련은 UINavigationBarAppearance를 사용
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        
+        
+        navi.navigationBar.standardAppearance = navigationBarAppearance
+        navi.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         return navi
     }
     
