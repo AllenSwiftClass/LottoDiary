@@ -23,7 +23,7 @@ extension Int {
             returnArray.append(Int.random(in: lottoRange))
         }
         
-        var sortedRandomReturnArray = returnArray.sorted()
+        let sortedRandomReturnArray = returnArray.sorted()
         
         return sortedRandomReturnArray
     }
