@@ -93,6 +93,6 @@ class IntroViewController: UIViewController {
     }
     
     @objc func settingButtonAction() {
-        print("settiong page 연결")
+        navigationController?.pushViewController(MyInfomationSettingViewController(), animated: true)
     }
 }
