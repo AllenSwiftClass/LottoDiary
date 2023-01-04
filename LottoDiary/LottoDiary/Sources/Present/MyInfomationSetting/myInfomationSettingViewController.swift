@@ -7,12 +7,14 @@
 
 import UIKit
 import SnapKit
-
+import RealmSwift
 
 final class MyInfomationSettingViewController: UIViewController {
 
     
     // MARK: - Property
+    
+    let realm = try! Realm()
     
     // 경고알림 주기를 담고있는 배열
     private let notificationCycleArray = ["설정 안함", "하루", "일주일", "한달"]
@@ -183,8 +185,41 @@ final class MyInfomationSettingViewController: UIViewController {
         okButton.alpha = 0.3
     }
     
+    // String타입의 구분자(,)를 포함한 숫자에서 구분자를 제거해 Int?타입으로 변환해주는 함수
+    func convertAmountTextToInt(amountLabel: String?) -> Int? {
+        guard let amountWithSeparator = amountLabel else {
+            return nil
+        }
+        let amountText = amountWithSeparator.components(separatedBy: [","]).joined()
+        
+        guard let targetAmount = Int(amountText) else {
+            return nil
+        }
+        return targetAmount
+    }
+    
     // 확인 버튼 클릭 시(닉네임, 목표금액, 경고 알림 선택시 활성화)
     @objc func okButtonTapped() {
+        // 옵셔널을 풀고 ,를 제거하고 Int로 변환
+        //
+        guard let goalAmount = convertAmountTextToInt(amountLabel: targetAmountTextField.text) else {
+            return
+        }
+        
+        guard let userName = nameTextField.text, let notification = notificationTextField.text else {
+            return
+        }
+        
+        let myGoalAmount = GoalAmount(date: Date(), goalAmount: goalAmount)
+        let user = User(nickName: userName, notificationCycle: notification)
+        
+        user.goalAmounts.append(myGoalAmount)
+        
+        print(user)
+        try! realm.write {
+            self.realm.add(user)
+        }
+        
         let tabBarvc = TabBarController()
         navigationController?.pushViewController(tabBarvc, animated: true)
         // 유저 데이터 생성 부분
