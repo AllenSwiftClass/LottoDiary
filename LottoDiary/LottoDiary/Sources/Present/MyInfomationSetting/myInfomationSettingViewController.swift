@@ -16,7 +16,6 @@ final class MyInfomationSettingViewController: UIViewController {
     
     // 경고알림 주기를 담고있는 배열
     private let notificationCycleArray = ["설정 안함", "하루", "일주일", "한달"]
-    
     private var validation = Validation()
     
     private lazy var myInfoLabel = CustomLabel(text: "내 정보", font: .gmarksans(weight: .bold, size: ._28), textColor: .white)
@@ -278,7 +277,7 @@ extension MyInfomationSettingViewController: UIPickerViewDataSource, UIPickerVie
     
     // 취소, 완료버튼이 있는 toolBar 설정
     private func configureToolbar() {
-        let toolBar = UIToolbar()
+        let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 35))
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
         toolBar.tintColor = .white
