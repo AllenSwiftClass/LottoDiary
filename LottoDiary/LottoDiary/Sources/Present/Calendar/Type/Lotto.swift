@@ -23,12 +23,7 @@ struct Lotto: Equatable, Identifiable  {
         case .spitto: return "스피또"
         }
     }
-    var image: UIImage {
-        switch type {
-        case .lotto: return UIImage()
-        case .spitto: return UIImage()
-        }
-    }
+    
     var purchaseAmount: Int
     var winningAmount: Int
     var date: String
