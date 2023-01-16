@@ -11,12 +11,10 @@ import AVFoundation
 
 final class TabBarController: UITabBarController {
     
-    var networkManager = LottoQRNetworkManager.shared
+    let lottoQRViewModel = LottoQRViewModel()
     
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
-//            let readerView = QRCodeReaderContainer(displayable: LottoQRView())
-//            $0.readerView = readerView
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
             
             // 플래시 버튼
@@ -72,10 +70,17 @@ final class TabBarController: UITabBarController {
         return navi
     }
     
+    // 로또QR 카메라 화면 push
+    // LottoQR 버튼 클릭하면 QR화면으로 전환
+    guard let tabBar = self.tabBar as? CustomTabBar else { return }
+    tabBar.middleBtnActionHandler = {
+        self.navigationController?.pushViewController(self.readerVC, animated: true)
+    }
+    
     func setupLottoQR() {
         readerVC.delegate = self
         
-        self.readerVC.completionBlock = { (result: QRCodeReaderResult?) in
+        self.readerVC.completionBlock = { [weak self] (result: QRCodeReaderResult?) in
             
             // 로또 번호 주소가 올바르지 않을 경우
             guard (result?.value.contains("http://m.dhlottery.co.kr/?v=")) == true else {
@@ -93,61 +98,8 @@ final class TabBarController: UITabBarController {
                 makeWrongAlert()
                 return
             }
-                
-            // TR번호
-            let startIndex = lottoURL.index(lottoURL.endIndex, offsetBy: -10)
-            let TRNumber = lottoURL[startIndex...]
             
-            var lottoTotalNumber = lottoURL.dropLast(10).components(separatedBy: "m")
-            // 회차번호
-            let roundNumber = lottoTotalNumber.removeFirst()
-            // 구매금액
-            let buyAmount = (lottoTotalNumber.count) * 1000
-            // 로또 번호
-            let lottoNumber = lottoTotalNumber.map { $0.separateNumber }
-            
-            print(TRNumber, roundNumber, buyAmount, lottoNumber)
-            
-            self.networkManager.fetchLottoResult(roundNumber: roundNumber) { result in
-                switch result {
-                case .success(let lottoResult):
-                    print(lottoResult)
-                    compareLottoNumbers(buyNumbers: lottoNumber, resultNumbers: lottoResult)
-                case .failure(let error):
-                    // 로또 회차 로드가 안되는 경우 (ex. 이미 결과발표가 안된 회차)
-                    // 구매한 로또 번호만 저장하고, 달력 페이지로 넘어가기
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        
-        // 당첨 번호 비교하는 함수
-        func compareLottoNumbers(buyNumbers: [[Int]], resultNumbers: LottoResultSorted) {
-            print("당첨 번호 비교 함수")
-
-            var matchResult: [Int] = []
-            
-            buyNumbers.forEach { rowNum in
-                var count = 0
-                resultNumbers.lottoResultNumber.forEach { resultNum in
-                    if rowNum.contains(resultNum) {
-                        count += 1
-                    }
-                }
-                
-                if count == 6 {
-                    matchResult.append(1)
-                } else if count == 5 {
-                    rowNum.contains(resultNumbers.bonusNumber) ? matchResult.append(2) : matchResult.append(3)
-                } else if count == 4 {
-                    matchResult.append(4)
-                } else if count == 3 {
-                    matchResult.append(5)
-                } else {
-                    matchResult.append(0)
-                }
-            }
-            print(matchResult)
+            self?.lottoQRViewModel.separateLottoURL(lottoURL: lottoURL)
         }
         
         func makeWrongAlert() {
@@ -159,16 +111,6 @@ final class TabBarController: UITabBarController {
             }
             wrongAlert.addAction(wrongAlertConfirm)
             present(wrongAlert, animated: true)
-        }
-        
-        // 로또QR 카메라 화면 push
-        // LottoQR 버튼 클릭하면 QR화면으로 전환
-        guard let tabBar = self.tabBar as? CustomTabBar else { return }
-        tabBar.middleBtnActionHandler = {
-            self.navigationController?.pushViewController(self.readerVC, animated: true)
-        }
-        
-        func loadLastResult() {
         }
     }
 }

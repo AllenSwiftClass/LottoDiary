@@ -60,12 +60,10 @@ final class LottoQRNetworkManager {
             
             // 3. 성공시
             if let lottoData = self.parseJSON(safeData) {
-//                print("Parse 실행")
                 let numArray = [lottoData.drwtNo1, lottoData.drwtNo2, lottoData.drwtNo3, lottoData.drwtNo4, lottoData.drwtNo5, lottoData.drwtNo6]
                 
                 completion(.success(LottoResultSorted(lottoResultNumber: numArray, bonusNumber: lottoData.bnusNo)))
             } else {
-//                print("Parse 실패")
                 completion(.failure(.parseError))
             }
         }
