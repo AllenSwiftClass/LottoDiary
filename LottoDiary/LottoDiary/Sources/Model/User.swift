@@ -9,9 +9,9 @@ import RealmSwift
 import Foundation
 
 class User: Object {
-    @objc dynamic var nickName: String = ""
-    @objc dynamic var notificationCycle: String = ""
-    var goalAmounts = List<GoalAmount>()
+    @Persisted var nickName: String = ""
+    @Persisted var notificationCycle: String = ""
+    @Persisted var goalAmounts = List<GoalAmount>()
     
     convenience init(nickName: String, notificationCycle: String) {
         self.init()
@@ -21,8 +21,8 @@ class User: Object {
 }
 
 class GoalAmount: Object {
-    @objc dynamic var date: Date = Date()
-    @objc dynamic var goalAmount: Int = 0
+    @Persisted var date: Date = Date()
+    @Persisted var goalAmount: Int = 0
     
     convenience init(date: Date, goalAmount: Int) {
         self.init()

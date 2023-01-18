@@ -213,6 +213,7 @@ final class MyInfomationSettingViewController: UIViewController {
         let myGoalAmount = GoalAmount(date: Date(), goalAmount: goalAmount)
         let user = User(nickName: userName, notificationCycle: notification)
         
+        print(user.goalAmounts)
         user.goalAmounts.append(myGoalAmount)
         
         print(user)
