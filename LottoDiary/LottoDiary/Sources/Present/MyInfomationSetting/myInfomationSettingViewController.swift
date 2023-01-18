@@ -11,7 +11,6 @@ import RealmSwift
 
 final class MyInfomationSettingViewController: UIViewController {
 
-    
     // MARK: - Property
     
     let realm = try! Realm()
@@ -77,6 +76,7 @@ final class MyInfomationSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         nameTextField.delegate = self
         targetAmountTextField.delegate = self
         
