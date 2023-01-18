@@ -112,7 +112,7 @@ extension LottoCalendarViewController {
             
             if lotto != nil {
                 cell.purchaseAmount.text = "\(lotto!.purchaseAmount.formattedWithSeparator) 원"
-                cell.winningAmount.text = "\(lotto!.winningAmount.formattedWithSeparator) 원"
+                cell.winningAmount.text = "\(lotto!.goalAmount.formattedWithSeparator) 원"
                 cell.type = lotto!.type
             }
             return cell

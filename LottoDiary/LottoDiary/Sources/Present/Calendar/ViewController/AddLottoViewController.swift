@@ -174,7 +174,7 @@ final class AddLottoViewController: UIViewController {
         if let main = purchaseTextField.text?.replacingOccurrences(of: ",", with: ""), !main.isEmpty,
            let price = winningTextField.text?.replacingOccurrences(of: ",", with: ""), !price.isEmpty {
             
-            lotto = Lotto(type: lottotype, purchaseAmount: Int(main)!, winningAmount: Int(price)!, date: selectedDate!)
+            lotto = Lotto(type: lottotype, purchaseAmount: Double(main)!, goalAmount: Double(price)!, date: selectedDate!)
             // 클로저 호출
             if lotto != nil {
                 onChange(lotto!)

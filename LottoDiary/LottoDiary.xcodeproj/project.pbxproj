@@ -26,6 +26,7 @@
 		6233423A2965508600DB642F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 623342392965508600DB642F /* RealmSwift */; };
 		6233423D296552E300DB642F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6233423C296552E300DB642F /* User.swift */; };
 		623922A82977C91D00A3ACD4 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623922A72977C91D00A3ACD4 /* DataBase.swift */; };
+		623922AA2977D35C00A3ACD4 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623922A92977D35C00A3ACD4 /* Double+.swift */; };
 		623F4E01294C574D00B2E385 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623F4E00294C574D00B2E385 /* CustomTextField.swift */; };
 		623F4E04294C584800B2E385 /* myInfomationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623F4E03294C584800B2E385 /* myInfomationSettingViewController.swift */; };
 		623F4E07294D7D6700B2E385 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623F4E06294D7D6700B2E385 /* Validation.swift */; };
@@ -87,6 +88,7 @@
 		4FE0818B293E2BA8006F9A1C /* LottoListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListHeader.swift; sourceTree = "<group>"; };
 		6233423C296552E300DB642F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		623922A72977C91D00A3ACD4 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		623922A92977D35C00A3ACD4 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		623F4E00294C574D00B2E385 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		623F4E03294C584800B2E385 /* myInfomationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myInfomationSettingViewController.swift; sourceTree = "<group>"; };
 		623F4E06294D7D6700B2E385 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				6240F863293C831600A2C781 /* Int+.swift */,
 				6240F865293C843B00A2C781 /* String+.swift */,
 				C0513CAD294F208F00711417 /* UIView+.swift */,
+				623922A92977D35C00A3ACD4 /* Double+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				625F05ED2944926B00231A9D /* CustomLabel.swift in Sources */,
 				623F4E07294D7D6700B2E385 /* Validation.swift in Sources */,
 				4F5CC82C2939EBAA000F8AB3 /* TabBarController.swift in Sources */,
+				623922AA2977D35C00A3ACD4 /* Double+.swift in Sources */,
 				623F4E04294C584800B2E385 /* myInfomationSettingViewController.swift in Sources */,
 				4F5CC82A2939EB9B000F8AB3 /* CustomTabBar.swift in Sources */,
 				C0513CAE294F208F00711417 /* UIView+.swift in Sources */,
