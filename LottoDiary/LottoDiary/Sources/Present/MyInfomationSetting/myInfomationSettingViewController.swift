@@ -13,7 +13,7 @@ final class MyInfomationSettingViewController: UIViewController {
 
     // MARK: - Property
     
-    let realm = try! Realm()
+    private let database = DataBaseManager.shared
     
     // 경고알림 주기를 담고있는 배열
     private let notificationCycleArray = ["설정 안함", "하루", "일주일", "한달"]
@@ -213,13 +213,9 @@ final class MyInfomationSettingViewController: UIViewController {
         let myGoalAmount = GoalAmount(date: Date(), goalAmount: goalAmount)
         let user = User(nickName: userName, notificationCycle: notification)
         
-        print(user.goalAmounts)
         user.goalAmounts.append(myGoalAmount)
         
-        print(user)
-        try! realm.write {
-            self.realm.add(user)
-        }
+        database.write(user)
         
         let tabBarvc = TabBarController()
         navigationController?.pushViewController(tabBarvc, animated: true)
