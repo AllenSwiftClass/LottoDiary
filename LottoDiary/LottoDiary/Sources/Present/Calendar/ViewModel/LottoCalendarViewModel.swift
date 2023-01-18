@@ -11,6 +11,8 @@ import Foundation
 
 final class LottoCalendarViewModel {
     
+    let database = DataBaseManager.shared
+    
     // 날짜 변환 객체
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()

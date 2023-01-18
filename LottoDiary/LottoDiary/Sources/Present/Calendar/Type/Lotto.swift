@@ -25,13 +25,13 @@ struct Lotto: Equatable, Identifiable  {
     }
     
     var purchaseAmount: Double
-    var goalAmount: Double
+    var winAmount: Double
     var date: String
     
-    init(type: LottoType, purchaseAmount: Double, goalAmount: Double, date: String) {
+    init(type: LottoType, purchaseAmount: Double, winAmount: Double, date: String) {
         self.type = type
         self.purchaseAmount = purchaseAmount
-        self.goalAmount = goalAmount
+        self.winAmount = winAmount
         self.date = date
     }
 }

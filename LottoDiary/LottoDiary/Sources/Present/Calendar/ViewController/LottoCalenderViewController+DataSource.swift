@@ -53,8 +53,6 @@ extension LottoCalendarViewController {
     }
 }
 
-
-
 // MARK: - header 및 footer 등록
 extension LottoCalendarViewController {
     // header등록 시 사용되는 completionHandler
@@ -72,7 +70,7 @@ extension LottoCalendarViewController {
     
     // 로또 추가버튼을 클릭할 때 실행되는 메서드
     @objc func didPressAddButton(sender: UITapGestureRecognizer) {
-        let lotto = Lotto(type: .lotto, purchaseAmount: 0, goalAmount: 0, date: viewModel.selectedDate)
+        let lotto = Lotto(type: .lotto, purchaseAmount: 0, winAmount: 0, date: viewModel.selectedDate)
         let vc = AddLottoViewController(lotto: lotto) { [weak self] newLotto in
             self?.add(newLotto)
             self?.changeCollectionViewHeight()

@@ -138,7 +138,6 @@ final class AddLottoViewController: UIViewController {
             make.top.equalTo(warningPurchaseLabel.snp.bottom).offset(10)
         }
         
-        
         winningTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
             make.top.equalTo(winningLabel.snp.bottom).offset(5)
@@ -174,7 +173,7 @@ final class AddLottoViewController: UIViewController {
         if let main = purchaseTextField.text?.replacingOccurrences(of: ",", with: ""), !main.isEmpty,
            let price = winningTextField.text?.replacingOccurrences(of: ",", with: ""), !price.isEmpty {
             
-            lotto = Lotto(type: lottotype, purchaseAmount: Double(main)!, goalAmount: Double(price)!, date: selectedDate!)
+            lotto = Lotto(type: lottotype, purchaseAmount: Double(main)!, winAmount: Double(price)!, date: selectedDate!)
             // 클로저 호출
             if lotto != nil {
                 onChange(lotto!)

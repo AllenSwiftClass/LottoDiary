@@ -8,10 +8,10 @@
 import RealmSwift
 import Foundation
 
-class User: Object {
+class UserRealm: Object {
     @Persisted var nickName: String = ""
     @Persisted var notificationCycle: String = ""
-    @Persisted var goalAmounts = List<GoalAmount>()
+    @Persisted var goalAmounts = List<GoalAmountRealm>()
     
     convenience init(nickName: String, notificationCycle: String) {
         self.init()
@@ -20,7 +20,7 @@ class User: Object {
     }
 }
 
-class GoalAmount: Object {
+class GoalAmountRealm: Object {
     @Persisted var date: Date = Date()
     @Persisted var goalAmount: Int = 0
     

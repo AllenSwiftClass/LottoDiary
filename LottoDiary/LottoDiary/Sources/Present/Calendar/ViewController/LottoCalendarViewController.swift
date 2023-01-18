@@ -12,7 +12,7 @@ import RxSwift
 
 
 final class LottoCalendarViewController: UIViewController {
-
+    
     // MARK: - Calendar 관련 변수
     
     lazy var events: [Date] = [] {
@@ -45,7 +45,7 @@ final class LottoCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.gray17181D)
-        
+        print(DataBaseManager.shared.getLocationOfDefaultRealm())
         // 스크롤 뷰 레이아웃 설정
         configureScrollView()
         
@@ -64,7 +64,7 @@ final class LottoCalendarViewController: UIViewController {
         changeHeaderTitle()
     }
     
-
+    
 }
 
 
@@ -78,7 +78,7 @@ extension LottoCalendarViewController {
         collectionView.delegate = self
         collectionView.register(LottoCell.self, forCellWithReuseIdentifier: LottoCell.reuseIdentifier)
         collectionView.backgroundColor = .designSystem(.gray17181D)
-
+        
         collectionView.isScrollEnabled = false
         lottosCollectionView = collectionView
         
@@ -112,7 +112,7 @@ extension LottoCalendarViewController {
             
             if lotto != nil {
                 cell.purchaseAmount.text = "\(lotto!.purchaseAmount.formattedWithSeparator) 원"
-                cell.winningAmount.text = "\(lotto!.goalAmount.formattedWithSeparator) 원"
+                cell.winningAmount.text = "\(lotto!.winAmount.formattedWithSeparator) 원"
                 cell.type = lotto!.type
             }
             return cell
@@ -178,7 +178,7 @@ extension LottoCalendarViewController {
             layoutSize: headerSize,
             elementKind: DateHeaderView.elementKind,
             alignment: .topLeading)
-            
+        
         // footer 크기설정
         let footerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -329,8 +329,8 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
             // 애니메이션이 끝난 시점에 custom header 적용
             self.changeHeaderTitle()
         }
-
-
+        
+        
         self.view.layoutIfNeeded()
     }
     

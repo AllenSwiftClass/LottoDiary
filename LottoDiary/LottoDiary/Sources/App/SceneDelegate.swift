@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         let dataBase = DataBaseManager.shared
-        let user = dataBase.read(User.self)
+        let user = dataBase.read(UserRealm.self)
         if user.count == 0 {
             window?.rootViewController = UINavigationController(rootViewController: IntroViewController())
         } else {

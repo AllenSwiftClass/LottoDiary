@@ -36,20 +36,20 @@ final class MyInfomationSettingViewController: UIViewController {
     
     private lazy var warningNameLabel = CustomLabel(text: "errorName", font: .gmarksans(weight: .regular, size: ._0), textColor: .clear)
     
-    private lazy var targetAmountTextFieldView: UIView = {
+    private lazy var goalAmountTextFieldView: UIView = {
         let view = UIView()
         view.backgroundColor = .designSystem(.gray2B2C35)
         view.layer.cornerRadius = 5
-        view.addSubview(targetAmountLabel)
-        view.addSubview(targetAmountTextField)
+        view.addSubview(goalAmountLabel)
+        view.addSubview(goalAmountTextField)
         return view
     }()
     
     private lazy var currentMonth = Calendar.current.dateComponents([.month], from: Date()).month!
     
-    private lazy var targetAmountLabel = CustomLabel(text: "\(currentMonth)월 목표금액", font: .gmarksans(weight: .bold, size: ._13), textColor: .white)
+    private lazy var goalAmountLabel = CustomLabel(text: "\(currentMonth)월 목표금액", font: .gmarksans(weight: .bold, size: ._13), textColor: .white)
     
-    private lazy var targetAmountTextField = CustomTextField(placeholder: "목표금액을 입력해주세요", type: .number, align: .right)
+    private lazy var goalAmountTextField = CustomTextField(placeholder: "목표금액을 입력해주세요", type: .number, align: .right)
     
     private lazy var warningAmountLabel = CustomLabel(text: "errorName", font: .gmarksans(weight: .regular, size: ._0), textColor: .clear)
     
@@ -78,7 +78,7 @@ final class MyInfomationSettingViewController: UIViewController {
         super.viewDidLoad()
         
         nameTextField.delegate = self
-        targetAmountTextField.delegate = self
+        goalAmountTextField.delegate = self
         
         configurePickView()
         setUI()
@@ -86,7 +86,7 @@ final class MyInfomationSettingViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.resignFirstResponder()
-        targetAmountTextField.resignFirstResponder()
+        goalAmountTextField.resignFirstResponder()
         notificationTextField.resignFirstResponder()
     }
     
@@ -94,7 +94,7 @@ final class MyInfomationSettingViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .designSystem(.backgroundBlack)
         
-        view.addSubviews(myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton)
+        view.addSubviews(myInfoLabel, nameTextFieldView, warningNameLabel, goalAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton)
         
         myInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -123,24 +123,24 @@ final class MyInfomationSettingViewController: UIViewController {
             make.leading.equalToSuperview().offset(10)
         }
         
-        targetAmountTextFieldView.snp.makeConstraints { make in
+        goalAmountTextFieldView.snp.makeConstraints { make in
             make.top.equalTo(warningNameLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(10)
             make.height.equalTo(83)
         }
         
-        targetAmountLabel.snp.makeConstraints { make in
+        goalAmountLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().offset(15)
         }
         
-        targetAmountTextField.snp.makeConstraints { make in
+        goalAmountTextField.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.7)
             make.trailing.equalToSuperview().offset(-15)
             make.bottom.equalToSuperview().offset(-10)
         }
         
         warningAmountLabel.snp.makeConstraints { make in
-            make.top.equalTo(targetAmountTextFieldView.snp.bottom).offset(10)
+            make.top.equalTo(goalAmountTextFieldView.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(15)
         }
         
@@ -174,8 +174,8 @@ final class MyInfomationSettingViewController: UIViewController {
     func validateOkButton() {
         if let notification = notificationTextField.text, !notification.isEmpty {
             let nameValid = validation.validateName(name: nameTextField.text).isValid
-            let targetAmountValid = validation.validateTargetAmount(number: targetAmountTextField.text).isValid
-            if nameValid && targetAmountValid {
+            let goalAmountValid = validation.validateTargetAmount(number: goalAmountTextField.text).isValid
+            if nameValid && goalAmountValid {
                 okButton.isEnabled = true
                 okButton.alpha = 1
                 return
@@ -202,7 +202,7 @@ final class MyInfomationSettingViewController: UIViewController {
     @objc func okButtonTapped() {
         // 옵셔널을 풀고 ,를 제거하고 Int로 변환
         //
-        guard let goalAmount = convertAmountTextToInt(amountLabel: targetAmountTextField.text) else {
+        guard let goalAmount = convertAmountTextToInt(amountLabel: goalAmountTextField.text) else {
             return
         }
         
@@ -210,8 +210,8 @@ final class MyInfomationSettingViewController: UIViewController {
             return
         }
         
-        let myGoalAmount = GoalAmount(date: Date(), goalAmount: goalAmount)
-        let user = User(nickName: userName, notificationCycle: notification)
+        let myGoalAmount = GoalAmountRealm(date: Date(), goalAmount: goalAmount)
+        let user = UserRealm(nickName: userName, notificationCycle: notification)
         
         user.goalAmounts.append(myGoalAmount)
         
@@ -230,8 +230,8 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == nameTextField {
             textFieldCheck(nameTextField, .letter)
-        } else if textField == targetAmountTextField {
-            textFieldCheck(targetAmountTextField, .number)
+        } else if textField == goalAmountTextField {
+            textFieldCheck(goalAmountTextField, .number)
         }
     }
     
@@ -262,7 +262,7 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
     
     // 텍스트 필드에 1000단위로 , 붙여주는 델리게이트, replacementString인 string은 입력한 길이 1인 문자이다.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            guard textField == targetAmountTextField else { return true }
+            guard textField == goalAmountTextField else { return true }
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
             formatter.locale = Locale.current
