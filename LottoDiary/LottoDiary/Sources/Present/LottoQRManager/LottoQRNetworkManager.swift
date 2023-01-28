@@ -44,7 +44,6 @@ final class LottoQRNetworkManager {
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: url) { data, response, error in
-            
             // 1. 에러 있다면,
             if error != nil {
                 print("performRequest error: \(error!)")

@@ -21,11 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        if goalAmountSetting {
+//        if goalAmountSetting {
             window?.rootViewController = UINavigationController(rootViewController: TabBarController())
-        } else {
-            window?.rootViewController = UINavigationController(rootViewController: MyInfomationSettingViewController())
-        }
+//        } else {
+//            window?.rootViewController = UINavigationController(rootViewController: MyInfomationSettingViewController())
+//        }
         window?.makeKeyAndVisible()
     }
 

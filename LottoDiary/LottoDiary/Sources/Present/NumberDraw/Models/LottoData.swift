@@ -13,12 +13,22 @@ struct LottoData {
 }
 
 extension LottoData {
-    static let lastDrawDatas: [LottoData] = [
-        LottoData(turnNumber: 1033, numbers: [1,2,3,4,5,6,7]),
-        LottoData(turnNumber: 1034, numbers: [8,9,10,11,12,13,14]),
-        LottoData(turnNumber: 1035, numbers: [15,16,17,18,19,20,21])
-    ]
+//    static let lastDrawDatas: [LottoData] = [
+//        LottoData(turnNumber: 1033, numbers: [1,2,3,4,5,6,7]),
+//        LottoData(turnNumber: 1034, numbers: [8,9,10,11,12,13,14]),
+//        LottoData(turnNumber: 1035, numbers: [15,16,17,18,19,20,21])
+//    ]
+    
+    static var lastDrawDatas: [LottoData] = {
+        let lottoQRViewModel = LottoQRViewModel()
+        
+        return [ lottoQRViewModel.makeLottoData(standardRound: 1033),
+                 lottoQRViewModel.makeLottoData(standardRound: 1034),
+                 lottoQRViewModel.makeLottoData(standardRound: 1035)
+                 ]
+    }()
 }
+
 
 
 
@@ -39,9 +49,11 @@ extension LottoData {
 
  if term.day! > 7 {
      standardRound += term.day! / 7
+    standardDate = Calendar.current.date(byAdding: .day, value: (term.day! / 7)*7, to: standardDate)
  } else {
      if term.day! == 7 {
           standardRound += 1
+        standardDate = today
       }
  }
  //print(term.day! / 7)

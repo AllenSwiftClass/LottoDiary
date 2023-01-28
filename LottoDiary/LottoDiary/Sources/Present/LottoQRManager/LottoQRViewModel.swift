@@ -40,24 +40,44 @@ final class LottoQRViewModel {
         let lottoNumber = lottoTotalNumber.map { $0.separateNumber }
         
         print(TRNumber, roundNumber, buyAmount, lottoNumber)
+        getLottoResult(from: roundNumber, buyNumbers: lottoNumber)
+    }
+    
+    // 로또 API를 이용해 회차번호로 로또결과 가져오기
+    private func getLottoResult(from roundNumber: String, buyNumbers: [[Int]]) {
         
-        LottoQRNetworkManager.shared.fetchLottoResult(roundNumber: roundNumber) { [weak self] result in
+        //        LottoQRNetworkManager.shared.fetchLottoResult(roundNumber: roundNumber) { [weak self] result in
+        //            switch result {
+        //            case .success(let lottoResult):
+        //                print(lottoResult)
+        //                self?.compare(buyNumbers: buyNumbers, resultNumbers: lottoResult)
+        //            case .failure(let error):
+        //                // 로또 회차 로드가 안되는 경우 (ex. 이미 결과발표가 안된 회차)
+        //                // 구매한 로또 번호만 저장하고, 달력 페이지로 넘어가기
+        //                print(error.localizedDescription)
+        //            }
+        //        }
+        networkTest(roundNumber: roundNumber) { result in
+            self.compare(buyNumbers: buyNumbers, resultNumbers: result)
+        }
+    }
+    
+    func networkTest(roundNumber: String, completion: @escaping (LottoResultSorted)->Void) {
+        LottoQRNetworkManager.shared.fetchLottoResult(roundNumber: roundNumber) { result in
             switch result {
             case .success(let lottoResult):
-                print(lottoResult)
-                self?.compareLottoNumbers(buyNumbers: lottoNumber, resultNumbers: lottoResult)
+                // 여기 위에서는 compare함수 부르기 위한 클로저고, randomNum에서는 로또결과 불러서 화면에 보여주기 위해서고.
+                completion(lottoResult)
             case .failure(let error):
-                // 로또 회차 로드가 안되는 경우 (ex. 이미 결과발표가 안된 회차)
-                // 구매한 로또 번호만 저장하고, 달력 페이지로 넘어가기
                 print(error.localizedDescription)
             }
         }
     }
     
     // 당첨 번호 비교하는 함수
-    func compareLottoNumbers(buyNumbers: [[Int]], resultNumbers: LottoResultSorted) {
+    private func compare(buyNumbers: [[Int]], resultNumbers: LottoResultSorted) {
         print("당첨 번호 비교 함수")
-
+        
         var matchResult: [Int] = []
         
         buyNumbers.forEach { rowNum in
@@ -81,6 +101,21 @@ final class LottoQRViewModel {
             }
         }
         print(matchResult)
+    }
+    
+    func makeLottoData(standardRound: Int) -> LottoData {
+        let lottoQRViewModel = LottoQRViewModel()
+        var array = [Int]()
+        
+        let group = DispatchGroup()
+        group.enter()
+        lottoQRViewModel.networkTest(roundNumber: String(standardRound)) { result in
+            array = result.lottoResultNumber
+            array.append(result.bonusNumber)
+            group.leave()
+        }
+        group.wait()
+        return LottoData(turnNumber: standardRound, numbers:array)
     }
 }
 

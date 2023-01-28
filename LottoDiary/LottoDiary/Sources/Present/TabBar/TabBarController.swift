@@ -80,7 +80,6 @@ final class TabBarController: UITabBarController {
                 makeWrongAlert()
                 return
             }
-            
             self?.lottoQRViewModel.separate(lottoURL: lottoURL)
         }
         
