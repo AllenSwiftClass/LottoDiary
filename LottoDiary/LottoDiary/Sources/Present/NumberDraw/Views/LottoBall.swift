@@ -19,11 +19,11 @@ class LottoBall: UIView {
             case 1..<10:
                 self.backgroundColor = .designSystem(.mainYellow)
             case 10..<20:
-                self.backgroundColor = .designSystem(.mainOrange)
-            case 20..<30:
                 self.backgroundColor = .designSystem(.mainBlue)
+            case 20..<30:
+                self.backgroundColor = .designSystem(.mainOrange)
             case 30..<40:
-                self.backgroundColor = .designSystem(.gray17181D)
+                self.backgroundColor = .designSystem(.grayA09FA7)
             default:
                 self.backgroundColor = .designSystem(.mainGreen)
             }
@@ -50,18 +50,18 @@ class LottoBall: UIView {
     }
     
     func setUI() {
-        switch ballNumber {
-        case 1..<10:
-            self.backgroundColor = .designSystem(.mainYellow)
-        case 10..<20:
-            self.backgroundColor = .designSystem(.mainOrange)
-        case 20..<30:
-            self.backgroundColor = .designSystem(.mainBlue)
-        case 30..<40:
-            self.backgroundColor = .designSystem(.gray2B2C35)
-        default:
-            self.backgroundColor = .designSystem(.mainGreen)
-        }
+//        switch ballNumber {
+//        case 1..<10:
+//            self.backgroundColor = .designSystem(.mainYellow)
+//        case 10..<20:
+//            self.backgroundColor = .designSystem(.mainBlue)
+//        case 20..<30:
+//            self.backgroundColor = .designSystem(.mainOrange)
+//        case 30..<40:
+//            self.backgroundColor = .designSystem(.grayD8D8D8)
+//        default:
+//            self.backgroundColor = .designSystem(.mainGreen)
+//        }
         self.clipsToBounds = true
         self.layer.cornerRadius = CGFloat(LottoBall.ballSize / 2)
         addSubview(ballNumberLabel)
