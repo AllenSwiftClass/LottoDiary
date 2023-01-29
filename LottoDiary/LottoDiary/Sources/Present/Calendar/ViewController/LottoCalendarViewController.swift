@@ -12,7 +12,9 @@ import RxSwift
 
 
 final class LottoCalendarViewController: UIViewController {
-
+    
+    let database = DataBaseManager.shared
+    
     // MARK: - Calendar 관련 변수
     
     lazy var events: [Date] = [] {
@@ -45,7 +47,6 @@ final class LottoCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.gray17181D)
-        
         // 스크롤 뷰 레이아웃 설정
         configureScrollView()
         
@@ -64,7 +65,7 @@ final class LottoCalendarViewController: UIViewController {
         changeHeaderTitle()
     }
     
-
+    
 }
 
 
@@ -78,7 +79,7 @@ extension LottoCalendarViewController {
         collectionView.delegate = self
         collectionView.register(LottoCell.self, forCellWithReuseIdentifier: LottoCell.reuseIdentifier)
         collectionView.backgroundColor = .designSystem(.gray17181D)
-
+        
         collectionView.isScrollEnabled = false
         lottosCollectionView = collectionView
         
@@ -110,10 +111,11 @@ extension LottoCalendarViewController {
             else { fatalError("Could not create new cell") }
             let lotto = self.lotto(for: lottoId)
             
-            if lotto != nil {
-                cell.purchaseAmount.text = "\(lotto!.purchaseAmount.formattedWithSeparator) 원"
-                cell.winningAmount.text = "\(lotto!.winningAmount.formattedWithSeparator) 원"
-                cell.type = lotto!.type
+            if let lotto = lotto {
+                cell.purchaseAmount.text = "\(lotto.purchaseAmount.formattedWithSeparator) 원"
+                cell.winningAmount.text = lotto.hasPassedResult ? "\(lotto.winAmount!.formattedWithSeparator) 원"
+                                                                 : "미지정"
+                cell.type = lotto.type
             }
             return cell
         }
@@ -178,7 +180,7 @@ extension LottoCalendarViewController {
             layoutSize: headerSize,
             elementKind: DateHeaderView.elementKind,
             alignment: .topLeading)
-            
+        
         // footer 크기설정
         let footerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -245,7 +247,7 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
         // 로또배열을 탐색하며 date 포멧이 가능한 date를 이벤트에 넣어준다.
         
         viewModel.lottoObservable
-            .map{$0.map{ self.viewModel.formatter.date(from: $0.date)!} }
+            .map{ $0.map{ $0.date } }
             .subscribe(onNext: { (dates) in
                 dates.forEach{ self.events.append($0) }
             })
@@ -329,14 +331,14 @@ extension LottoCalendarViewController: FSCalendarDelegate, FSCalendarDataSource 
             // 애니메이션이 끝난 시점에 custom header 적용
             self.changeHeaderTitle()
         }
-
-
+        
+        
         self.view.layoutIfNeeded()
     }
     
     // 날짜 선택 시 호출
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        viewModel.selectedDate = viewModel.formatter.string(from: date)
+        viewModel.selectedDate = date
         
         changeCollectionViewHeight()
         updateSnapShot()
@@ -374,7 +376,7 @@ extension LottoCalendarViewController: UICollectionViewDelegate {
     
     func changeCollectionViewHeight() {
         // headerViewText 변경
-        headerView?.headerLabel.text = viewModel.selectedDate.dateStringToHeaderView
+        headerView?.headerLabel.text = viewModel.formatter.string(from: viewModel.selectedDate).dateStringToHeaderView
         
         viewModel.filteredLottos
             .map { $0.count }

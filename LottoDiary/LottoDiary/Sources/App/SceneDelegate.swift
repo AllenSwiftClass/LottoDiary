@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,11 +23,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-//        if goalAmountSetting {
+        let dataBase = DataBaseManager.shared
+        print(dataBase.getLocationOfDefaultRealm())
+        let user = dataBase.read(UserRealm.self)
+        if user.count == 0 {
+            window?.rootViewController = UINavigationController(rootViewController: IntroViewController())
+        } else {
             window?.rootViewController = UINavigationController(rootViewController: TabBarController())
-//        } else {
-//            window?.rootViewController = UINavigationController(rootViewController: MyInfomationSettingViewController())
-//        }
+        }
         window?.makeKeyAndVisible()
     }
 

@@ -18,7 +18,7 @@ final class AddLottoViewController: UIViewController {
     
     var lottotype: LottoType = .lotto
     
-    lazy var selectedDate: String? = nil
+    lazy var selectedDate: Date? = nil
     
     private lazy var typeLabel = CustomLabel(text: "로또 종류", font: .gmarksans(weight: .bold, size: ._22), textColor: .white)
        
@@ -138,7 +138,6 @@ final class AddLottoViewController: UIViewController {
             make.top.equalTo(warningPurchaseLabel.snp.bottom).offset(10)
         }
         
-        
         winningTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
             make.top.equalTo(winningLabel.snp.bottom).offset(5)
@@ -174,7 +173,7 @@ final class AddLottoViewController: UIViewController {
         if let main = purchaseTextField.text?.replacingOccurrences(of: ",", with: ""), !main.isEmpty,
            let price = winningTextField.text?.replacingOccurrences(of: ",", with: ""), !price.isEmpty {
             
-            lotto = Lotto(type: lottotype, purchaseAmount: Int(main)!, winningAmount: Int(price)!, date: selectedDate!)
+            lotto = Lotto(type: lottotype, purchaseAmount: Double(main)!, winAmount: Double(price)!, date: selectedDate!)
             // 클로저 호출
             if lotto != nil {
                 onChange(lotto!)

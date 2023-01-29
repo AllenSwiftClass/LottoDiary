@@ -8,8 +8,11 @@
 
 import RxSwift
 import Foundation
+import RealmSwift
 
 final class LottoCalendarViewModel {
+    
+    let database = DataBaseManager.shared
     
     // 날짜 변환 객체
     lazy var formatter: DateFormatter = {
@@ -25,27 +28,26 @@ final class LottoCalendarViewModel {
         $0.filter{ $0.date ==  self.selectedDate }
     }
     
-    lazy var selectedDate: String = formatter.string(from: Date())
+    lazy var selectedDate: Date = Date()
+    
+    // 지나간 결과가 아닌 로또들은 당첨금액이 없는 상태인데도 일단 로또로 뽑아줘야 함.
+    // hasPassedResult
+    func convertLottoRealmToLottos(lottoRealms: Results<LottoRealm>) -> [Lotto] {
+        // 결과를 가지고있다면
+        var lottos: [Lotto] = []
+        lottoRealms.forEach {
+            lottos.append(Lotto(type: LottoType(rawValue: $0.type)!,
+                                purchaseAmount: $0.purchaseAmount,
+                                winAmount: $0.winAmount,
+                                date: $0.date))
+        }
+        return lottos
+    }
     
     init() {
-        let lottos: [Lotto] = [
-            Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-13"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-13"),
-            Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-17"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .spitto, purchaseAmount: 20001, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-18"),
-            Lotto(type: .lotto, purchaseAmount: 13330000, winningAmount: 500, date: "2022-11-19"),
-            Lotto(type: .spitto, purchaseAmount: 20000, winningAmount: 15000, date: "2022-11-20"),
-            Lotto(type: .lotto, purchaseAmount: 30000, winningAmount: 2000, date: "2022-11-24"),
-            Lotto(type: .lotto, purchaseAmount: 30000, winningAmount: 2000, date: "2022-11-25"),
-            Lotto(type: .spitto, purchaseAmount: 30000, winningAmount: 2000, date: "2022-11-30"),
-            Lotto(type: .spitto, purchaseAmount: 30000, winningAmount: 2000, date: "2022-11-30"),
-        ]
+        let lottoRealms = database.read(LottoRealm.self)
+
+        let lottos = convertLottoRealmToLottos(lottoRealms: lottoRealms)
         
         lottoObservable.onNext(lottos)
     }

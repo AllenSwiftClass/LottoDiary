@@ -21,7 +21,6 @@ struct Validation {
     
     func validateTargetAmount(number: String?) -> ResultWithErrorLabel {
         guard let amount = number, !amount.isEmpty else { return (false, "값을 입력해주세요") }
-        print(amount)
         guard (1...13) ~= amount.count else { return (false, "100억 미만의 숫자만 입력해주세요") }
         return (true, "")
     }

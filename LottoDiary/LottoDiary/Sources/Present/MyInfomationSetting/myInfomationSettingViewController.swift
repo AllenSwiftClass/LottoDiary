@@ -7,16 +7,16 @@
 
 import UIKit
 import SnapKit
-
+import RealmSwift
 
 final class MyInfomationSettingViewController: UIViewController {
 
-    
     // MARK: - Property
+    
+    private let database = DataBaseManager.shared
     
     // 경고알림 주기를 담고있는 배열
     private let notificationCycleArray = ["설정 안함", "하루", "일주일", "한달"]
-    
     private var validation = Validation()
     
     private lazy var myInfoLabel = CustomLabel(text: "내 정보", font: .gmarksans(weight: .bold, size: ._28), textColor: .white)
@@ -36,20 +36,20 @@ final class MyInfomationSettingViewController: UIViewController {
     
     private lazy var warningNameLabel = CustomLabel(text: "errorName", font: .gmarksans(weight: .regular, size: ._0), textColor: .clear)
     
-    private lazy var targetAmountTextFieldView: UIView = {
+    private lazy var goalAmountTextFieldView: UIView = {
         let view = UIView()
         view.backgroundColor = .designSystem(.gray2B2C35)
         view.layer.cornerRadius = 5
-        view.addSubview(targetAmountLabel)
-        view.addSubview(targetAmountTextField)
+        view.addSubview(goalAmountLabel)
+        view.addSubview(goalAmountTextField)
         return view
     }()
     
     private lazy var currentMonth = Calendar.current.dateComponents([.month], from: Date()).month!
     
-    private lazy var targetAmountLabel = CustomLabel(text: "\(currentMonth)월 목표금액", font: .gmarksans(weight: .bold, size: ._13), textColor: .white)
+    private lazy var goalAmountLabel = CustomLabel(text: "\(currentMonth)월 목표금액", font: .gmarksans(weight: .bold, size: ._13), textColor: .white)
     
-    private lazy var targetAmountTextField = CustomTextField(placeholder: "목표금액을 입력해주세요", type: .number, align: .right)
+    private lazy var goalAmountTextField = CustomTextField(placeholder: "목표금액을 입력해주세요", type: .number, align: .right)
     
     private lazy var warningAmountLabel = CustomLabel(text: "errorName", font: .gmarksans(weight: .regular, size: ._0), textColor: .clear)
     
@@ -76,8 +76,9 @@ final class MyInfomationSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         nameTextField.delegate = self
-        targetAmountTextField.delegate = self
+        goalAmountTextField.delegate = self
         
         configurePickView()
         setUI()
@@ -85,7 +86,7 @@ final class MyInfomationSettingViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.resignFirstResponder()
-        targetAmountTextField.resignFirstResponder()
+        goalAmountTextField.resignFirstResponder()
         notificationTextField.resignFirstResponder()
     }
     
@@ -93,7 +94,7 @@ final class MyInfomationSettingViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .designSystem(.backgroundBlack)
         
-        view.addSubviews(myInfoLabel, nameTextFieldView, warningNameLabel, targetAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton)
+        view.addSubviews(myInfoLabel, nameTextFieldView, warningNameLabel, goalAmountTextFieldView, warningAmountLabel, notificationLabel, notificationTextField, okButton)
         
         myInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -122,24 +123,24 @@ final class MyInfomationSettingViewController: UIViewController {
             make.leading.equalToSuperview().offset(10)
         }
         
-        targetAmountTextFieldView.snp.makeConstraints { make in
+        goalAmountTextFieldView.snp.makeConstraints { make in
             make.top.equalTo(warningNameLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(10)
             make.height.equalTo(83)
         }
         
-        targetAmountLabel.snp.makeConstraints { make in
+        goalAmountLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().offset(15)
         }
         
-        targetAmountTextField.snp.makeConstraints { make in
+        goalAmountTextField.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.7)
             make.trailing.equalToSuperview().offset(-15)
             make.bottom.equalToSuperview().offset(-10)
         }
         
         warningAmountLabel.snp.makeConstraints { make in
-            make.top.equalTo(targetAmountTextFieldView.snp.bottom).offset(10)
+            make.top.equalTo(goalAmountTextFieldView.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(15)
         }
         
@@ -173,8 +174,8 @@ final class MyInfomationSettingViewController: UIViewController {
     func validateOkButton() {
         if let notification = notificationTextField.text, !notification.isEmpty {
             let nameValid = validation.validateName(name: nameTextField.text).isValid
-            let targetAmountValid = validation.validateTargetAmount(number: targetAmountTextField.text).isValid
-            if nameValid && targetAmountValid {
+            let goalAmountValid = validation.validateTargetAmount(number: goalAmountTextField.text).isValid
+            if nameValid && goalAmountValid {
                 okButton.isEnabled = true
                 okButton.alpha = 1
                 return
@@ -184,8 +185,38 @@ final class MyInfomationSettingViewController: UIViewController {
         okButton.alpha = 0.3
     }
     
+    // String타입의 구분자(,)를 포함한 숫자에서 구분자를 제거해 Int?타입으로 변환해주는 함수
+    func convertAmountTextToInt(amountLabel: String?) -> Int? {
+        guard let amountWithSeparator = amountLabel else {
+            return nil
+        }
+        let amountText = amountWithSeparator.components(separatedBy: [","]).joined()
+        
+        guard let targetAmount = Int(amountText) else {
+            return nil
+        }
+        return targetAmount
+    }
+    
     // 확인 버튼 클릭 시(닉네임, 목표금액, 경고 알림 선택시 활성화)
     @objc func okButtonTapped() {
+        // 옵셔널을 풀고 ,를 제거하고 Int로 변환
+        //
+        guard let goalAmount = convertAmountTextToInt(amountLabel: goalAmountTextField.text) else {
+            return
+        }
+        
+        guard let userName = nameTextField.text, let notification = notificationTextField.text else {
+            return
+        }
+        
+        let myGoalAmount = GoalAmountRealm(date: Date(), goalAmount: goalAmount)
+        let user = UserRealm(nickName: userName, notificationCycle: notification)
+        
+        user.goalAmounts.append(myGoalAmount)
+        
+        database.write(user)
+        
         let tabBarvc = TabBarController()
         navigationController?.pushViewController(tabBarvc, animated: true)
         // 유저 데이터 생성 부분
@@ -199,8 +230,8 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == nameTextField {
             textFieldCheck(nameTextField, .letter)
-        } else if textField == targetAmountTextField {
-            textFieldCheck(targetAmountTextField, .number)
+        } else if textField == goalAmountTextField {
+            textFieldCheck(goalAmountTextField, .number)
         }
     }
     
@@ -231,7 +262,7 @@ extension MyInfomationSettingViewController: UITextFieldDelegate {
     
     // 텍스트 필드에 1000단위로 , 붙여주는 델리게이트, replacementString인 string은 입력한 길이 1인 문자이다.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            guard textField == targetAmountTextField else { return true }
+            guard textField == goalAmountTextField else { return true }
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
             formatter.locale = Locale.current
@@ -278,7 +309,7 @@ extension MyInfomationSettingViewController: UIPickerViewDataSource, UIPickerVie
     
     // 취소, 완료버튼이 있는 toolBar 설정
     private func configureToolbar() {
-        let toolBar = UIToolbar()
+        let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 35))
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
         toolBar.tintColor = .white
