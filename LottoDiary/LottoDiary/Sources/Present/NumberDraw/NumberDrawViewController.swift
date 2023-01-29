@@ -164,7 +164,6 @@ final class NumberDrawViewController: UIViewController {
             make.height.equalTo(32)
             make.width.equalTo(142)
         }
-        
     }
     
     @objc func changeButtonTapped() {

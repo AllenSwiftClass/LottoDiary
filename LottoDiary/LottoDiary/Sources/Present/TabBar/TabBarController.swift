@@ -6,8 +6,28 @@
 //
 
 import UIKit
+import QRCodeReader
+import AVFoundation
 
 final class TabBarController: UITabBarController {
+    
+    let lottoQRViewModel = LottoQRViewModel()
+    
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+            
+            // 플래시 버튼
+            $0.showTorchButton = false
+            $0.showSwitchCameraButton = false
+            $0.showCancelButton = false
+            $0.showOverlayView = true
+            // 가이드라인 선
+            $0.rectOfInterest = CGRect(x: 0.2, y: 0.3, width: 0.6, height: 0.3)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,6 +35,7 @@ final class TabBarController: UITabBarController {
         navigationItem.hidesBackButton = true
         tabBarConfigure()
         setupTabBar()
+        setupLottoQR()
     }
     
     private func tabBarConfigure() {
@@ -31,12 +52,6 @@ final class TabBarController: UITabBarController {
         let num = naviController(image: UIImage(systemName: "number.circle"), title: "번호 추첨", rootViewController: NumberDrawViewController())
         
         self.viewControllers = [ calendar, home, UIViewController() , chart, num ]
-        
-        // 로또QR 카메라 화면 전환
-        guard let tabBar = self.tabBar as? CustomTabBar else { return }
-        tabBar.middleBtnActionHandler = {
-            self.navigationController?.pushViewController(LottoQRViewController(), animated: true)
-        }
     }
     
     func naviController(image: UIImage!, title: String, rootViewController: UIViewController) -> UINavigationController {
@@ -54,7 +69,41 @@ final class TabBarController: UITabBarController {
         navi.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         return navi
     }
+    
+    func setupLottoQR() {
+        readerVC.delegate = self
+        
+        self.readerVC.completionBlock = { [weak self] (result: QRCodeReaderResult?) in
+            
+            guard let lottoURL = self?.lottoQRViewModel.check(result: result) else {
+                // 로또 번호가 맞지 않으면 alert 보내기
+                makeWrongAlert()
+                return
+            }
+            self?.lottoQRViewModel.separate(lottoURL: lottoURL)
+        }
+        
+        func makeWrongAlert() {
+            let wrongAlert = UIAlertController(title: "잘못된 로또 QR입니다.", message: "올바른 로또 QR을 인식해주세요." , preferredStyle: .alert)
+            
+            // Alert 창 구현
+            let wrongAlertConfirm = UIAlertAction(title: "확인", style: .default) { [self] _ in
+                readerVC.startScanning()
+            }
+            wrongAlert.addAction(wrongAlertConfirm)
+            present(wrongAlert, animated: true)
+        }
+        
+        // 로또QR 카메라 화면 push
+        // LottoQR 버튼 클릭하면 QR화면으로 전환
+        guard let tabBar = self.tabBar as? CustomTabBar else { return }
+        tabBar.middleBtnActionHandler = {
+            self.navigationController?.pushViewController(self.readerVC, animated: true)
+        }
+    }
 }
+
+// MARK: - UITabBarControllerDelegate
 
 extension TabBarController: UITabBarControllerDelegate {
     
@@ -68,5 +117,33 @@ extension TabBarController: UITabBarControllerDelegate {
             return true
         }
         return selectedIndex == 2 ? false : true
+    }
+}
+
+// MARK: - QRCodeReaderViewControllerDelegate
+
+extension TabBarController: QRCodeReaderViewControllerDelegate {
+    // QR 인식이 성공하면(올바른 로또QR X, 인식이 성공되었을 때) 실행되는 코드
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        print("reader 완료")
+        
+        let okAlert = UIAlertController(title: "로또 QR 인식에 성공하였습니다.", message: "로또 달력으로 이동합니다." , preferredStyle: .alert)
+
+        // Alert 창 구현
+        let okAlertConfirm = UIAlertAction(title: "확인", style: .default) { action in
+            reader.stopScanning()
+            // popViewController로 rederView 날리기
+            self.navigationController?.popViewController(animated: true)
+            // QR 인식 성공 후 calendarView로 넘어가기
+            self.selectedIndex = 0
+        }
+        okAlert.addAction(okAlertConfirm)
+        present(okAlert, animated: true)
+    }
+    
+    func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        reader.stopScanning()
+        
+        dismiss(animated: true)
     }
 }

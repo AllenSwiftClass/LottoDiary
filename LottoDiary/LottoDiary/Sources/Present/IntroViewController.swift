@@ -67,29 +67,20 @@ class IntroViewController: UIViewController {
             make.left.right.bottom.equalTo(stackView)
         }
         
-        lazy var totalStackView: UIStackView = {
-            let sv = UIStackView()
-            sv.axis = .vertical
-            sv.spacing = 32
-            sv.addArrangedSubview(stackView)
-            sv.addArrangedSubview(settingButton)
-            return sv
-        }()
-        
+        view.addSubviews(stackView)
         stackView.snp.makeConstraints { make in
-            make.left.right.top.equalTo(totalStackView)
+            make.left.right.equalToSuperview()
+            make.top.equalTo(DeviceInfo.screenHeight / 2 - 92)
         }
         
+        view.addSubviews(settingButton)
         settingButton.snp.makeConstraints { make in
-            make.bottom.equalTo(totalStackView)
-            make.left.right.equalTo(totalStackView).inset(70)
+            make.left.right.equalToSuperview().inset(70)
+            make.top.equalTo(stackView.snp.bottom).offset(32)
             make.height.equalTo(60)
         }
         
-        view.addSubview(totalStackView)
-        totalStackView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
+     
     }
     
     @objc func settingButtonAction() {

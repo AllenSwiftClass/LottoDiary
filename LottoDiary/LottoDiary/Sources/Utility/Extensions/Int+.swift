@@ -8,7 +8,13 @@
 import Foundation
 
 extension Int {
+    
+    // 1, 2 등 1자리 숫자를 01, 02로 변경하는 함수
+    var insertZero: String {
+        return String(format: "%02d", self)
+    }
     //
+    
     static let lottoRange: Range<Int> = 1..<46
     
     static func makeRandomIntArray(count: Int) -> [Int] {
@@ -17,7 +23,7 @@ extension Int {
             returnArray.append(Int.random(in: lottoRange))
         }
         
-        var sortedRandomReturnArray = returnArray.sorted()
+        let sortedRandomReturnArray = returnArray.sorted()
         
         return sortedRandomReturnArray
     }
