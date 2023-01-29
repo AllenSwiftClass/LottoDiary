@@ -8,6 +8,7 @@
 
 import RxSwift
 import Foundation
+import RealmSwift
 
 final class LottoCalendarViewModel {
     
@@ -27,11 +28,26 @@ final class LottoCalendarViewModel {
         $0.filter{ $0.date ==  self.selectedDate }
     }
     
-    lazy var selectedDate: String = formatter.string(from: Date())
+    lazy var selectedDate: Date = Date()
+    
+    // 지나간 결과가 아닌 로또들은 당첨금액이 없는 상태인데도 일단 로또로 뽑아줘야 함.
+    // hasPassedResult
+    func convertLottoRealmToLottos(lottoRealms: Results<LottoRealm>) -> [Lotto] {
+        // 결과를 가지고있다면
+        var lottos: [Lotto] = []
+        lottoRealms.forEach {
+            lottos.append(Lotto(type: LottoType(rawValue: $0.type)!,
+                                purchaseAmount: $0.purchaseAmount,
+                                winAmount: $0.winAmount,
+                                date: $0.date))
+        }
+        return lottos
+    }
     
     init() {
-        let lottos: [Lotto] = [
-        ]
+        let lottoRealms = database.read(LottoRealm.self)
+
+        let lottos = convertLottoRealmToLottos(lottoRealms: lottoRealms)
         
         lottoObservable.onNext(lottos)
     }

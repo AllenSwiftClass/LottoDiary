@@ -12,7 +12,8 @@ class UserRealm: Object {
     @Persisted var nickName: String = ""
     @Persisted var notificationCycle: String = ""
     @Persisted var goalAmounts = List<GoalAmountRealm>()
-    
+    @Persisted var standardRound: Int?
+    @Persisted var standardDate: Date = Date()
     convenience init(nickName: String, notificationCycle: String) {
         self.init()
         self.nickName = nickName
@@ -29,4 +30,5 @@ class GoalAmountRealm: Object {
         self.date = date
         self.goalAmount = goalAmount
     }
+    
 }

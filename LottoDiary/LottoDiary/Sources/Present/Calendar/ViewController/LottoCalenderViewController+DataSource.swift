@@ -25,7 +25,6 @@ extension LottoCalendarViewController {
                 self.dataSource.apply(snapshot, animatingDifferences: true)
             })
             .dispose()
-        
     }
     
     // 로또의 ID를 받아서 Lotto 객체를 생성
@@ -38,7 +37,6 @@ extension LottoCalendarViewController {
                 lotto = lottos[index]
             })
             .dispose()
-            
         return lotto
     }
     
@@ -46,6 +44,16 @@ extension LottoCalendarViewController {
     func add(_ lotto: Lotto) {
         do {
             let lottos = try viewModel.lottoObservable.value()
+            // Lotto -> LottoRealm
+            let lottoRealm = LottoRealm(
+                id: lotto.id,
+                type: lotto.type.rawValue,
+                purchaseAmount: lotto.purchaseAmount,
+                winAmount: lotto.winAmount!,
+                date: lotto.date
+            )
+            database.write(lottoRealm)
+            
             viewModel.lottoObservable.onNext(lottos + [lotto])
         } catch {
             print(error)
@@ -58,7 +66,7 @@ extension LottoCalendarViewController {
     // header등록 시 사용되는 completionHandler
     func headerRegistrationHandler(dateHeaderView: DateHeaderView, elementKind: String, indexPath: IndexPath) {
         self.headerView = dateHeaderView
-        headerView?.headerLabel.text = viewModel.selectedDate.dateStringToHeaderView
+        headerView?.headerLabel.text = viewModel.formatter.string(from: viewModel.selectedDate).dateStringToHeaderView
     }
     
     // footer등록 시 사용되는 completionHandler

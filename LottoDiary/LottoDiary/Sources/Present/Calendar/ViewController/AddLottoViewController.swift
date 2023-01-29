@@ -18,7 +18,7 @@ final class AddLottoViewController: UIViewController {
     
     var lottotype: LottoType = .lotto
     
-    lazy var selectedDate: String? = nil
+    lazy var selectedDate: Date? = nil
     
     private lazy var typeLabel = CustomLabel(text: "로또 종류", font: .gmarksans(weight: .bold, size: ._22), textColor: .white)
        
