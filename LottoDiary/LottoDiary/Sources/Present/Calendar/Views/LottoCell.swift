@@ -18,14 +18,11 @@ final class LottoCell: UICollectionViewCell {
     lazy var purchaseLabel = CustomLabel(text: "구매 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
     
     lazy var winningLabel =  CustomLabel(text: "당첨 금액:", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
-
     
     lazy var purchaseAmount =  CustomLabel(text: "10000원", font: .gmarksans(weight: .bold, size: ._15), textColor: .white)
 
-    
     lazy var winningAmount =  CustomLabel(text: "5000원", font: .gmarksans(weight: .regular, size: ._15), textColor: .white)
 
-    
     var type: LottoType = .lotto {
         didSet {
             configure()

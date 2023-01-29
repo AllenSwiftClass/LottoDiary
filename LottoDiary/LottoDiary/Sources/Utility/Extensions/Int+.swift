@@ -25,10 +25,12 @@ extension Int {
     static func makeRandomLottoNumber() -> Int {
         return Int.random(in: lottoRange)
     }
+    
     var formattedWithSeparator: String {
         let formatter = NumberFormatter()
         formatter.groupingSeparator = ","
         formatter.numberStyle = .decimal
         return formatter.string(for: self) ?? ""
     }
+    
 }

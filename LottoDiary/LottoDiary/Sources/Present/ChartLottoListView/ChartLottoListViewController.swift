@@ -67,7 +67,6 @@ final class ChartLottoListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupChartView()
         setupChartData()
         
