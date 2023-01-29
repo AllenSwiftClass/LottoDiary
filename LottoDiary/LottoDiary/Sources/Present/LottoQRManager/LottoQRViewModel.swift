@@ -62,7 +62,7 @@ final class LottoQRViewModel {
         }
     }
     
-    func networkTest(roundNumber: String, completion: @escaping (LottoResultSorted)->Void) {
+    private func networkTest(roundNumber: String, completion: @escaping (LottoResultSorted)->Void) {
         LottoQRNetworkManager.shared.fetchLottoResult(roundNumber: roundNumber) { result in
             switch result {
             case .success(let lottoResult):

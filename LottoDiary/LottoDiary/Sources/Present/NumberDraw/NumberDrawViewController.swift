@@ -99,8 +99,6 @@ final class NumberDrawViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
-        print("제발! \(LottoData.lastDrawDatas)")
-        
         super.viewDidLoad()
         view.backgroundColor = .designSystem(.backgroundBlack)
         view.addSubview(mainTitle)
@@ -166,7 +164,6 @@ final class NumberDrawViewController: UIViewController {
             make.height.equalTo(32)
             make.width.equalTo(142)
         }
-        
     }
     
     @objc func changeButtonTapped() {
