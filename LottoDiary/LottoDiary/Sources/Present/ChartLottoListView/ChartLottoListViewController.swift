@@ -15,19 +15,20 @@ final class ChartLottoListViewController: UIViewController {
     
     let chartViewModel = ChartViewModel()
     let lottoListViewModel = LottoListViewModel()
+    let database = DataBaseManager.shared
     
     // chartView에서만 월별 목표,구매,당첨 금액을 계산하면 되기 때문에 데이터를 따로 저장하지 않고, 클릭시 그때 그때 월별 데이터 계산
     var selectedAmount: [Amount] = []
     
     // 앱 실행시, 초기 설정은 오늘 년도와 날짜
-    lazy var selectedYear: Double = self.lottoListViewModel.getTodayDate()[0] {
+    lazy var selectedYear: Int = self.lottoListViewModel.getTodayDate()[0] {
         didSet {
             // selectedYear 변경시, 년도에 맞는 chartData 변경
             self.setupChartData()
         }
     }
     
-    lazy var selectedMonth: Double = lottoListViewModel.getTodayDate()[1] {
+    lazy var selectedMonth: Int = lottoListViewModel.getTodayDate()[1] {
         didSet {
             // selectedMonth 변경시, 월에 맞는 lottoList 변경
             self.setupLottoListSnapshot()
@@ -67,10 +68,20 @@ final class ChartLottoListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupChartView()
         setupChartData()
         
         setupLottoListView()
+        setupLottoListDataSource()
+        setupLottoListSnapshot()
+    }
+    
+    // MARK: - 달력에서 새로운 로또 추가하고 차트로 건너오면 데이터 바로 적용 X 
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupChartData()
         setupLottoListDataSource()
         setupLottoListSnapshot()
     }
@@ -100,7 +111,7 @@ final class ChartLottoListViewController: UIViewController {
     }
     
     private func setupChartData() {
-        chartView.data = chartViewModel.setBarChartData(year: selectedYear)
+        chartView.data = chartViewModel.setBarChartData(year: Double(selectedYear))
     }
     
     private func setupLottoListView() {
@@ -172,17 +183,17 @@ extension ChartLottoListViewController: ChartViewDelegate {
     // bar 클릭시 실행되는 함수
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
 
-        self.selectedMonth = entry.x
+        self.selectedMonth = Int(entry.x)
         
         // LottoListHeader 에도 넘겨줘서 dateTextField.text 변경
         let lottoListHeader = self.lottoListView.tableHeaderView as! LottoListHeader
-        lottoListHeader.selectedMonth = entry.x
+        lottoListHeader.selectedMonth = Int(entry.x)
     }
 }
 
 // DatePickerDelegate
 extension ChartLottoListViewController: LottoListHeaderDelegate {
-    func didSelectedDate(year: Double, month: Double) {
+    func didSelectedDate(year: Int, month: Int) {
         self.selectedYear = year
         self.selectedMonth = month
     }

@@ -68,6 +68,10 @@ final class DataBaseManager: DataBase {
         }
     }
     
+    func refresh() {
+        database.refresh()
+    }
+    
     func sort<T: Object>(_ object: T.Type, by keyPath: String, ascending: Bool = true) -> Results<T> {
         return database.objects(object).sorted(byKeyPath: keyPath, ascending: ascending)
     }

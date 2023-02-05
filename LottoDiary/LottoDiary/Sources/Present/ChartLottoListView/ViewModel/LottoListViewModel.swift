@@ -9,26 +9,41 @@ import UIKit
 
 final class LottoListViewModel {
     
+    let database = DataBaseManager.shared
+    let chartViewModel = ChartViewModel()
+    let calendar = Calendar.current
+    
     typealias GoalResult = LottoListDataSourceController.GoalResult
     typealias Amount = LottoListDataSourceController.Amount
     
-    // rowData에서 특정 년도, 월 데이터 뽑아내기
-    func getMonthList(year: Double, month: Double) -> LottoItem {
-        let data = LottoItem.rowData.filter { $0.buyYear == year && $0.buyMonth == month }
+    func getMonthList(year: Int, month: Int) -> LottoItem {
+        let allData = chartViewModel.filterDataByYear(year: Int(year))
+        var data = allData.filter { $0.buyMonth == Int(month) }
         
-        // 만약 특정 년, 월의 데이터가 없다면?
-        if data.isEmpty {
-            return LottoItem(buyYear: year, buyMonth: month, buyAmount: 0, winAmount: 0, goalAmount: 0)
-        } else {
-            return data[0]
+        data[0].goalAmount = Double(getGoalAmount(year: year, month: month))
+        return data[0]
+    }
+    
+    func getGoalAmount(year: Int, month: Int) -> Int {
+        // MARK: - 잠시 헷갈리는 것이, 하나의 앱에는 하나의 nickName이 잇는것이 맞는지? 그래서 밑에 코드에는 first로 적음.
+
+        let userGoal = database.read(UserRealm.self).first?.goalAmounts
+        let filteredGoal = userGoal?.filter { eachData -> Bool in
+            let yearComponents = self.calendar.component(Calendar.Component.year, from: eachData.date)
+            let monthComponents = self.calendar.component(Calendar.Component.month, from: eachData.date)
+            
+            return yearComponents == year && monthComponents == month
         }
+        
+        guard let result = filteredGoal?.first?.goalAmount else { return 0 }
+        return result
     }
     
     // 특정 년, 월의 당첨 퍼센테이지 구하기
-    func getMonthPercent(year: Double, month: Double) -> [GoalResult : Int] {
+    func getMonthPercent(year: Int, month: Int) -> [GoalResult : Int] {
         let monthData = self.getMonthList(year: year, month: month)
         var result = GoalResult.percent
-        let goalAmount = monthData.goalAmount
+        let goalAmount = monthData.goalAmount ?? 0
         let buyAmount = monthData.buyAmount
         let winAmount = monthData.winAmount
         
@@ -46,24 +61,24 @@ final class LottoListViewModel {
     }
     
     // 오늘 날짜 구하기
-    func getTodayDate() -> [Double] {
+    func getTodayDate() -> [Int] {
         let yearFormatter = DateFormatter()
         let monthFormatter = DateFormatter()
         yearFormatter.dateFormat = "yyyy"
         monthFormatter.dateFormat = "MM"
         
         let date = Date()
-        guard let thisYear = Double(yearFormatter.string(from: date)) else { return [] }
-        guard let thisMonth = Double(monthFormatter.string(from: date)) else { return [] }
+        guard let thisYear = Int(yearFormatter.string(from: date)) else { return [] }
+        guard let thisMonth = Int(monthFormatter.string(from: date)) else { return [] }
         
         return [ thisYear, thisMonth ]
     }
     
     // datePicker 구현시, 년도(1년부터 오늘 년도까지)와 월 설정
     // 오늘 날짜 기준으로 picker component 구성
-    func getPickerDays() -> [[Double]] {
-        var year: [Double] = []
-        let month: [Double] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    func getPickerDays() -> [[Int]] {
+        var year: [Int] = []
+        let month: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
         let thisYear = self.getTodayDate()[0]
         for num in stride(from: thisYear, to: 1, by: -1) {
             year.append(num)
@@ -71,7 +86,7 @@ final class LottoListViewModel {
         return [year, month]
     }
 
-    func makeAmountData(year: Double, month: Double) -> [Amount] {
+    func makeAmountData(year: Int, month: Int) -> [Amount] {
         
         // 1. 특정 년, 월 데이터를 가져온다.
         let data = self.getMonthList(year: year, month: month)
@@ -93,6 +108,6 @@ final class LottoListViewModel {
 // delegate protocol 설정할때, AnyObject 명시하면 weak 사용으로 Memory Leak문제 해결 가능
 // LottoListHeader -> ChartViewController간 selectedYear/Month 공유
 protocol LottoListHeaderDelegate: AnyObject {
-    func didSelectedDate(year: Double, month: Double)
+    func didSelectedDate(year: Int, month: Int)
 }
 

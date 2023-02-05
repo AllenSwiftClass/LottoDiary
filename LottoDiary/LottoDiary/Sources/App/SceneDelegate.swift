@@ -29,6 +29,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if user.count == 0 {
             window?.rootViewController = UINavigationController(rootViewController: IntroViewController())
         } else {
+            // App 실행될 때 자동으로 standardDate 오늘 날짜로 업데이트
+            dataBase.update(user[0]) { user in
+                user.standardDate = Date()
+            }
+            
             window?.rootViewController = UINavigationController(rootViewController: TabBarController())
         }
         window?.makeKeyAndVisible()

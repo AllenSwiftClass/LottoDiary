@@ -16,7 +16,7 @@ final class LottoListHeader: UIView {
     let getPickerDays = LottoListViewModel().getPickerDays()
     
     // 맨 처음 로드될때, LottoListView는 현재 날짜 기준 정렬
-    lazy var selectedYear: Double = self.lottoListViewModel.getTodayDate()[0] {
+    lazy var selectedYear: Int = self.lottoListViewModel.getTodayDate()[0] {
         didSet {
             // UIPickerView.selectRow() : picker 열었을 때, 초기 wheel 셋팅
             self.setupSelectRow()
@@ -24,7 +24,7 @@ final class LottoListHeader: UIView {
             self.lottoListHeaderDelegate?.didSelectedDate(year: self.selectedYear, month: self.selectedMonth)
         }
     }
-    lazy var selectedMonth: Double = self.lottoListViewModel.getTodayDate()[1] {
+    lazy var selectedMonth: Int = self.lottoListViewModel.getTodayDate()[1] {
         didSet {
             self.setupSelectRow()
             self.setupDateTextFieldText()
@@ -32,7 +32,7 @@ final class LottoListHeader: UIView {
         }
     }
     // picker을 아무것도 누르지 않고 선택 버튼을 누를 경우를 위해 changingDay 초기값은 selectedYear/Month.
-    lazy var changingDay: [Double] = [self.selectedYear, self.selectedMonth]
+    lazy var changingDay: [Int] = [self.selectedYear, self.selectedMonth]
     
     lazy var datePickerView = UIPickerView()
     
